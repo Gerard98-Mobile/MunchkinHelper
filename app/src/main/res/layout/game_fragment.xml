@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content" android:id="@+id/textView2" android:textSize="24sp"
-            android:layout_marginBottom="20dp" android:layout_marginTop="15dp" android:layout_alignParentTop="true"/>
+            android:layout_marginBottom="5dp" android:layout_marginTop="15dp" android:layout_alignParentTop="true"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/recycler_view"
@@ -59,17 +59,4 @@
                     android:id="@+id/editText2" android:hint="@string/monster"/>
         </LinearLayout>
     </LinearLayout>
-    <TextView
-            android:text="@string/power"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" android:id="@+id/rightTextView"
-            android:layout_above="@+id/recycler_view"
-            android:layout_marginBottom="0dp" android:layout_alignParentEnd="true" android:layout_marginEnd="15dp"/>
-    <TextView
-            android:text="@string/level"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content" android:id="@+id/leftTextView"
-            android:layout_above="@+id/recycler_view"
-            android:layout_marginBottom="0dp" android:layout_toStartOf="@id/rightTextView"
-            android:layout_marginEnd="42dp"/>
 </RelativeLayout>

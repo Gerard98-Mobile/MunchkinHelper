@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="50dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
 
     <TextView
+            android:id="@+id/player_name"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:inputType="textPersonName"
-            android:layout_gravity="top"
-            android:ems="10"
-            android:id="@+id/player_name" android:layout_weight="1" android:hint="@string/player_name"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:text="user_name"/>
     <ImageButton
-            android:layout_width="40dp"
-            android:layout_marginLeft="70dp"
-            android:layout_height="40dp"
             android:id="@+id/plusButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/ic_add_black_24dp"
-            android:layout_weight="1"/>
+            android:layout_toStartOf="@+id/level"
+            android:layout_marginEnd="5dp"/>
+
     <TextView
+            android:id="@+id/level"
             android:text="@string/one"
-            android:layout_width="50dp"
-            android:gravity="center"
-            android:layout_height="wrap_content" android:id="@+id/level" android:layout_weight="1"
-            android:textSize="30sp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/minusButton"/>
+
     <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/minusButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/ic_remove_black_24dp"
-            android:id="@+id/minusButton" android:layout_weight="1"/>
-</LinearLayout>
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="5dp"/>
+
+</RelativeLayout>

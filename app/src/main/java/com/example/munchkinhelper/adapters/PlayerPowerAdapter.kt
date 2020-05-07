@@ -15,20 +15,17 @@ import com.example.munchkinhelper.MainActivity
 import com.example.munchkinhelper.Player
 import com.example.munchkinhelper.R
 
-class PlayerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PlayerPowerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     val players : List<Player> = LocalBase.instance.players
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType){
-            1 -> return PlayerHolder(LayoutInflater.from(context).inflate(R.layout.one_player,parent,false))
-            0 -> return PlayerHolder(LayoutInflater.from(context).inflate(R.layout.one_player_with_header,parent,false))
-            else -> return PlayerHolder(LayoutInflater.from(context).inflate(R.layout.one_player,parent,false))
+            0 -> return PlayerHolderPower(LayoutInflater.from(context).inflate(R.layout.one_player_with_power_and_header,parent,false))
+            1 -> return PlayerHolderPower(LayoutInflater.from(context).inflate(R.layout.one_player_with_power,parent,false))
+            else -> return PlayerHolderPower(LayoutInflater.from(context).inflate(R.layout.one_player_with_power,parent,false))
         }
-    }
-
-    override fun getItemCount(): Int {
-        return players.count()
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -38,15 +35,17 @@ class PlayerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
+    override fun getItemCount(): Int {
+        return players.count()
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val playerHolder = holder as PlayerHolder
+        val playerHolder = holder as PlayerHolderPower
         playerHolder.bind(players.get(position))
     }
 
 
-
-
-    private class PlayerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private class PlayerHolderPower(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         var power: TextView? = null
         var player: Player? = null
@@ -55,20 +54,51 @@ class PlayerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
         val minusButton: ImageButton
         val level : TextView
 
+        var plusButtonPower: ImageButton? = null
+        var minusButtonPower: ImageButton? = null
+
         init {
             plusButton = itemView.findViewById(R.id.plusButton)
             minusButton = itemView.findViewById(R.id.minusButton)
             level = itemView.findViewById(R.id.level)
 
+
+            plusButtonPower = itemView.findViewById(R.id.plusButtonPower)
+            minusButtonPower = itemView.findViewById(R.id.minusButtonPower)
+            power = itemView.findViewById(R.id.power)
+
+            plusButtonPower?.setOnClickListener{
+                player?.let {
+                    it.power++
+                    power?.text = it.power.toString()
+                }
+            }
+
+            minusButtonPower?.setOnClickListener{
+                player?.let {
+                    it.power--
+                    power?.text = it.power.toString()
+                }
+            }
+
+
             plusButton.setOnClickListener {
+                var actuallyLevel = level.text.toString().toInt()
+
                 player?.let {
                     it.lvl++
                     level.text = it.lvl.toString();
 
-                    if(it.lvl >= 10){
+                    if(it.lvl < 10){
+                        it.power++
+                        power?.text = it.power.toString()
+
+                    }
+                    else{
                         end(it.name)
                     }
                 }
+                ++actuallyLevel
             }
 
             minusButton.setOnClickListener {
@@ -76,6 +106,9 @@ class PlayerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
                     if(it.lvl > 1){
                         it.lvl--
                         level.text = it.lvl.toString()
+                        it.power--
+                        power?.text = it.power.toString()
+
                     }
                 }
             }
@@ -109,7 +142,6 @@ class PlayerAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
             }
             alertDialog?.show()
         }
+
     }
-
 }
-
