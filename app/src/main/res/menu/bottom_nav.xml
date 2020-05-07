@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/menu_game"
+            android:title="@string/menu_game"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:enabled="true"/>
+
+    <item
+            android:id="@+id/menu_dice"
+            android:title="@string/menu_dice"
+            android:icon="@drawable/ic_inverted_dice_menu"
+            android:enabled="true"/>
+
+</menu>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Munchkin Helper</string>
+    <string name="how_many_players">Podaj liczbę graczy</string>
+    <string name="start_game">Zacznij grę!</string>
+    <string name="invalid_amount_players">Liczba graczy musi być z przedziału 2-9</string>
+    <string name="level">level</string>
+    <string name="one">1</string>
+    <string name="player_name">Nazwa gracza</string>
+    <string name="end">Koniec gry!</string>
+    <string name="winner">Jako pierwszy wbił 10 lvl i zwyciężył gracz: %1$s</string>
+    <string name="stay">Zostań</string>
+    <string name="reset">Zresetuj</string>
+    <string name="fight">Walka</string>
+    <string name="vs">vs</string>
+    <string name="player">Gracz</string>
+    <string name="monster">Potwór</string>
+    <string name="players">Gracze    </string>
+    <string name="power_counter">Licznik mocy</string>
+    <string name="power">moc</string>
+    <string name="restore_game">Przywróć poprzepdnią</string>
+    <string name="add">Dodaj</string>
+    <string name="first_player">Gracz nr 1</string>
+    <string name="player_added">Gracz został dodany</string>
+    <string name="menu_game">Gra</string>
+    <string name="menu_dice">Kostka</string>
+    <string name="back_pressed_title">Czy na pewno chcesz wrócić?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="roll">Rzuć</string>
+</resources>
