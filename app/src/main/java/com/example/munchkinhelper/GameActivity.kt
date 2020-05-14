@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.munchkinhelper.adapters.PlayerAdapter
 import com.example.munchkinhelper.fragments.DiceFragment
+import com.example.munchkinhelper.fragments.FightFragment
 import com.example.munchkinhelper.fragments.GameFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -57,6 +58,13 @@ class GameActivity : AppCompatActivity() {
                 }
                 R.id.menu_dice -> {
                     actuallyFragment = DiceFragment()
+                    actuallyFragment?.let {
+                        transaction.replace(R.id.frame, it)
+                        transaction.commit()
+                    }
+                }
+                R.id.menu_fight -> {
+                    actuallyFragment = FightFragment()
                     actuallyFragment?.let {
                         transaction.replace(R.id.frame, it)
                         transaction.commit()

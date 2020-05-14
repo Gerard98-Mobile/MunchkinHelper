@@ -12,4 +12,10 @@
             android:icon="@drawable/ic_inverted_dice_menu"
             android:enabled="true"/>
 
+    <item
+            android:id="@+id/menu_fight"
+            android:title="@string/menu_fight"
+            android:icon="@drawable/ic_crossed_sabres"
+            android:enabled="true"/>
+
 </menu>

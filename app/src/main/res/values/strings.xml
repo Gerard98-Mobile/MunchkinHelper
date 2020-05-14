@@ -26,5 +26,17 @@
     <string name="back_pressed_title">Czy na pewno chcesz wrócić?</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
-    <string name="roll">Rzuć </string>
+    <string name="roll">Rzuć</string>
+    <string name="menu_fight">Walka</string>
+    <string name="choose_player">Wybierz gracza</string>
+    <string name="add_one">+1</string>
+    <string name="add_two">+2</string>
+    <string name="add_three">+3</string>
+    <string name="add_five">+5</string>
+    <string name="add_ten">+10</string>
+    <string name="minus_one">-1</string>
+    <string name="minus_two">-2</string>
+    <string name="minus_three">-3</string>
+    <string name="minus_five">-5</string>
+    <string name="minus_ten">-10</string>
 </resources>
