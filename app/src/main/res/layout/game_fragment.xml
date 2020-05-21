@@ -14,49 +14,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/recycler_view"
-            android:layout_marginBottom="10dp" android:layout_marginTop="0dp" android:layout_below="@+id/textView2"
-            android:layout_above="@+id/fightLayout"/>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp" android:id="@+id/fightLayout">
-        <TextView
-                android:text="@string/fight"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView" android:layout_weight="1"
-                android:textSize="18sp"/>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_weight="1"
-                android:weightSum="7">
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberSigned"
-                    android:textAlignment="center"
-                    android:ems="10"
-                    android:layout_weight="3"
-                    android:id="@+id/editText" android:hint="@string/player"/>
-            <TextView
-                    android:text="@string/vs"
-                    android:layout_width="30dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" android:id="@+id/textView3"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:textAlignment="center"
-                    android:inputType="numberSigned"
-                    android:ems="10"
-                    android:id="@+id/editText2" android:hint="@string/monster"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_marginBottom="10dp" android:layout_marginTop="0dp" android:layout_below="@+id/textView2"
+    />
 </RelativeLayout>

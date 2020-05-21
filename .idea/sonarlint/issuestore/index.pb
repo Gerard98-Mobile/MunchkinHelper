@@ -37,3 +37,11 @@ w
 Gapp/src/main/java/com/example/munchkinhelper/fragments/FightFragment.kt,b\c\bc9192faea44e5cd3ddc8822ae57f0ddfa306222
 S
 #app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
+_
+/app/src/main/res/drawable/ic_crossed_sabres.xml,6\0\6086e4e3bd2011ca588ef4906d9a2ad8d76f44d3
+Z
+*app/src/main/res/layout/fight_fragment.xml,a\7\a7cde7b0a91c1a5f8fbb5bbf9045ffd4125ac4c1
+T
+$app/src/main/res/menu/bottom_nav.xml,6\7\67bf9a022ee543f47bfd6d4c9e38a36916703315
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0

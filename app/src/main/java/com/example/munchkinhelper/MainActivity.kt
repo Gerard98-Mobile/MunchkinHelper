@@ -1,7 +1,6 @@
 package com.example.munchkinhelper
 
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)*/
 
                 LocalBase.instance.players.clear()
-                val intent = Intent(this, AddingPlayers::class.java)
+                val intent = Intent(this, AddingPlayersActivity::class.java)
                 intent.putExtra(KEY_EXTRA_PLAYER_AMOUNT, playerAmountInt)
                 val withPower = switch.isChecked
                 intent.putExtra(KEY_EXTRA_WITH_POWER, withPower)

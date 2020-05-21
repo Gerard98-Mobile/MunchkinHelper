@@ -1,42 +1,46 @@
 <resources>
     <string name="app_name">Munchkin Helper</string>
-    <string name="how_many_players">Podaj liczbę graczy</string>
-    <string name="start_game">Zacznij grę!</string>
-    <string name="invalid_amount_players">Liczba graczy musi być z przedziału 2-9</string>
-    <string name="level">level</string>
-    <string name="one">1</string>
-    <string name="player_name">Nazwa gracza</string>
-    <string name="end">Koniec gry!</string>
-    <string name="winner">Jako pierwszy wbił 10 lvl i zwyciężył gracz: %1$s</string>
-    <string name="stay">Zostań</string>
-    <string name="reset">Zresetuj</string>
-    <string name="fight">Walka</string>
-    <string name="vs">vs</string>
-    <string name="player">Gracz</string>
-    <string name="monster">Potwór</string>
-    <string name="players">Gracze    </string>
-    <string name="power_counter">Licznik mocy</string>
-    <string name="power">moc</string>
-    <string name="restore_game">Przywróć poprzepdnią</string>
-    <string name="add">Dodaj</string>
-    <string name="first_player">Gracz nr 1</string>
-    <string name="player_added">Gracz został dodany</string>
-    <string name="menu_game">Gra</string>
-    <string name="menu_dice">Kostka</string>
-    <string name="back_pressed_title">Czy na pewno chcesz wrócić?</string>
-    <string name="yes">Tak</string>
-    <string name="no">Nie</string>
-    <string name="roll">Rzuć</string>
-    <string name="menu_fight">Walka</string>
-    <string name="choose_player">Wybierz gracza</string>
-    <string name="add_one">+1</string>
-    <string name="add_two">+2</string>
-    <string name="add_three">+3</string>
-    <string name="add_five">+5</string>
-    <string name="add_ten">+10</string>
-    <string name="minus_one">-1</string>
-    <string name="minus_two">-2</string>
-    <string name="minus_three">-3</string>
-    <string name="minus_five">-5</string>
-    <string name="minus_ten">-10</string>
+    <string name="how_many_players">Put amount of players</string>
+    <string name="start_game">Start the game!</string>
+    <string name="invalid_amount_players">"Amount of players must be beetween 1-9 "</string>
+    <string name="level" translatable="false">level</string>
+    <string name="one" translatable="false">1</string>
+    <string name="player_name">Name of player</string>
+    <string name="end">End of the game!</string>
+    <string name="winner">Player with name: %1$s reached 10 lvl and he win!!</string>
+    <string name="stay">Stay</string>
+    <string name="reset">Reset</string>
+    <string name="fight">Fight</string>
+    <string name="vs" translatable="false">vs</string>
+    <string name="player">Player</string>
+    <string name="monster">Monster</string>
+    <string name="players">Players</string>
+    <string name="power_counter">Power counting</string>
+    <string name="power">power</string>
+    <string name="restore_game">Return previous</string>
+    <string name="add">Add</string>
+    <string name="first_player">Player 1</string>
+    <string name="player_added">Player added</string>
+    <string name="menu_game">Game</string>
+    <string name="menu_dice">Dice</string>
+    <string name="back_pressed_title">Are you sure you want to back?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="roll">Throw</string>
+    <string name="menu_fight">Fight</string>
+    <string name="choose_player">Choose player</string>
+    <string name="add_one" translatable="false">+1</string>
+    <string name="add_two" translatable="false">+2</string>
+    <string name="add_three" translatable="false">+3</string>
+    <string name="add_five" translatable="false">+5</string>
+    <string name="add_ten" translatable="false">+10</string>
+    <string name="minus_one" translatable="false">-1</string>
+    <string name="minus_two" translatable="false">-2</string>
+    <string name="minus_three" translatable="false">-3</string>
+    <string name="minus_five" translatable="false">-5</string>
+    <string name="minus_ten" translatable="false">-10</string>
+    <string name="players_fight">Player/s</string>
+    <string name="choose_assistant">Choose asistant</string>
+    <string name="nobody">Nobody</string>
+    <string name="name_lenght_error">Player name have to have minimum 3 letters!</string>
 </resources>

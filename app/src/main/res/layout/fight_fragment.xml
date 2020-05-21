@@ -5,247 +5,264 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                        android:id="@+id/first_player_fight"
-                        android:text="@string/choose_player"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/first_player_fight"
+            android:text="@string/choose_player"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-                <Spinner
-                        android:id="@+id/first_player"
-                        android:layout_below="@+id/first_player_fight"
-                        android:layout_marginStart="20dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+    <Spinner
+            android:id="@+id/first_player_spinner"
+            android:layout_below="@+id/first_player_fight"
+            android:layout_marginStart="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-                <LinearLayout
-                        android:id="@+id/headers_linearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_marginTop="50dp"
-                        android:layout_below="@+id/first_player">
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_weight="1"
-                            android:text="@string/player"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_weight="1"
-                            android:text="@string/monster"/>
-                </LinearLayout>
+    <TextView
+            android:id="@+id/assistant_player_fight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/first_player_fight"
+            android:text="@string/choose_assistant"/>
 
-                <LinearLayout
-                        android:id="@+id/powers_linearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_marginTop="10dp"
-                        android:layout_below="@+id/headers_linearLayout">
-                    <EditText
-                            android:id="@+id/player_power_fight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_weight="1"/>
-                    <EditText
-                            android:id="@+id/monster_power_fight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_weight="1"/>
-                </LinearLayout>
+    <Spinner
+            android:id="@+id/assistant_player_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/assistant_player_fight"
+            android:layout_below="@+id/assistant_player_fight"/>
 
+    <LinearLayout
+            android:id="@+id/headers_linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/first_player_spinner">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:text="@string/players_fight"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:text="@string/monster"/>
+    </LinearLayout>
 
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/powers_linearLayout"
-                        android:weightSum="2">
+    <LinearLayout
+            android:id="@+id/powers_linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/headers_linearLayout">
+        <EditText
+                android:id="@+id/player_power_fight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_weight="1" android:inputType="numberSigned"/>
+        <EditText
+                android:id="@+id/monster_power_fight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/one"
+                android:layout_weight="1" android:inputType="numberSigned"/>
+    </LinearLayout>
 
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginTop="10dp"
-                        android:weightSum="2">
-
-                    <LinearLayout android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:weightSum="5"
-                                  android:orientation="vertical"
-                                  style="?android:attr/buttonBarStyle"
-                                    android:layout_weight="1">
-
-                        <Button
-                                android:layout_width="wrap_content"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/add_one"/>
-                        <Button
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/add_two"/>
-                        <Button
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/add_three"/>
-                        <Button
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_five"/>
-                        <Button
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_ten"/>
-                    </LinearLayout>
-
-                    <LinearLayout android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:weightSum="5"
-                                  android:orientation="vertical"
-                                  style="?android:attr/buttonBarStyle"
-                                  android:layout_weight="1">
-
-                        <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_weight="1"
-                                android:text="@string/minus_one"/>
-                        <Button
-                                android:layout_width="wrap_content"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/minus_two"/>
-                        <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_weight="1"
-                                android:text="@string/minus_three"/>
-                        <Button
-                                android:layout_width="wrap_content"
-                                android:layout_weight="1"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_height="wrap_content"
-                                android:text="@string/minus_five"/>
-                        <Button
-                                android:layout_width="wrap_content"
-                                android:layout_weight="1"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_height="wrap_content"
-                                android:text="@string/minus_ten"/>
-                    </LinearLayout>
-
-
-                </LinearLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:weightSum="2"
-            android:layout_weight="1">
+            android:layout_below="@+id/powers_linearLayout"
+            android:weightSum="2">
 
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:weightSum="5"
-                      android:orientation="vertical"
-                      style="?android:attr/buttonBarStyle"
-                      android:layout_weight="1">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:weightSum="2">
 
-            <Button
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/add_one"/>
-            <Button
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/add_two"/>
-            <Button
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/add_three"/>
-            <Button
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_five"/>
-            <Button
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_ten"/>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:weightSum="5"
+                          android:orientation="vertical"
+                          style="?android:attr/buttonBarStyle"
+                          android:layout_weight="1">
+
+                <Button
+                        android:layout_width="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/add_one" android:id="@+id/player_add_1"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/add_two" android:id="@+id/player_add_2"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/add_three" android:id="@+id/player_add_3"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_five" android:id="@+id/player_add_5"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_ten" android:id="@+id/player_add_10"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:weightSum="5"
+                          android:orientation="vertical"
+                          style="?android:attr/buttonBarStyle"
+                          android:layout_weight="1">
+
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_weight="1"
+                        android:text="@string/minus_one" android:id="@+id/player_minus_1"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/minus_two" android:id="@+id/player_minus_2"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_weight="1"
+                        android:text="@string/minus_three" android:id="@+id/player_minus_3"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus_five" android:id="@+id/player_minus_5"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus_ten" android:id="@+id/player_minus_10"/>
+            </LinearLayout>
+
+
         </LinearLayout>
 
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:weightSum="5"
-                      android:orientation="vertical"
-                      style="?android:attr/buttonBarStyle"
-                      android:layout_weight="1">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:layout_weight="1">
 
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_weight="1"
-                    android:text="@string/minus_one"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_weight="1"
-                    android:text="@string/minus_two"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_weight="1"
-                    android:text="@string/minus_three"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_height="wrap_content"
-                    android:text="@string/minus_five"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/minus_ten"/>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:weightSum="5"
+                          android:orientation="vertical"
+                          style="?android:attr/buttonBarStyle"
+                          android:layout_weight="1">
+
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/add_one" android:id="@+id/monster_add_1"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/add_two" android:id="@+id/monster_add_2"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/add_three" android:id="@+id/monster_add_3"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_five" android:id="@+id/monster_add_5"/>
+                <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_ten" android:id="@+id/monster_add_10"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:weightSum="5"
+                          android:orientation="vertical"
+                          style="?android:attr/buttonBarStyle"
+                          android:layout_weight="1">
+
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_weight="1"
+                        android:text="@string/minus_one" android:id="@+id/monster_minus_1"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_weight="1"
+                        android:text="@string/minus_two" android:id="@+id/monster_minus_2"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_weight="1"
+                        android:text="@string/minus_three" android:id="@+id/monster_minus_3"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus_five" android:id="@+id/monster_minus_5"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus_ten" android:id="@+id/monster_minus_10"/>
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
     </LinearLayout>
-                </LinearLayout>
 
 
 
