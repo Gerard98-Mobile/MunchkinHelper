@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/txtView_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="title"/>
+
+    <TextView
+            android:id="@+id/txtView_dialog_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:text="body"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="15dp"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/txtView_dialog_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:text="@string/yes"
+                android:layout_toStartOf="@+id/txtView_dialog_no">
+
+        </TextView>
+
+        <TextView
+                android:id="@+id/txtView_dialog_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:layout_alignParentEnd="true"
+                android:text="@string/no">
+
+        </TextView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

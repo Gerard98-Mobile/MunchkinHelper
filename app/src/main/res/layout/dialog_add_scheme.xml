@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="@string/adding_scheme_dialog_title">
+        </TextView>
+
+        <EditText
+                android:id="@+id/editText_scheme_dialog_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/editText_scheme_hint">
+
+        </EditText>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_margin="15dp"
+                    android:id="@+id/txtView_scheme_dialog_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_toStartOf="@id/txtView_scheme_dialog_add"
+                    android:text="@string/no">
+
+            </TextView>
+
+            <TextView
+                    android:layout_margin="15dp"
+                    android:id="@+id/txtView_scheme_dialog_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/add">
+
+            </TextView>
+
+        </RelativeLayout>
+
+</LinearLayout>

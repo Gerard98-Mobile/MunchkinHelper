@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Munchkin Helper</string>
-    <string name="how_many_players">Put amount of players</string>
-    <string name="start_game">Start the game!</string>
-    <string name="invalid_amount_players">"Amount of players must be beetween 1-9 "</string>
+    <string name="how_many_players">Amount of players</string>
+    <string name="start_game">Start new game</string>
+    <string name="invalid_amount_players">"Amount of players must be beetween 1–9 "</string>
     <string name="level" translatable="false">level</string>
     <string name="one" translatable="false">1</string>
     <string name="player_name">Name of player</string>
@@ -12,18 +12,23 @@
     <string name="reset">Reset</string>
     <string name="fight">Fight</string>
     <string name="vs" translatable="false">vs</string>
+    <string name="x" translatable="false">x</string>
     <string name="player">Player</string>
+    <string name="click_on_player">Click on player</string>
     <string name="monster">Monster</string>
     <string name="players">Players</string>
     <string name="power_counter">Power counting</string>
     <string name="power">power</string>
-    <string name="restore_game">Return previous</string>
+    <string name="load_game">Load game</string>
     <string name="add">Add</string>
     <string name="first_player">Player 1</string>
     <string name="player_added">Player added</string>
     <string name="menu_game">Game</string>
     <string name="menu_dice">Dice</string>
-    <string name="back_pressed_title">Are you sure you want to back?</string>
+    <string name="menu_history">History</string>
+    <string name="menu_scheme">Scheme</string>
+    <string name="back_pressed_title">Backing</string>
+    <string name="back_pressed_body">Are you sure you want to go back?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="roll">Throw</string>
@@ -42,5 +47,22 @@
     <string name="players_fight">Player/s</string>
     <string name="choose_assistant">Choose asistant</string>
     <string name="nobody">Nobody</string>
-    <string name="name_lenght_error">Player name have to have minimum 3 letters!</string>
+    <string name="name_lenght_error">Player name can not be empty\nand have less than 20 letters</string>
+    <string name="player_count_error">You have to add minimum 2 players</string>
+    <string name="adding_players">Additioning Players</string>
+    <string name="history">History</string>
+    <string name="schemes">Schemes</string>
+    <string name="no_history_games">There is no history games</string>
+    <string name="no_schemes">You didn\'t add any scheme</string>
+    <string name="adding_scheme_dialog_title">Adding scheme</string>
+    <string name="editText_scheme_hint">Name of scheme</string>
+
+    <string name="deleting_scheme_title">Deleting scheme</string>
+    <string name="deleting_scheme_body">Are you sure about deleting that scheme?</string>
+
+    <string name="deleting_history_title">Deleting history game</string>
+    <string name="deleting_history_body">Are you sure about deleting that game?</string>
+    <string name="delete">delete</string>
+    <string name="choose_fighter">Firstly choose player who fight</string>
+    <string name="game_updated">Game saved</string>
 </resources>

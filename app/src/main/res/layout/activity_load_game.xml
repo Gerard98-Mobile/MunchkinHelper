@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:background="@color/colorBackground">
+
+    <LinearLayout
+            android:id="@+id/linearLayout_load_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+
+
+        <TextView
+                android:id="@+id/txtView_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/bottom_border_primary_bold"
+                android:textSize="18sp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="@string/history">
+        </TextView>
+
+        <View
+                android:layout_width="1dp"
+                android:background="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_height="match_parent">
+
+        </View>
+
+        <TextView
+                android:id="@+id/txtView_scheme"
+                android:layout_width="0dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/bottom_border_primary"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:layout_margin="10dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/colorGrey"
+                android:text="@string/schemes">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_load_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_above="@id/btn_startNewGame"
+                tools:listitem="@layout/item_card_scheme">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+                android:id="@+id/btn_startNewGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                style="@style/Button"
+                android:text="@string/start_game">
+
+        </Button>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

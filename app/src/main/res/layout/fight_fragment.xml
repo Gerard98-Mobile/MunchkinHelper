@@ -2,58 +2,76 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
+                android:background="@color/colorBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/first_player_fight"
-            android:text="@string/choose_player"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
+    <LinearLayout
+            android:id="@+id/linearLayout_player1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    <Spinner
-            android:id="@+id/first_player_spinner"
-            android:layout_below="@+id/first_player_fight"
-            android:layout_marginStart="20dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    <TextView
-            android:id="@+id/assistant_player_fight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/first_player_fight"
-            android:text="@string/choose_assistant"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Spinner
-            android:id="@+id/assistant_player_spinner"
+        <TextView
+                android:id="@+id/first_player_fight"
+                android:text="@string/choose_player"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <Spinner
+                android:id="@+id/first_player_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/linearLayout_player2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/assistant_player_fight"
-            android:layout_below="@+id/assistant_player_fight"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/linearLayout_player1"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/assistant_player_fight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/choose_assistant"/>
+
+        <Spinner
+                android:id="@+id/assistant_player_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 
     <LinearLayout
             android:id="@+id/headers_linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:layout_marginTop="50dp"
-            android:layout_below="@+id/first_player_spinner">
+            android:layout_below="@+id/linearLayout_player1">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_weight="1"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/players_fight"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:layout_weight="1"
                 android:text="@string/monster"/>
     </LinearLayout>

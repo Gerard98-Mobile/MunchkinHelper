@@ -1,21 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:background="@color/colorBackground"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <TextView
-            android:text="@string/first_player"
+            android:text="@string/adding_players"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/count_player_textView" android:textSize="18sp"/>
+            android:layout_height="wrap_content" android:id="@+id/count_player_textView"/>
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:layout_margin="10dp"
             android:ems="10"
             android:id="@+id/name_player_editText" android:hint="@string/player_name"/>
     <Button
             android:text="@string/add"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/add_player_button"/>
+            style="@style/Button"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_player_button"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_new_players"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_above="@+id/radioButton_scheme"
+                android:layout_margin="10dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <RadioButton
+                android:id="@+id/radioButton_scheme"
+                android:layout_above="@+id/btn_startGame"
+                android:layout_width="match_parent"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                android:text="Save as scheme">
+        </RadioButton>
+
+        <Button
+                android:id="@+id/btn_startGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Button"
+                android:layout_alignParentBottom="true"
+                android:text="@string/start_game">
+
+        </Button>
+    </RelativeLayout>
+
+
+
 </LinearLayout>
