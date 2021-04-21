@@ -50,4 +50,6 @@
     <string name="delete">usuń</string>
     <string name="choose_fighter">Najpierw wybierz walczącego gracza</string>
     <string name="game_updated">Gra została zapisana</string>
+    <string name="settings">Ustawienia</string>
+    <string name="auto_save">Auto-save</string>
 </resources>

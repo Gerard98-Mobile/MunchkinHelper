@@ -19,7 +19,7 @@ class FightFragment : Fragment() {
     private var assistant : Player? = null
 
     companion object{
-        fun newInstance(game: Game) : FightFragment{
+        fun newInstance(game: Game?) : FightFragment{
             return FightFragment().apply {
                 arguments = Bundle().apply{
                     putSerializable(GAME_KEY, game)

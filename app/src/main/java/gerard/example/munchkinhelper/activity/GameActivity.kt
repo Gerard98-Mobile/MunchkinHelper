@@ -7,18 +7,17 @@ import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import gerard.example.munchkinhelper.fragments.DiceFragment
-import gerard.example.munchkinhelper.fragments.FightFragment
-import gerard.example.munchkinhelper.fragments.GameFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import gerard.example.munchkinhelper.MainActivity
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.fragments.DiceFragment
+import gerard.example.munchkinhelper.fragments.FightFragment
+import gerard.example.munchkinhelper.fragments.GameFragment
+import gerard.example.munchkinhelper.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.viewmodels.GameVM
 
@@ -40,46 +39,14 @@ class GameActivity : AppCompatActivity() {
 
         game = intent.getSerializableExtra(GAME_KEY) as Game?
 
-        //actuallyFragment = GameFragment.newInstance(game)
-        game?.let {
-            actuallyFragment = GameFragment.newInstance(it)
-            if (actuallyFragment != null) {
-                val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.frame, actuallyFragment!!)
-                transaction.commit()
-            }
-        }
-
+        changeFragment(GameFragment.newInstance(game))
 
         navigation = findViewById(R.id.navigation)
         navigation!!.setOnNavigationItemSelectedListener {
-            val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
-                R.id.menu_game -> {
-                    if (game != null) {
-                        actuallyFragment = GameFragment.newInstance(game!!)
-                        actuallyFragment?.let {
-                            transaction.replace(R.id.frame, it)
-                            transaction.commit()
-                        }
-                    }
-                }
-                R.id.menu_dice -> {
-                    actuallyFragment = DiceFragment()
-                    actuallyFragment?.let {
-                        transaction.replace(R.id.frame, it)
-                        transaction.commit()
-                    }
-                }
-                R.id.menu_fight -> {
-                    if (game != null) {
-                        actuallyFragment = FightFragment.newInstance(game!!)
-                        actuallyFragment?.let {
-                            transaction.replace(R.id.frame, it)
-                            transaction.commit()
-                        }
-                    }
-                }
+                R.id.menu_game -> changeFragment(GameFragment.newInstance(game))
+                R.id.menu_dice -> changeFragment(DiceFragment())
+                R.id.menu_fight -> changeFragment(FightFragment.newInstance(game))
             }
             true
         }
@@ -105,12 +72,31 @@ class GameActivity : AppCompatActivity() {
                 }
                 true
             }
+            R.id.menu_settings -> {
+                changeFragment(SettingsFragment())
+                true
+            }
 
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    private fun changeFragment(fragment: Fragment) {
+        actuallyFragment = fragment
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frame, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun onBackPressed() {
+
+        val count = supportFragmentManager.backStackEntryCount
+        if(count > 1){
+            super.onBackPressed()
+            return
+        }
 
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -129,5 +115,9 @@ class GameActivity : AppCompatActivity() {
         }
         noBtn.setOnClickListener { dialog.dismiss() }
         dialog.show()
+    }
+
+    fun showBottomBar(show: Boolean) {
+        navigation?.visibility = if(show) View.VISIBLE else View.GONE
     }
 }

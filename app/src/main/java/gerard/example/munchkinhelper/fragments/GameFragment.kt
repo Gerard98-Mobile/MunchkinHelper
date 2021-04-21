@@ -25,7 +25,7 @@ class GameFragment() : Fragment(){
     var game : Game? = null
 
     companion object{
-        fun newInstance(game: Game) : GameFragment{
+        fun newInstance(game: Game?) : GameFragment{
             return GameFragment().apply {
                 arguments = Bundle().apply{
                     putSerializable(GAME_KEY, game)
