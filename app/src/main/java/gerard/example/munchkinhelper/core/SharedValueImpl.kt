@@ -1,5 +1,6 @@
 package gerard.example.munchkinhelper.core
 
+import android.util.Log
 import gerard.example.munchkinhelper.Cfg
 
 abstract class SharedValueImpl<T>{
@@ -18,12 +19,17 @@ abstract class SharedValueImpl<T>{
 
     class Bool : SharedValueImpl<Boolean>(){
         override fun getValue(): Boolean? {
-            return Cfg.sharedPreferences?.getBoolean(key, defaultValue ?: false)
+            val value = Cfg.sharedPreferences?.getBoolean(key, defaultValue ?: false)
+            Log.d("SharedValue","Value from " + key + " is " + value)
+            return value
         }
 
         override fun setValue(value: Boolean) {
             with(Cfg.sharedPreferences?.edit()){
-                if(this == null) return
+                if(this == null) {
+                    Log.d("SharedValue", "Setting Value error, obj is null")
+                    return
+                }
                 putBoolean(key, value)
                 commit()
             }

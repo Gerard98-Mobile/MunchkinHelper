@@ -8,81 +8,53 @@ import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import gerard.example.munchkinhelper.Cfg
 import gerard.example.munchkinhelper.MainActivity
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.fragments.DiceFragment
 import gerard.example.munchkinhelper.fragments.FightFragment
 import gerard.example.munchkinhelper.fragments.GameFragment
+import gerard.example.munchkinhelper.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.viewmodels.GameVM
+import kotlinx.android.synthetic.main.activity_game.*
 
 val GAME_KEY = "game_key"
 
 class GameActivity : AppCompatActivity() {
 
-    var navigation: BottomNavigationView? = null
-    var actuallyFragment: Fragment? = null
-    var viewmodel: GameVM? = null
-    var game: Game? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        viewmodel = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-            .create(GameVM::class.java)
-        setObservers()
+        Cfg.init(this)
+        setToolbar()
 
-        game = intent.getSerializableExtra(GAME_KEY) as Game?
+        val game = intent.getSerializableExtra(GAME_KEY) as Game?
+        changeFragment(HomeFragment.newInstance(game))
+    }
 
-        changeFragment(GameFragment.newInstance(game))
-
-        navigation = findViewById(R.id.navigation)
-        navigation!!.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.menu_game -> changeFragment(GameFragment.newInstance(game))
-                R.id.menu_dice -> changeFragment(DiceFragment())
-                R.id.menu_fight -> changeFragment(FightFragment.newInstance(game))
-            }
-            true
+    fun setToolbar() {
+        setToolbarTitle(getString(R.string.app_name))
+        if(Cfg.autoSave.value.get() == true){
+            toolbar_autosave.visibility = View.GONE
         }
-    }
-
-    private fun setObservers() {
-        viewmodel?.gameUpdated?.observe(this, Observer {
-            Toast.makeText(this, getString(R.string.game_updated), Toast.LENGTH_SHORT).show()
-        })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.save_nav, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_save_game -> {
-                game?.let {
-                    viewmodel?.saveGame(it)
-                }
-                true
-            }
-            R.id.menu_settings -> {
-                changeFragment(SettingsFragment())
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
+        else{
+            toolbar_autosave.visibility = View.VISIBLE
         }
+        toolbar_settings.visibility = View.VISIBLE
+        toolbar_back.visibility = View.GONE
+        toolbar_settings.setOnClickListener { changeFragment(SettingsFragment()) }
+        toolbar_back.setOnClickListener { onBackPressed() }
     }
 
     private fun changeFragment(fragment: Fragment) {
-        actuallyFragment = fragment
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame, fragment)
@@ -117,7 +89,14 @@ class GameActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun showBottomBar(show: Boolean) {
-        navigation?.visibility = if(show) View.VISIBLE else View.GONE
+    fun setToolbarTitle(text: String){
+        toolbar_text.setText(text)
     }
+
+    fun hideToolbarButtons() {
+        toolbar_back.visibility = View.VISIBLE
+        toolbar_settings.visibility = View.GONE
+        toolbar_autosave.visibility = View.GONE
+    }
+
 }

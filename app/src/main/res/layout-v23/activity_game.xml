@@ -26,6 +26,7 @@
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:visibility="gone"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
                     app:layout_constraintStart_toStartOf="parent"
                     android:src="@drawable/ic_back"/>
 
@@ -47,6 +48,7 @@
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
                     app:layout_constraintEnd_toStartOf="@+id/toolbar_settings"
                     android:src="@drawable/ic_save2"/>
 
@@ -54,6 +56,7 @@
                     android:id="@+id/toolbar_settings"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_settings"/>

@@ -12,21 +12,21 @@ import java.util.*
 
 class GameFragmentVM(application: Application) : AndroidViewModel(application) {
 
-//    private val repository: GameRepository
-//
-//    init{
-//        val gameDao = GameDatabase.getDatabase(application).gameDao()
-//        repository = GameRepository(gameDao)
-//    }
-//
-//    fun updateGame(game: Game?) = viewModelScope.launch(Dispatchers.IO) {
-//        game?.let {
-//            it.saveDate = Date().time
-//            repository.update(it)
-//        }
-//    }
-//
-//    fun insertGame(game: Game) = viewModelScope.launch(Dispatchers.IO) {
-//        repository.insert(game)
-//    }
+    private val repository: GameRepository
+
+    init{
+        val gameDao = GameDatabase.getDatabase(application).gameDao()
+        repository = GameRepository(gameDao)
+    }
+
+    fun updateGame(game: Game?) = viewModelScope.launch(Dispatchers.IO) {
+        game?.let {
+            it.saveDate = Date().time
+            repository.update(it)
+        }
+    }
+
+    fun insertGame(game: Game) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(game)
+    }
 }

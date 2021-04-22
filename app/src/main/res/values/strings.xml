@@ -67,4 +67,7 @@
     <string name="game_updated">Game saved</string>
     <string name="settings">Settings</string>
     <string name="auto_save">Auto-save</string>
+    <string name="sound">Sound</string>
+    <string name="save">Save</string>
+    <string name="death">Death</string>
 </resources>

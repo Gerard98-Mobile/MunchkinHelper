@@ -104,7 +104,6 @@ class AddingPlayersActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     // function show dialog for get scheme name from user
     class SchemeNameDialog(val typedName: MutableLiveData<String>) : DialogFragment(){
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

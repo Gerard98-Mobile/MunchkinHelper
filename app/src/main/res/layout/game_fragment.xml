@@ -16,14 +16,23 @@
             android:paddingRight="20dp"
             android:weightSum="1">
 
-        <TextView
+        <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.33"
-                android:layout_gravity="bottom"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                android:text=""/>
+                android:layout_weight="0.33"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:id="@+id/skull_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_skull"
+                    android:text=""
+                    android:contentDescription="@string/death" />
+
+        </LinearLayout>
 
         <TextView
                 android:layout_width="0dp"
@@ -51,6 +60,7 @@
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_above="@+id/linearLayout_changer"
             android:layout_below="@+id/linearLayout_header_container"
             android:layout_marginBottom="10dp"/>
@@ -77,80 +87,106 @@
 
         </TextView>
 
-
-        <RelativeLayout
-                android:id="@+id/relativeLayout_changer"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
+                android:weightSum="2"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-            <LinearLayout
+            <gerard.example.munchkinhelper.core.views.CounterView
+                    android:id="@+id/power_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="20dp">
+                    android:layout_weight="1"
+                    app:title="@string/power"/>
 
-                <ImageButton
-                        android:id="@+id/imgButton_add_power"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/circle_border"
-                        android:src="@drawable/ic_add_brown">
-                </ImageButton>
-                <TextView
-                        android:id="@+id/txtView_power"
-                        android:layout_width="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:textColor="@color/colorPrimary"
-                        android:text="@string/x">
-                </TextView>
-                <ImageButton
-                        android:id="@+id/imgButton_reduce_power"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/circle_border"
-                        android:src="@drawable/ic_remove_brown">
-                </ImageButton>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <gerard.example.munchkinhelper.core.views.CounterView
+                    android:id="@+id/level_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:orientation="horizontal"
-                    android:layout_alignParentEnd="true">
+                    android:layout_weight="1"
+                    app:title="@string/level"/>
 
-                <ImageButton
-                        android:id="@+id/imgButton_add_level"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/circle_border"
-                        android:src="@drawable/ic_add_brown">
-                </ImageButton>
-                <TextView
-                        android:id="@+id/txtView_level"
-                        android:layout_margin="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:textColor="@color/colorPrimary"
-                        android:text="@string/x">
-                </TextView>
-                <ImageButton
-                        android:id="@+id/imgButton_reduce_level"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/circle_border"
-                        android:src="@drawable/ic_remove_brown">
-                </ImageButton>
+        </LinearLayout>
 
-            </LinearLayout>
 
-        </RelativeLayout>
+
+
+<!--        <RelativeLayout-->
+<!--                android:id="@+id/relativeLayout_changer"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:visibility="gone"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp">-->
+
+<!--            <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginLeft="20dp">-->
+
+<!--                <ImageButton-->
+<!--                        android:id="@+id/imgButton_add_power"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:background="@drawable/circle_border"-->
+<!--                        android:src="@drawable/ic_add_brown">-->
+<!--                </ImageButton>-->
+<!--                <TextView-->
+<!--                        android:id="@+id/txtView_power"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:textColor="@color/colorPrimary"-->
+<!--                        android:text="@string/x">-->
+<!--                </TextView>-->
+<!--                <ImageButton-->
+<!--                        android:id="@+id/imgButton_reduce_power"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:background="@drawable/circle_border"-->
+<!--                        android:src="@drawable/ic_remove_brown">-->
+<!--                </ImageButton>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_alignParentEnd="true">-->
+
+<!--                <ImageButton-->
+<!--                        android:id="@+id/imgButton_add_level"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:background="@drawable/circle_border"-->
+<!--                        android:src="@drawable/ic_add_brown">-->
+<!--                </ImageButton>-->
+<!--                <TextView-->
+<!--                        android:id="@+id/txtView_level"-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:textColor="@color/colorPrimary"-->
+<!--                        android:text="@string/x">-->
+<!--                </TextView>-->
+<!--                <ImageButton-->
+<!--                        android:id="@+id/imgButton_reduce_level"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:background="@drawable/circle_border"-->
+<!--                        android:src="@drawable/ic_remove_brown">-->
+<!--                </ImageButton>-->
+
+<!--            </LinearLayout>-->
+
+<!--        </RelativeLayout>-->
 
     </LinearLayout>
 </RelativeLayout>
