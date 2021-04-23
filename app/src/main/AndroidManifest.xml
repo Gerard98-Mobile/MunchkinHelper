@@ -16,11 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="gerard.example.munchkinhelper.activity.GameActivity"
+        <activity android:name="gerard.example.munchkinhelper.ui.activity.GameActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:configChanges="screenSize"/>
-        <activity android:name="gerard.example.munchkinhelper.activity.AddingPlayersActivity"/>
-        <activity android:name="gerard.example.munchkinhelper.activity.LoadGameActivity"/>
+        <activity android:name="gerard.example.munchkinhelper.ui.activity.AddingPlayersActivity"/>
+        <activity android:name="gerard.example.munchkinhelper.ui.activity.load.LoadGameActivity"/>
     </application>
 
 </manifest>

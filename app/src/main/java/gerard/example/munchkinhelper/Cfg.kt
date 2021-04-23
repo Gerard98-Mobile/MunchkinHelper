@@ -3,7 +3,7 @@ package gerard.example.munchkinhelper
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import gerard.example.munchkinhelper.fragments.settings.Setting
+import gerard.example.munchkinhelper.ui.fragments.settings.Setting
 import gerard.example.munchkinhelper.core.SharedValue
 
 object Cfg{

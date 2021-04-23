@@ -1,9 +1,8 @@
 package gerard.example.munchkinhelper.model
 
 import androidx.room.*
-import gerard.example.munchkinhelper.converters.DateConverter
-import gerard.example.munchkinhelper.converters.PlayerListConverter
-import org.jetbrains.annotations.NotNull
+import gerard.example.munchkinhelper.db.converters.DateConverter
+import gerard.example.munchkinhelper.db.converters.PlayerListConverter
 import java.io.Serializable
 
 @Entity(tableName = "games")

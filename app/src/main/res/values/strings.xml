@@ -70,4 +70,6 @@
     <string name="sound">Sound</string>
     <string name="save">Save</string>
     <string name="death">Death</string>
+    <string name="poor_end">"Poor End: "</string>
+    <string name="baked_and_eaten_end">you get baked and eaten. You die</string>
 </resources>

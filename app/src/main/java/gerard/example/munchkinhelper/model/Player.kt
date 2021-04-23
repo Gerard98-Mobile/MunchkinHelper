@@ -14,11 +14,20 @@ class Player(
         return power + lvl
     }
 
+    fun setPowerFromAbsoluteValue(absolutePower: Int){
+        this.power = absolutePower - lvl
+    }
+
     fun getAbsolutePower(): String{
         return (power + lvl).toString()
     }
 
     override fun toString(): String {
         return name
+    }
+
+    fun death() {
+        lvl = 1
+        power = 0
     }
 }

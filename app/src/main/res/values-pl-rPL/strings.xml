@@ -55,4 +55,6 @@
     <string name="sound">Dźwięk</string>
     <string name="save">Zapisz</string>
     <string name="death">Śmierć</string>
+    <string name="poor_end">Marny Koniec:</string>
+    <string name="baked_and_eaten_end">zostajesz upieczony i zjedzony. Giniesz</string>
 </resources>

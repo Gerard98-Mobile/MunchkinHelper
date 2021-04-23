@@ -7,4 +7,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#C0C0C0</color>
     <color name="deleteBackground">#E96D72</color>
+    <color name="winnerColor">#77dd77</color>
+    <color name="looserColor">#E96D72</color>
 </resources>

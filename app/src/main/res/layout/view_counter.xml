@@ -16,17 +16,30 @@
             android:textSize="18sp"
             android:textColor="@color/colorPrimary"/>
 
-    <ImageButton
+    <com.google.android.material.card.MaterialCardView
             android:id="@+id/imgButton_reduce"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/colorBackground"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="3dp"
             android:layout_marginTop="5dp"
-            android:foreground="?android:selectableItemBackground"
             app:layout_constraintTop_toBottomOf="@+id/txtView_title"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/circle_border"
-            android:src="@drawable/ic_remove_brown">
-    </ImageButton>
+            app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="12dp"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_remove_brown">
+                </ImageView>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
             android:id="@+id/txtView_value"
             android:layout_width="wrap_content"
@@ -40,17 +53,29 @@
             android:text="@string/x">
     </TextView>
 
-    <ImageButton
+    <com.google.android.material.card.MaterialCardView
             android:id="@+id/imgButton_add"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/colorBackground"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="3dp"
             android:layout_marginStart="8dp"
-            android:foreground="?android:selectableItemBackground"
             app:layout_constraintTop_toTopOf="@+id/imgButton_reduce"
             app:layout_constraintBottom_toBottomOf="@+id/imgButton_reduce"
-            app:layout_constraintStart_toEndOf="@+id/txtView_value"
-            android:background="@drawable/circle_border"
-            android:src="@drawable/ic_add_brown">
-    </ImageButton>
+            app:layout_constraintStart_toEndOf="@+id/txtView_value">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:layout_gravity="center"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_add_brown">
+        </ImageView>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

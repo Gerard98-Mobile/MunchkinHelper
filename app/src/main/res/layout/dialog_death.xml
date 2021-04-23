@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        app:cardBackgroundColor="@color/colorBackground"
+        app:strokeWidth="10dp"
+        app:strokeColor="@color/colorPrimary"
+        app:cardCornerRadius="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_skull"/>
+
+
+
+        <TextView
+                android:id="@+id/dead_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="21sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="7dp"
+                android:textStyle="normal"
+                android:text="Marny Koniec: Gerard zostajesz upieczony i zjedzony. Giniesz"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:weightSum="4"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp">
+
+            <TextView
+                    android:id="@+id/btn_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textColor="@color/colorPrimary"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:layout_marginTop="7dp"
+                    android:textStyle="bold"
+                    android:text="@string/no"/>
+
+            <TextView
+                    android:id="@+id/btn_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:layout_marginTop="7dp"
+                    android:textStyle="normal"
+                    android:text="@string/yes"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,22 +1,11 @@
 package gerard.example.munchkinhelper
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.se.omapi.Session
-import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.Switch
-import android.widget.TextView
-import android.widget.Toast
-import gerard.example.munchkinhelper.activity.AddingPlayersActivity
-import gerard.example.munchkinhelper.activity.GameActivity
-import gerard.example.munchkinhelper.activity.LoadGameActivity
-import java.util.*
+import gerard.example.munchkinhelper.ui.activity.create.AddingPlayersActivity
+import gerard.example.munchkinhelper.ui.activity.load.LoadGameActivity
 
 
 class MainActivity : AppCompatActivity() {
