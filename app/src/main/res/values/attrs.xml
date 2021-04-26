@@ -4,5 +4,12 @@
     <declare-styleable name="Counter">
         <attr name="title" format="string"/>
     </declare-styleable>
+    <declare-styleable name="EditTextWithTitle">
+        <attr name="editTextTitle" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="FightCounter">
+
+    </declare-styleable>
 
 </resources>

@@ -38,12 +38,15 @@ class HomeFragment : Fragment() {
         }
 
         home_view_pager.registerOnPageChangeCallback(object : OnPageChangeCallback(){
-
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+
                 when(position){
                     0 -> navigation.selectedItemId = R.id.menu_game
-                    1 -> navigation.selectedItemId = R.id.menu_dice
+                    1 -> {
+                        home_view_pager.isUserInputEnabled = false
+                        navigation.selectedItemId = R.id.menu_dice
+                    }
                     2 -> navigation.selectedItemId = R.id.menu_fight
                 }
             }

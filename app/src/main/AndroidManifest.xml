@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="gerard.example.munchkinhelper">
 
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -16,11 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="gerard.example.munchkinhelper.ui.activity.GameActivity"
+        <activity android:name=".ui.activity.GameActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:configChanges="screenSize"/>
-        <activity android:name="gerard.example.munchkinhelper.ui.activity.AddingPlayersActivity"/>
-        <activity android:name="gerard.example.munchkinhelper.ui.activity.load.LoadGameActivity"/>
+        <activity android:name=".ui.activity.create.AddingPlayersActivity"/>
+        <activity android:name=".ui.activity.load.LoadGameActivity"/>
     </application>
 
 </manifest>

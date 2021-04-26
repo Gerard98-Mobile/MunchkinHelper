@@ -18,9 +18,11 @@ object Cfg{
 
     private val _autoSaveValue = SharedValue("auto_save",true,Boolean::class.java)
     private val _sound = SharedValue("sound",true,Boolean::class.java)
+    private val _dice3d = SharedValue("sound",true,Boolean::class.java)
 
     val autoSave = Setting(R.string.auto_save, _autoSaveValue, R.drawable.ic_save)
     val sound = Setting(R.string.sound, _sound, R.drawable.ic_audio)
+    val dice3d = Setting(R.string.dice3d, _dice3d, R.drawable.ic_dice_four)
 
-    val settings = listOf(autoSave, sound)
+    val settings = listOf(autoSave, sound, dice3d)
 }
