@@ -31,6 +31,8 @@
                 android:textCursorDrawable="@drawable/cursor"
                 android:theme="@style/AppTheme"
                 android:gravity="center"
+                android:focusable="false"
+                android:clickable="false"
                 android:inputType="number"
                 android:padding="10dp"
                 android:background="@android:color/transparent"

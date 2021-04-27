@@ -12,7 +12,13 @@ class FightCounter @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    var editText: EditTextWithTitle? = null
+    fun interface ValueChangeListener{
+        fun valueChanged(value: Int)
+    }
+
+    var valueChangeListener : ValueChangeListener? = null
+
+    var addedPower: Int = 0
 
     init{
         inflate(context, R.layout.view_fight_counter, this)
@@ -31,9 +37,8 @@ class FightCounter @JvmOverloads constructor(
     }
 
     fun changeValue(changer: Int){
-        var value = editText?.getCount() ?: 0
-        value += changer
-        editText?.setCount(value)
+        addedPower += changer
+        valueChangeListener?.valueChanged(addedPower)
     }
 
 }

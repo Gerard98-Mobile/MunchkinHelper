@@ -11,4 +11,5 @@
     <color name="winnerColor">#77dd77</color>
     <color name="looserColor">#E96D72</color>
     <color name="drawColor">@color/colorGrey</color>
+    <color name="backlight">#ffffad</color>
 </resources>

@@ -27,7 +27,6 @@ class EditTextWithTitle @JvmOverloads constructor(
         fun onValueChange()
     }
 
-    private var state = STATE.DRAW
     private var valueChangeListener : ValueChangeListener? = null
 
     init{
@@ -85,8 +84,8 @@ class EditTextWithTitle @JvmOverloads constructor(
         })
     }
 
-    fun getCount(): Int? {
-        return editText.text.toString().toIntOrNull()
+    fun getCount(): Int {
+        return editText.text.toString().toIntOrNull() ?: 0
     }
 
     fun setCount(value: Int) {

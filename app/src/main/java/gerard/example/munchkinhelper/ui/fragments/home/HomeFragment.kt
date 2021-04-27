@@ -27,6 +27,8 @@ class HomeFragment : Fragment() {
         val game = arguments?.getSerializable(GAME_KEY) as Game
 
         home_view_pager.adapter = ViewPagerAdapter(game, this)
+        home_view_pager.isUserInputEnabled = false
+
 
         navigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
