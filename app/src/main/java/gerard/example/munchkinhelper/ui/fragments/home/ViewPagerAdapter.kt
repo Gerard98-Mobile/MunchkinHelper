@@ -8,7 +8,6 @@ import gerard.example.munchkinhelper.ui.fragments.game.GameFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.fragments.Dice3DFragment
 import gerard.example.munchkinhelper.ui.fragments.fight.FightContainerFragment
-import gerard.example.munchkinhelper.ui.fragments.fight.FightFragment2
 
 class ViewPagerAdapter(
     val game: Game,

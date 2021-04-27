@@ -11,7 +11,7 @@ class FightViewPagerAdapter(
 ) : FragmentStateAdapter(parent) {
 
     val selectFightersFragment = SelectFightersFragment.newInstance(fighters)
-    val fightFragment = FightFragment2.newInstance()
+    val fightFragment = FightFragment.newInstance()
 
     override fun getItemCount(): Int {
         return 2

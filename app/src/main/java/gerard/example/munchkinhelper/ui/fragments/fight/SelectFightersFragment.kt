@@ -14,13 +14,7 @@ import java.io.Serializable
 
 class SelectFightersFragment : Fragment() {
 
-    class FighterModelParcelable(val fighters: List<FighterModel>) : Serializable{
-        fun getPower() : Int{
-            var value = 0
-            fighters.forEach { if(it.selected) value += it.player.getAbsolutePowerInt() }
-            return value
-        }
-    }
+    class FighterModelParcelable(val fighters: List<FighterModel>) : Serializable
     class FighterModel(val player: Player, var selected: Boolean)
 
     private lateinit var fightersParcelable : FighterModelParcelable

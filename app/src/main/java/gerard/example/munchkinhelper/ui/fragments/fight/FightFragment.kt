@@ -11,11 +11,11 @@ import gerard.example.munchkinhelper.core.views.EditTextWithTitle
 import gerard.example.munchkinhelper.core.views.FightCounter
 import kotlinx.android.synthetic.main.fight_fragment2.*
 
-class FightFragment2 : Fragment() {
+class FightFragment : Fragment() {
 
     companion object{
-        fun newInstance() : FightFragment2 {
-            return FightFragment2()
+        fun newInstance() : FightFragment {
+            return FightFragment()
         }
     }
 

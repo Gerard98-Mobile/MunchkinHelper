@@ -85,6 +85,7 @@ class GameFragment() : Fragment(){
                     it.death()
                     observer.onChanged(it)
                     playerAdapter?.notifyDataSetChanged()
+                    if(Cfg.autoSave.value.get() == true) viewmodel?.updateGame(game)
                 }.show()
             }
 

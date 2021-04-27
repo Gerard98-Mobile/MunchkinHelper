@@ -8,6 +8,8 @@ import gerard.example.munchkinhelper.core.SharedValue
 
 object Cfg{
 
+    var autoOpen = false
+
     var sharedPreferences : SharedPreferences? = null
         get() = if(field == null) throw NotInitializedException("SharedPreference have to be initialized") else field
         private set(value){ field = value}
