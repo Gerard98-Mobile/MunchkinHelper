@@ -32,19 +32,13 @@ class FightFragment : Fragment() {
 
         players_counter.valueChangeListener = FightCounter.ValueChangeListener {
             model.playersPower += it
-//            players_count?.setCount(model.playersPower)
         }
 
         monsters_counter.valueChangeListener = FightCounter.ValueChangeListener {
             model.monstersPower += it
         }
 
-//        players_counter.addedPower = playerAddedPower
-//        monsters_counter.addedPower = monsterAddedPower
-//        players_count.setCount(playersPower)
-
         model.reset.observe(viewLifecycleOwner, {
-            Log.e("Reset","FightFragment")
             players_count?.setCount(0)
             monsters_count?.setCount(0)
         })
@@ -75,20 +69,4 @@ class FightFragment : Fragment() {
             monsters_count.changeState(EditTextWithTitle.STATE.WINNER)
         }
     }
-
-//    fun reset() {
-//        playersPower = 0
-//        playerAddedPower = 0
-//        monsterAddedPower = 0
-//        players_counter.addedPower = playerAddedPower
-//        monsters_counter.addedPower = monsterAddedPower
-//        players_count.setCount(fullPlayersPower.invoke())
-//        monsters_count.setCount(0)
-//    }
-//
-//    fun fightersPowerChanged(newPlayerPowers: Int) {
-//        playersPower = newPlayerPowers
-//        players_count?.setCount(fullPlayersPower.invoke())
-//        Log.e("FightFramgnet","After Change players: " + playersPower + " addedPower: " + playerAddedPower)
-//    }
 }

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 
 class SharedViewModel : ViewModel() {
 
+    var fighters: List<SelectFightersFragment.FighterModel>? = null
+
     val playersPowerChanged = MutableLiveData<Int>()
     val monstersPowerChanged = MutableLiveData<Int>()
 

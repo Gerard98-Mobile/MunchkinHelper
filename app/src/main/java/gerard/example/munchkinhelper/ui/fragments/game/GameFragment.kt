@@ -18,7 +18,7 @@ import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.dialogs.DeathDialog
 import kotlinx.android.synthetic.main.game_fragment.*
 
-class GameFragment() : Fragment(){
+class GameFragment : Fragment(){
 
     var selectedPlayer: Player? = null
     var viewmodel: GameFragmentVM? = null
@@ -50,9 +50,10 @@ class GameFragment() : Fragment(){
 
         var playerAdapter : GamePlayerAdapter? = null
 
+
         game?.let {
             // we know that context is not null
-            playerAdapter = GamePlayerAdapter(context!!, it.players)
+            playerAdapter = GamePlayerAdapter(view.context, it.players)
         }
 
         val observer = Observer<Player>{ player ->

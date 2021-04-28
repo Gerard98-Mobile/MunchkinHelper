@@ -34,10 +34,13 @@ class SelectFightersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fightersParcelable = arguments?.getSerializable(FIGHTERS_KEY) as FighterModelParcelable
-        fighters_recycler_view.adapter = SelectFightersAdapter(view.context, fightersParcelable.fighters) { changedPower ->
-            model.playersPower += changedPower
+
+        model.fighters?.let {
+            fighters_recycler_view.adapter = SelectFightersAdapter(view.context, it) { changedPower ->
+                model.playersPower += changedPower
+            }
         }
+
         swipe_to_right.setOnClickListener {
             val parent = parentFragment as? FightContainerFragment
             parent?.changeFragment(1)
@@ -54,12 +57,8 @@ class SelectFightersFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(fighters: FighterModelParcelable) : SelectFightersFragment {
-            return SelectFightersFragment().apply {
-                arguments = Bundle().apply{
-                    putSerializable(FIGHTERS_KEY, fighters)
-                }
-            }
+        fun newInstance() : SelectFightersFragment {
+            return SelectFightersFragment()
         }
     }
 }

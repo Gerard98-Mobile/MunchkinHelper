@@ -32,15 +32,8 @@ class SelectFightersAdapter(
             model.selected = holder.itemView.fighter_checkBox.isChecked
             callback.selectionChange(if(model.selected) model.player.getAbsolutePowerInt() else model.player.getAbsolutePowerInt() *-1)
         }
-
-
     }
 
-    fun getPower() : Int{
-        var power = 0
-        fighters.forEach { if(it.selected) power += it.player.getAbsolutePowerInt() }
-        return power
-    }
 
     override fun getItemCount(): Int {
         return fighters.size

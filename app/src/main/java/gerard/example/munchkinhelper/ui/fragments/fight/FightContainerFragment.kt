@@ -33,10 +33,8 @@ class FightContainerFragment : Fragment() {
         val fighters = mutableListOf<SelectFightersFragment.FighterModel>()
         game.players.forEach { fighters.add(SelectFightersFragment.FighterModel(it, false)) }
 
-        val adapter = FightViewPagerAdapter(
-            SelectFightersFragment.FighterModelParcelable(fighters),
-            this
-        )
+        model.fighters = fighters
+        val adapter = FightViewPagerAdapter(this)
 
         fight_view_pager.adapter = adapter
 
