@@ -1,10 +1,12 @@
 package gerard.example.munchkinhelper.ui.fragments.fight
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.model.Game
@@ -21,6 +23,8 @@ class FightContainerFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_fight_container, container, false)
     }
+
+    private val model: SharedViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,30 +43,22 @@ class FightContainerFragment : Fragment() {
         fight_view_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if(position == 1){
-                    AnimationUtil.animateAlpha(1.0f, 300, back)
-                }
-                else{
-                    AnimationUtil.animateAlpha(0.0f, 300, back)
-                }
+                AnimationUtil.animateAlpha(position.toFloat(), 300, back)
             }
         })
 
         reset.setOnClickListener {
-            adapter.reset()
+            model.reset()
         }
 
         back.setOnClickListener {
             changeFragment(0)
         }
+
     }
 
     fun changeFragment(i: Int) {
         fight_view_pager.setCurrentItem(i, true)
-    }
-
-    fun fightersPowerChanged(newPower: Int){
-        (fight_view_pager.adapter as? FightViewPagerAdapter)?.fightersPowerChanged(newPower)
     }
 
     companion object{

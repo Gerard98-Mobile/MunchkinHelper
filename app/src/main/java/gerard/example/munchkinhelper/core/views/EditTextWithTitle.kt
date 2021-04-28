@@ -23,12 +23,6 @@ class EditTextWithTitle @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    fun interface ValueChangeListener{
-        fun onValueChange()
-    }
-
-    private var valueChangeListener : ValueChangeListener? = null
-
     init{
         inflate(context, R.layout.power_edit_text, this)
 
@@ -67,23 +61,6 @@ class EditTextWithTitle @JvmOverloads constructor(
         this.oldColor = newColor
     }
 
-    fun setOnChangeListener(valueChangeListener: ValueChangeListener) {
-        this.valueChangeListener = valueChangeListener
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                //nothing
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                valueChangeListener.onValueChange()
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // nothing
-            }
-        })
-    }
-
     fun getCount(): Int {
         return editText.text.toString().toIntOrNull() ?: 0
     }
@@ -92,7 +69,7 @@ class EditTextWithTitle @JvmOverloads constructor(
         editText.setText(value.toString())
     }
 
-    enum class STATE(val color: Int){
-        WINNER(R.color.winnerColor), LOSSER(R.color.looserColor), DRAW(R.color.drawColor)
+    enum class STATE{
+        WINNER, LOSSER, DRAW
     }
 }

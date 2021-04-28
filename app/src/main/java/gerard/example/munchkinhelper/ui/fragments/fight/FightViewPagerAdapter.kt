@@ -10,26 +10,14 @@ class FightViewPagerAdapter(
     parent: Fragment
 ) : FragmentStateAdapter(parent) {
 
-    val selectFightersFragment = SelectFightersFragment.newInstance(fighters)
-    val fightFragment = FightFragment.newInstance()
-
     override fun getItemCount(): Int {
         return 2
     }
 
     override fun createFragment(position: Int): Fragment {
         when(position){
-            0 -> return selectFightersFragment
-            else -> return fightFragment
+            0 -> return SelectFightersFragment.newInstance(fighters)
+            else -> return FightFragment.newInstance()
         }
-    }
-
-    fun reset(){
-        selectFightersFragment.reset()
-        fightFragment.reset()
-    }
-
-    fun fightersPowerChanged(newPower: Int) {
-        fightFragment.fightersPowerChanged(newPower)
     }
 }

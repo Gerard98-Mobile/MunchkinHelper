@@ -1,10 +1,12 @@
 package gerard.example.munchkinhelper.ui.fragments.fight
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
@@ -19,6 +21,9 @@ class SelectFightersFragment : Fragment() {
 
     private lateinit var fightersParcelable : FighterModelParcelable
 
+    private val model: SharedViewModel by activityViewModels()
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,14 +35,17 @@ class SelectFightersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fightersParcelable = arguments?.getSerializable(FIGHTERS_KEY) as FighterModelParcelable
-        fighters_recycler_view.adapter = SelectFightersAdapter(view.context, fightersParcelable.fighters) { newPower ->
-            val parent = parentFragment as? FightContainerFragment
-            parent?.fightersPowerChanged(newPower)
+        fighters_recycler_view.adapter = SelectFightersAdapter(view.context, fightersParcelable.fighters) { changedPower ->
+            model.playersPower += changedPower
         }
         swipe_to_right.setOnClickListener {
             val parent = parentFragment as? FightContainerFragment
             parent?.changeFragment(1)
         }
+
+        model.reset.observe(viewLifecycleOwner, {
+            reset()
+        })
     }
 
     fun reset() {

@@ -30,7 +30,7 @@ class SelectFightersAdapter(
 
         holder.itemView.fighter_checkBox.setOnClickListener {
             model.selected = holder.itemView.fighter_checkBox.isChecked
-            callback.selectionChange(getPower())
+            callback.selectionChange(if(model.selected) model.player.getAbsolutePowerInt() else model.player.getAbsolutePowerInt() *-1)
         }
 
 

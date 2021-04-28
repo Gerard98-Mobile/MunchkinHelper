@@ -18,8 +18,6 @@ class FightCounter @JvmOverloads constructor(
 
     var valueChangeListener : ValueChangeListener? = null
 
-    var addedPower: Int = 0
-
     init{
         inflate(context, R.layout.view_fight_counter, this)
 
@@ -37,8 +35,7 @@ class FightCounter @JvmOverloads constructor(
     }
 
     fun changeValue(changer: Int){
-        addedPower += changer
-        valueChangeListener?.valueChanged(addedPower)
+        valueChangeListener?.valueChanged(changer)
     }
 
 }
