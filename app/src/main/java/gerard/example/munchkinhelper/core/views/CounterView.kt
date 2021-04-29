@@ -11,7 +11,7 @@ class CounterView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     fun interface OnChangeListener{
-        fun onChange(newValue: Int)
+        fun onChange(newValue: Int, goUp: Boolean)
     }
 
     var value: Int? = null
@@ -30,7 +30,7 @@ class CounterView @JvmOverloads constructor(
                 if(newValue < 0) return@let
                 value = newValue
                 txtView_value.text = newValue.toString()
-                onChangeListener?.onChange(newValue)
+                onChangeListener?.onChange(newValue, false)
             }
         }
         imgButton_add.setOnClickListener {
@@ -38,7 +38,7 @@ class CounterView @JvmOverloads constructor(
                 val newValue = it+1
                 value = newValue
                 txtView_value.text = newValue.toString()
-                onChangeListener?.onChange(newValue)
+                onChangeListener?.onChange(newValue, true)
             }
         }
 

@@ -16,6 +16,7 @@ import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.core.views.CounterView
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.dialogs.DeathDialog
+import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.game_fragment.*
 
 class GameFragment : Fragment(){
@@ -23,6 +24,8 @@ class GameFragment : Fragment(){
     var selectedPlayer: Player? = null
     var viewmodel: GameFragmentVM? = null
     var game : Game? = null
+
+    var soundHelper: SoundHelper? = null
 
     companion object{
         fun newInstance(game: Game?) : GameFragment {
@@ -40,6 +43,7 @@ class GameFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.let { soundHelper = SoundHelper(it.applicationContext) }
 
         game = arguments?.getSerializable(GAME_KEY) as Game?
 
@@ -60,16 +64,17 @@ class GameFragment : Fragment(){
             selectedPlayer = player
             txtView_playerName.text = player.name
             power_counter?.attachValue(player.getAbsolutePowerInt())
-            power_counter?.onChangeListener = CounterView.OnChangeListener{
-                player.setPowerFromAbsoluteValue(it)
+            power_counter?.onChangeListener = CounterView.OnChangeListener{ newValue, _ ->
+                player.setPowerFromAbsoluteValue(newValue)
                 if(Cfg.autoSave.value.get() == true) viewmodel?.updateGame(game)
                 playerAdapter?.notifyDataSetChanged()
             }
             level_counter?.attachValue(player.lvl)
-            level_counter?.onChangeListener = CounterView.OnChangeListener {
-                player.lvl = it
+            level_counter?.onChangeListener = CounterView.OnChangeListener { newValue, goUp ->
+                player.lvl = newValue
                 power_counter?.attachValue(player.getAbsolutePowerInt())
                 if(Cfg.autoSave.value.get() == true) viewmodel?.updateGame(game)
+                if(Cfg.sound.value.get() == true) soundHelper?.playLvlChangeSound(activity?.applicationContext,goUp)
                 playerAdapter?.notifyDataSetChanged()
             }
         }
@@ -84,6 +89,7 @@ class GameFragment : Fragment(){
                     it.name
                 ) {
                     it.death()
+                    if(Cfg.sound.value.get() == true) soundHelper?.playSound(R.raw.you_lose)
                     observer.onChanged(it)
                     playerAdapter?.notifyDataSetChanged()
                     if(Cfg.autoSave.value.get() == true) viewmodel?.updateGame(game)

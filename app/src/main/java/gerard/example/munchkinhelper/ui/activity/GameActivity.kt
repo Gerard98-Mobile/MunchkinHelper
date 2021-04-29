@@ -14,12 +14,12 @@ import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.ui.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.ui.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
+import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.activity_game.*
 
 val GAME_KEY = "game_key"
 
 class GameActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
