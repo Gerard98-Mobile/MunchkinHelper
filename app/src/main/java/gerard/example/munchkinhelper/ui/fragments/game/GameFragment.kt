@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -56,7 +57,6 @@ class GameFragment : Fragment(){
 
 
         game?.let {
-            // we know that context is not null
             playerAdapter = GamePlayerAdapter(view.context, it.players)
         }
 
@@ -66,15 +66,15 @@ class GameFragment : Fragment(){
             power_counter?.attachValue(player.getAbsolutePowerInt())
             power_counter?.onChangeListener = CounterView.OnChangeListener{ newValue, _ ->
                 player.setPowerFromAbsoluteValue(newValue)
-                if(Cfg.autoSave.value.get() == true) viewmodel?.updateGame(game)
+                viewmodel?.autosave(game)
                 playerAdapter?.notifyDataSetChanged()
             }
             level_counter?.attachValue(player.lvl)
-            level_counter?.onChangeListener = CounterView.OnChangeListener { newValue, goUp ->
+            level_counter?.onChangeListener = CounterView.OnChangeListener { newValue, lvlUp ->
                 player.lvl = newValue
                 power_counter?.attachValue(player.getAbsolutePowerInt())
-                if(Cfg.autoSave.value.get() == true) viewmodel?.updateGame(game)
-                if(Cfg.sound.value.get() == true) soundHelper?.playLvlChangeSound(activity?.applicationContext,goUp)
+                viewmodel?.autosave(game)
+                soundHelper?.playLvlChangeSound(lvlUp)
                 playerAdapter?.notifyDataSetChanged()
             }
         }
@@ -82,17 +82,17 @@ class GameFragment : Fragment(){
         playerAdapter?.selectedPlayer?.observe(viewLifecycleOwner, observer)
         recycler_view.adapter = playerAdapter
 
-        skull_icon.setOnClickListener { view ->
+        skull_icon.setOnClickListener { v1 ->
             selectedPlayer?.let {
                 DeathDialog(
-                    view.context,
+                    v1.context,
                     it.name
                 ) {
                     it.death()
-                    if(Cfg.sound.value.get() == true) soundHelper?.playSound(R.raw.you_lose)
+                    soundHelper?.playSound(R.raw.you_lose)
                     observer.onChanged(it)
                     playerAdapter?.notifyDataSetChanged()
-                    if(Cfg.autoSave.value.get() == true) viewmodel?.updateGame(game)
+                    viewmodel?.autosave(game)
                 }.show()
             }
 

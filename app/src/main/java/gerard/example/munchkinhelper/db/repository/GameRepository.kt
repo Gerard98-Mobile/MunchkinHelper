@@ -1,5 +1,6 @@
 package gerard.example.munchkinhelper.db.repository
 
+import android.util.Log
 import gerard.example.munchkinhelper.db.dao.GameDao
 import gerard.example.munchkinhelper.model.Game
 
@@ -22,7 +23,7 @@ class GameRepository(private val gameDao: GameDao) {
     }
 
     suspend fun checkIfExist(game: Game): Boolean{
-        return if(gameDao.getCountById(game.id) != 0)  true else false
+        return gameDao.getCountById(game.id) != 0
     }
 
 
