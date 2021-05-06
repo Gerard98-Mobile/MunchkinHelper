@@ -19,8 +19,6 @@ class SelectFightersFragment : Fragment() {
     class FighterModelParcelable(val fighters: List<FighterModel>) : Serializable
     class FighterModel(val player: Player, var selected: Boolean)
 
-    private lateinit var fightersParcelable : FighterModelParcelable
-
     private val model: SharedViewModel by activityViewModels()
 
 
@@ -52,7 +50,7 @@ class SelectFightersFragment : Fragment() {
     }
 
     fun reset() {
-        fightersParcelable.fighters.forEach { it.selected = false }
+        model.fighters?.forEach { it.selected = false }
         fighters_recycler_view.adapter?.notifyDataSetChanged()
     }
 

@@ -19,7 +19,7 @@ class SharedViewModel : ViewModel() {
     var monstersPower = 0
         set(value){
             field = value
-            playersPowerChanged.value = field
+            monstersPowerChanged.value = field
         }
 
     val reset = MutableLiveData<Boolean>()

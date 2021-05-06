@@ -17,6 +17,7 @@ import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.core.views.CounterView
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.dialogs.DeathDialog
+import gerard.example.munchkinhelper.util.Sound
 import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.game_fragment.*
 
@@ -89,7 +90,7 @@ class GameFragment : Fragment(){
                     it.name
                 ) {
                     it.death()
-                    soundHelper?.playSound(R.raw.you_lose)
+                    soundHelper?.playSound(Sound.DEATH)
                     observer.onChanged(it)
                     playerAdapter?.notifyDataSetChanged()
                     viewmodel?.autosave(game)
