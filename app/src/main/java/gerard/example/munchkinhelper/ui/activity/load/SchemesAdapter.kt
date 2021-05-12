@@ -19,7 +19,11 @@ import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Scheme
 import java.util.*
 
-class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val schemeToDelete: MutableLiveData<Scheme>) : RecyclerView.Adapter<SchemesAdapter.SchemeHolder>() {
+class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val callback: SchemeCallback) : RecyclerView.Adapter<SchemesAdapter.SchemeHolder>() {
+
+    fun interface SchemeCallback{
+        fun delete(scheme: Scheme)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SchemeHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_card_scheme, parent, false)
@@ -97,7 +101,7 @@ class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val
         // on click yes we are deleting data from db
         yesBtn.setOnClickListener {
             // inform that we want to delete that scheme from db
-            schemeToDelete.value = scheme
+            callback.delete(scheme)
             // deleting that scheme from adapter item list
             schemes.remove(scheme)
             // notifing that we changed item list

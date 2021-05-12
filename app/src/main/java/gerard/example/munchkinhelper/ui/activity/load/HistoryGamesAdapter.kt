@@ -11,7 +11,6 @@ import android.view.Window
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
@@ -20,7 +19,11 @@ import gerard.example.munchkinhelper.model.Game
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistoryGamesAdapter(val context: Context, val games: MutableList<Game>, val gameToDelete: MutableLiveData<Game>) : RecyclerView.Adapter<HistoryGamesAdapter.HistoryGameHolder>()  {
+class HistoryGamesAdapter(val context: Context, val games: MutableList<Game>, val callback: DeleteGameCallback) : RecyclerView.Adapter<HistoryGamesAdapter.HistoryGameHolder>()  {
+
+    fun interface DeleteGameCallback{
+        fun deleteGame(game: Game)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryGameHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_card_history, parent, false)
@@ -95,7 +98,7 @@ class HistoryGamesAdapter(val context: Context, val games: MutableList<Game>, va
         val yesBtn = dialog.findViewById(R.id.txtView_dialog_yes) as TextView
         val noBtn = dialog.findViewById(R.id.txtView_dialog_no) as TextView
         yesBtn.setOnClickListener {
-            gameToDelete.value = game
+            callback.deleteGame(game)
             games.remove(game)
             notifyDataSetChanged()
             dialog.dismiss()

@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(BuildConfig.DEBUG == true && Cfg.autoOpen){
+        if(BuildConfig.DEBUG && Cfg.autoOpen){
             val intent = Intent(this, GameActivity::class.java)
             val game = Game(0, listOf(Player("Gerard",2,4), Player("Braciak",5,3)))
             intent.putExtra(GAME_KEY, game)
