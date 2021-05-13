@@ -8,61 +8,76 @@
         android:background="@color/colorBackground"
         tools:context="gerard.example.munchkinhelper.MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:layout_height="wrap_content">
 
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_08"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.8"/>
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2"/>
+
+
         <ImageView
+                android:id="@+id/logo"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:src="@drawable/logo">
+                android:src="@drawable/logo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        </ImageView>
 
-
-
-        <LinearLayout
-                android:id="@+id/linearLayout_main_activity"
-                android:layout_width="match_parent"
+        <gerard.example.munchkinhelper.core.views.RoundedButton
+                android:id="@+id/start_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_game"
                 android:layout_gravity="center"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/logo"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_02"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_08"/>
 
-            <Button
-                    android:id="@+id/start_game"
-                    android:text="@string/start_game"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginTop="10dp" />
+        <gerard.example.munchkinhelper.core.views.RoundedButton
+                android:id="@+id/load_last_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Load Last Game"
+                android:layout_marginTop="14dp"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/start_game"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_02"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_08" />
 
-            <Button
-                    android:id="@+id/load_last_game"
-                    android:text="Load Last Game"
-                    android:visibility="gone"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:textColor="@color/colorWhite" />
+        <gerard.example.munchkinhelper.core.views.RoundedButton
+                android:id="@+id/btn_loadGame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/load_game"
+                android:layout_marginTop="14dp"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/load_last_game"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_02"
+                app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_08"/>
 
-            <Button
-                    android:id="@+id/btn_loadGame"
-                    android:text="@string/load_game"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:textColor="@color/colorWhite"
-                    android:layout_height="wrap_content"/>
 
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

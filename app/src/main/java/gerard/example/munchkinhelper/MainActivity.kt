@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import gerard.example.munchkinhelper.core.views.RoundedButton
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
@@ -25,13 +26,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val loadGame: Button = findViewById(R.id.btn_loadGame)
+        val loadGame: RoundedButton = findViewById(R.id.btn_loadGame)
         loadGame.setOnClickListener {
             val intent = Intent(this, LoadGameActivity::class.java)
             startActivity(intent)
         }
 
-        val startGame: Button = findViewById(R.id.start_game)
+        val startGame: RoundedButton = findViewById(R.id.start_game)
         startGame.setOnClickListener {
             val intent = Intent(this, AddingPlayersActivity::class.java)
             startActivity(intent)
