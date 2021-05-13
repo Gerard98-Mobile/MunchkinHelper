@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import gerard.example.munchkinhelper.ui.fragments.settings.Setting
 import gerard.example.munchkinhelper.core.SharedValue
+import gerard.example.munchkinhelper.model.Game
+import gerard.example.munchkinhelper.model.Player
 
 object Cfg{
 
@@ -17,6 +19,8 @@ object Cfg{
     fun init(activity: Activity){
         sharedPreferences = activity.getSharedPreferences("Cfg", Context.MODE_PRIVATE)
     }
+
+    val lastGame = SharedValue("game",null , Game::class.java)
 
     private val _autoSaveValue = SharedValue("auto_save",true,Boolean::class.java)
     private val _sound = SharedValue("sound",true,Boolean::class.java)

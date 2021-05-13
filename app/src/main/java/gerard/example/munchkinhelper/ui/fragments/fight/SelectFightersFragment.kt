@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_select_fighters.*
 import java.io.Serializable
 
 class SelectFightersFragment : Fragment() {
-    
+
     class FighterModel(val player: Player, var selected: Boolean)
 
     private val model: SharedViewModel by activityViewModels()

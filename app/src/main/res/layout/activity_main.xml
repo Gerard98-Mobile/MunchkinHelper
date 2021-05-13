@@ -43,9 +43,9 @@
 
             <Button
                     android:id="@+id/load_last_game"
-                    android:text="Load Last Game"
-                    android:visibility="gone"
+                    android:text="@string/load_last_game"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorPrimary"

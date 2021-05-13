@@ -58,4 +58,5 @@
     <string name="poor_end">Marny Koniec:</string>
     <string name="baked_and_eaten_end">zostajesz upieczony i zjedzony. Giniesz</string>
     <string name="dice3d">Kostka 3D</string>
+    <string name="load_last_game">Przywróć ostatnią grę</string>
 </resources>

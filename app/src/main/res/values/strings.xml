@@ -73,4 +73,5 @@
     <string name="poor_end">"Poor End: "</string>
     <string name="baked_and_eaten_end">you get baked and eaten. You die</string>
     <string name="dice3d">Dice 3D</string>
+    <string name="load_last_game">Load Last Game</string>
 </resources>

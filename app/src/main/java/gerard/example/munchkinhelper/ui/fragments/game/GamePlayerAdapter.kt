@@ -5,14 +5,18 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.MainActivity
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.R
+import kotlinx.android.synthetic.main.game_fragment.*
+import kotlinx.android.synthetic.main.item_player.view.*
 
 class GamePlayerAdapter(val context: Context, val players: List<Player>) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
@@ -33,41 +37,26 @@ class GamePlayerAdapter(val context: Context, val players: List<Player>) : Recyc
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val playerHolder = holder as PlayerHolder
-        playerHolder.bind(players.get(position))
+        playerHolder.bind(players[position])
     }
 
 
     private inner class PlayerHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        val txtViewPower: TextView
-        val txtViewLevel: TextView
-        val txtViewPlayerName : TextView
-        val playerContainer: LinearLayout
-
         var player: Player? = null
-
-        init {
-            txtViewPlayerName = itemView.findViewById(R.id.txtView_playerName_item)
-            txtViewLevel = itemView.findViewById(R.id.txtView_level_item)
-            txtViewPower = itemView.findViewById(R.id.txtView_power_item)
-            playerContainer = itemView.findViewById(R.id.linearLayout_player_container)
-        }
 
         fun bind(player: Player){
             this.player = player
-            txtViewPlayerName.text = player.name
-            txtViewPower.text = player.getAbsolutePower()
-            txtViewLevel.text = player.lvl.toString()
+            itemView.txtView_playerName_item.text = player.name
+            itemView.txtView_power_item.text = player.getAbsolutePower()
+            itemView.txtView_level_item.text = player.lvl.toString()
+            itemView.imgView_leader.visibility = if(player.isLeader) View.VISIBLE else View.INVISIBLE
 
-
-
-            playerContainer.setOnClickListener {
+            itemView.linearLayout_player_container.setOnClickListener {
                 if(selectedView != it){
-                    playerContainer.setBackgroundResource(R.drawable.circle_border)
-                    val valueInPixels = context.resources.getDimensionPixelOffset(R.dimen.item_padding)
-                    playerContainer.setPadding(valueInPixels,valueInPixels,valueInPixels,valueInPixels)
+                    itemView.linearLayout_player_container.setBackgroundResource(R.drawable.circle_border)
                     selectedView?.setBackgroundResource(0)
-                    selectedView = playerContainer
+                    selectedView = itemView.linearLayout_player_container
                     selectedPlayer.value = player
                 }
 

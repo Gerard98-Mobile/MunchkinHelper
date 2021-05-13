@@ -5,7 +5,8 @@ import java.io.Serializable
 class Player(
     val name: String,
     var power: Int,
-    var lvl: Int) : Serializable{
+    var lvl: Int,
+    var isLeader: Boolean = false) : Serializable{
 
     /*
         Function return a value of power + lvl in String

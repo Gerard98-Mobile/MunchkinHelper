@@ -43,7 +43,7 @@ class GameFragmentVM(application: Application) : AndroidViewModel(application) {
         if(Cfg.autoSave.value.get() == false) return@launch
 
         game?.let {
-            if(gameExist == false){
+            if(!gameExist){
                 gameExist = repository.checkIfExist(game)
             }
             it.saveDate = Date().time
@@ -51,7 +51,7 @@ class GameFragmentVM(application: Application) : AndroidViewModel(application) {
                 repository.update(it)
             }
             else{
-                repository.insert(it)
+                it.id = repository.insert(it).toInt()
             }
         }
     }
