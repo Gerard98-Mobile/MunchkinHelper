@@ -11,7 +11,7 @@ import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.DateUtil
-import kotlinx.android.synthetic.main.item_card_history_new.view.*
+import kotlinx.android.synthetic.main.item_card_history.view.*
 import java.util.*
 
 class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val callback: Callback) : RecyclerView.Adapter<HistoryGameAdapter.HistoryGameHolder>()  {
@@ -21,7 +21,7 @@ class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryGameHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_card_history_new, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_card_history, parent, false)
         return HistoryGameHolder(view)
     }
 
@@ -36,11 +36,16 @@ class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val
         }
 
         holder.itemView.more_icon_click_area.setOnClickListener{
-            holder.itemView.more.performClick()
-            MoreOptionsPopUp {
-                callback.delete(games[holder.layoutPosition])
-                games.removeAt(holder.layoutPosition)
-                notifyItemRemoved(holder.layoutPosition)
+            MoreOptionsPopUp(listOf(
+                Option.DELETE_GAME
+            )) { option ->
+                when(option){
+                    Option.DELETE_GAME -> {
+                        callback.delete(games[holder.layoutPosition])
+                        games.removeAt(holder.layoutPosition)
+                        notifyItemRemoved(holder.layoutPosition)
+                    }
+                }
             }.show(it)
         }
     }

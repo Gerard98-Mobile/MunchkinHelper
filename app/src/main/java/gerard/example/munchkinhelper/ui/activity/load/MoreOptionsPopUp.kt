@@ -8,29 +8,50 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.PopupWindow
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.model.Game
+import kotlinx.android.synthetic.main.item_menu_option.view.*
 import kotlinx.android.synthetic.main.popup_game_options.view.*
 
-class MoreOptionsPopUp(val callback: Callback) : PopupWindow() {
+fun interface OptionCallback{
+    fun clicked(option: Option)
+}
+enum class Option(@StringRes val title : Int, @DrawableRes val icon : Int){
+    DELETE_GAME(R.string.delete_game, R.drawable.ic_delete_black),
+    DELETE_SCHEME(R.string.delete_scheme, R.drawable.ic_delete_black),
+    EDIT(R.string.edit, R.drawable.ic_edit)
+}
 
-    fun interface Callback{
-        fun delete()
-    }
+class MoreOptionsPopUp(val options: List<Option>, val callback: OptionCallback){
+
+    var popupWindow : PopupWindow? = null
 
     fun show(view: View){
-        val popupView = LayoutInflater.from(view.context).inflate(R.layout.popup_game_options, null)
-        with(PopupWindow(popupView, FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)){
-            this.setBackgroundDrawable(ColorDrawable())
-            this.isOutsideTouchable = true
-            this.showAsDropDown(view)
-
-            popupView.delete.setOnClickListener {
-                callback.delete()
-                this.dismiss()
-            }
+        if(options.isEmpty()) return
+        val popupView = createView(view.context)
+        popupWindow = PopupWindow(popupView, FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+        popupWindow?.let{
+            it.setBackgroundDrawable(ColorDrawable())
+            it.isOutsideTouchable = true
+            it.showAsDropDown(view)
         }
+    }
 
+    private fun createView(context: Context) : View{
+        val popupView = LayoutInflater.from(context).inflate(R.layout.popup_game_options, null)
+        options.forEach { option ->
+            val item = LayoutInflater.from(context).inflate(R.layout.item_menu_option, popupView.options_container, false)
+            item.icon.setImageResource(option.icon)
+            item.text.text = context.getString(option.title)
+            item.setOnClickListener {
+                callback.clicked(option)
+                popupWindow?.dismiss()
+            }
+            popupView.options_container.addView(item)
+        }
+        return popupView
     }
 
 }

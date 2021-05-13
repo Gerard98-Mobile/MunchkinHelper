@@ -75,4 +75,6 @@
     <string name="baked_and_eaten_end">you get baked and eaten. You die</string>
     <string name="dice3d">Dice 3D</string>
     <string name="more">More</string>
+    <string name="delete_scheme">Delete Scheme</string>
+    <string name="edit">Edit</string>
 </resources>

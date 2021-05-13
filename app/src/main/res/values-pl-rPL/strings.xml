@@ -60,4 +60,6 @@
     <string name="dice3d">Kostka 3D</string>
     <string name="more">Więcej</string>
     <string name="delete_game">Usuń grę</string>
+    <string name="delete_scheme">Usuń schemat</string>
+    <string name="edit">Edytuj</string>
 </resources>
