@@ -56,7 +56,7 @@ class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val
 
     class HistoryGameHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game : Game){
-            itemView.players.text = game.players.map { "${it.name} ${it.lvl} lvl" }.joinToString(",")
+            itemView.players.text = game.players.joinToString(", ") { "${it.name} ${it.lvl} lvl" }
             val date = DateUtil.dateDDMMYYYYdash().format(Date(game.saveDate))
             itemView.game_date.text = date.toString()
         }
