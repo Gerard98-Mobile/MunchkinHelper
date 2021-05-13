@@ -1,16 +1,15 @@
 package gerard.example.munchkinhelper.ui.activity.load
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
 import kotlinx.android.synthetic.main.fragment_games_history.*
-import kotlinx.android.synthetic.main.fragment_scheme.*
 
 class HistoryGamesFragment : Fragment(){
 
@@ -29,7 +28,12 @@ class HistoryGamesFragment : Fragment(){
         viewmodel.loadAllObjects()
 
         viewmodel.games.observe(viewLifecycleOwner, {
-            val adapter = HistoryGamesAdapter(view.context, it) { game -> viewmodel.removeGame(game) }
+            Log.e("TAG", "History games live data")
+            val adapter = HistoryGameAdapter(view.context, it) { game ->
+                viewmodel.removeGame(
+                    game
+                )
+            }
             history_recycler.adapter = adapter
         })
 

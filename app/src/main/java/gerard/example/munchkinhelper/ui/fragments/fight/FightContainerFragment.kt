@@ -41,7 +41,7 @@ class FightContainerFragment : Fragment() {
         fight_view_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                AnimationUtil.animateAlpha(position.toFloat(), 300, back)
+                AnimationUtil.animateAlpha(back, position.toFloat(), 300)
             }
         })
 

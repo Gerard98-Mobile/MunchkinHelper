@@ -9,6 +9,8 @@
             android:id="@+id/history_recycler"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_card_history"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

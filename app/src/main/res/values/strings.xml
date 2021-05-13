@@ -63,6 +63,7 @@
     <string name="deleting_history_title">Deleting history game</string>
     <string name="deleting_history_body">Are you sure about deleting that game?</string>
     <string name="delete">delete</string>
+    <string name="delete_game">Delete Game</string>
     <string name="choose_fighter">Firstly choose player who fight</string>
     <string name="game_updated">Game saved</string>
     <string name="settings">Settings</string>
@@ -73,4 +74,5 @@
     <string name="poor_end">"Poor End: "</string>
     <string name="baked_and_eaten_end">you get baked and eaten. You die</string>
     <string name="dice3d">Dice 3D</string>
+    <string name="more">More</string>
 </resources>
