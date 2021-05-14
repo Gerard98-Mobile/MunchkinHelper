@@ -14,6 +14,7 @@ import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.ui.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.ui.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
+import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.activity_game.*
 
@@ -73,8 +74,7 @@ class GameActivity : AppCompatActivity() {
         val yesBtn = dialog.findViewById(R.id.txtView_dialog_yes) as TextView
         val noBtn = dialog.findViewById(R.id.txtView_dialog_no) as TextView
         yesBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            NavigationHelper.finish(this)
         }
         noBtn.setOnClickListener { dialog.dismiss() }
         dialog.show()

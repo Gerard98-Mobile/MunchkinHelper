@@ -13,13 +13,11 @@ import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Scheme
 import gerard.example.munchkinhelper.now
+import gerard.example.munchkinhelper.util.Action
+import gerard.example.munchkinhelper.util.Callback
 import kotlinx.android.synthetic.main.item_card_scheme_new.view.*
 
-class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val callback: SchemeCallback) : RecyclerView.Adapter<SchemesAdapter.SchemeHolder>() {
-
-    fun interface SchemeCallback{
-        fun delete(scheme: Scheme)
-    }
+class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val callback: Callback<Scheme>) : RecyclerView.Adapter<SchemesAdapter.SchemeHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SchemeHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_card_scheme_new, parent, false)
@@ -30,17 +28,14 @@ class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val
         holder.bind(schemes[position])
 
         holder.itemView.scheme_root.setOnClickListener{
-            val intent = Intent(context, GameActivity::class.java)
-            val game = Game(now(), schemes[position].players)
-            intent.putExtra(GAME_KEY, game)
-            context.startActivity(intent)
+            callback.execute(schemes[position], Action.OPEN)
         }
 
         holder.itemView.more_icon_click_area.setOnClickListener {
             MoreOptionsPopUp(listOf(Option.DELETE_SCHEME)) { option ->
                 when(option){
                     Option.DELETE_SCHEME -> {
-                        callback.delete(schemes[holder.layoutPosition])
+                        callback.execute(schemes[holder.layoutPosition], Action.DELETE)
                         schemes.removeAt(holder.layoutPosition)
                         notifyItemRemoved(holder.layoutPosition)
                     }

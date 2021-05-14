@@ -23,8 +23,8 @@ class GamePlayerAdapter(val context: Context, val players: List<Player>) : Recyc
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PlayerHolder(
-                LayoutInflater.from(context).inflate(R.layout.item_player, parent, false)
-            )
+            LayoutInflater.from(context).inflate(R.layout.item_player, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -73,24 +73,6 @@ class GamePlayerAdapter(val context: Context, val players: List<Player>) : Recyc
 
             }
 
-        }
-
-        fun end(playerName: String){
-            val alertDialog: AlertDialog? = itemView.let {
-                val builder = AlertDialog.Builder(it.context)
-                val message = itemView.resources.getString(R.string.winner, playerName)
-                builder.apply {
-                    setTitle(R.string.end)
-                    setMessage(message)
-                    setNeutralButton(R.string.stay) { _, _ -> }
-                    setPositiveButton(R.string.reset) { _, _ ->
-                        val newIntent = Intent(it.context, MainActivity::class.java)
-                        it.context.startActivity(newIntent)
-                    }
-                }
-                builder.create()
-            }
-            alertDialog?.show()
         }
 
     }

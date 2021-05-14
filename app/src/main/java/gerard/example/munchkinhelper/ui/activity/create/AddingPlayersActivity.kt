@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
+import android.view.MenuItem
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +20,12 @@ import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
 import com.google.android.material.snackbar.Snackbar
 import gerard.example.munchkinhelper.model.Scheme
+import gerard.example.munchkinhelper.now
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
+import gerard.example.munchkinhelper.util.Action
+import gerard.example.munchkinhelper.util.Callback
+import gerard.example.munchkinhelper.util.NavigationHelper
 import kotlinx.android.synthetic.main.activity_adding_players.*
 import kotlinx.android.synthetic.main.dialog_add_scheme_new.*
 import java.util.Date
@@ -31,16 +36,13 @@ const val START_LVL = 1
 
 class AddingPlayersActivity : AppCompatActivity() {
 
-    fun interface SchemeCallback{
-        fun create(name: String)
-    }
-
     val viewmodel by viewModels<AddingPlayersVM>()
     val playerList = mutableListOf<Player>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_players)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapter = AddedPlayersAdapter(this, playerList)
         recyclerView_new_players.adapter = adapter
@@ -61,8 +63,8 @@ class AddingPlayersActivity : AppCompatActivity() {
 
             when(checkbox_scheme.isChecked){
                 true -> {
-                    SchemeNameDialog(this) {
-                        viewmodel.insertScheme(Scheme(playerList, it))
+                    SchemeNameDialog(this) { name, _ ->
+                        viewmodel.insertScheme(Scheme(playerList, name))
                         startGameIntent()
                     }.show()
                 }
@@ -84,12 +86,8 @@ class AddingPlayersActivity : AppCompatActivity() {
         }
     }
 
-    // function starting game activity
     private fun startGameIntent() {
-        val game = Game(Date().time , playerList)
-        val intent = Intent(this, GameActivity::class.java)
-        intent.putExtra(GAME_KEY, game)
-        startActivity(intent)
+        NavigationHelper.startActivity(this, GameActivity::class.java, Game(now(), playerList))
     }
 
     override fun onResume() {
@@ -97,8 +95,20 @@ class AddingPlayersActivity : AppCompatActivity() {
         name_player.requestFocus()
     }
 
+    override fun onPause() {
+        super.onPause()
+        name_player.clearFocus()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> NavigationHelper.finish(this)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     // function show dialog for get scheme name from user
-    class SchemeNameDialog(context: Context, val callback: SchemeCallback) : Dialog(context) {
+    class SchemeNameDialog(context: Context, val callback: Callback<String>) : Dialog(context) {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -108,7 +118,7 @@ class AddingPlayersActivity : AppCompatActivity() {
                     scheme_name.background = ContextCompat.getDrawable(context, R.drawable.edit_text_error)
                     return@setOnClickListener
                 }
-                callback.create(scheme_name.text.toString())
+                callback.execute(scheme_name.text.toString(), Action.NONE)
                 dismiss()
             }
             cancel.setOnClickListener { dismiss() }

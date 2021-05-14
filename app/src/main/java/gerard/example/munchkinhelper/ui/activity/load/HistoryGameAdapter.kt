@@ -11,13 +11,16 @@ import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.DateUtil
+import gerard.example.munchkinhelper.util.NavigationHelper
 import kotlinx.android.synthetic.main.item_card_history.view.*
 import java.util.*
 
 class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val callback: Callback) : RecyclerView.Adapter<HistoryGameAdapter.HistoryGameHolder>()  {
 
+    enum class Action{ DELETE, OPEN }
+
     fun interface Callback{
-        fun delete(game: Game)
+        fun execute(game: Game, action: Action)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryGameHolder {
@@ -30,9 +33,7 @@ class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val
 
         // listeners for open game
         holder.itemView.root.setOnClickListener {
-            val intent = Intent(context, GameActivity::class.java)
-            intent.putExtra(GAME_KEY, games[position])
-            context.startActivity(intent)
+            callback.execute(games[position], Action.OPEN)
         }
 
         holder.itemView.more_icon_click_area.setOnClickListener{
@@ -41,7 +42,7 @@ class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val
             )) { option ->
                 when(option){
                     Option.DELETE_GAME -> {
-                        callback.delete(games[holder.layoutPosition])
+                        callback.execute(games[holder.layoutPosition], Action.DELETE)
                         games.removeAt(holder.layoutPosition)
                         notifyItemRemoved(holder.layoutPosition)
                     }

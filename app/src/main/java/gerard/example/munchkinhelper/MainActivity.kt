@@ -11,6 +11,7 @@ import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.ui.activity.create.AddingPlayersActivity
 import gerard.example.munchkinhelper.ui.activity.load.LoadGameActivity
+import gerard.example.munchkinhelper.util.NavigationHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,14 +29,13 @@ class MainActivity : AppCompatActivity() {
 
         val loadGame: RoundedButton = findViewById(R.id.btn_loadGame)
         loadGame.setOnClickListener {
-            val intent = Intent(this, LoadGameActivity::class.java)
-            startActivity(intent)
+            NavigationHelper.startActivity(this, LoadGameActivity::class.java)
         }
 
         val startGame: RoundedButton = findViewById(R.id.start_game)
         startGame.setOnClickListener {
-            val intent = Intent(this, AddingPlayersActivity::class.java)
-            startActivity(intent)
+            NavigationHelper.startActivity(this, AddingPlayersActivity::class.java)
         }
     }
+
 }
