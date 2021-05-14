@@ -22,4 +22,31 @@
         <item name="android:layout_margin">10dp</item>
     </style>
 
+    <style name="TextButton">
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="TextButton.Confirm">
+        <item name="android:textStyle">bold</item>
+        <item name="android:text">@string/yes</item>
+    </style>
+
+    <style name="TextButton.Decline">
+        <item name="android:textStyle">normal</item>
+        <item name="android:text">@string/no</item>
+    </style>
+
+    <style name="ClickableImage">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+    </style>
+
+
 </resources>

@@ -1,132 +1,117 @@
 package gerard.example.munchkinhelper.ui.activity.create
 
-import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
-import java.lang.IllegalStateException
-import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import gerard.example.munchkinhelper.model.Scheme
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
-import java.util.*
+import kotlinx.android.synthetic.main.activity_adding_players.*
+import kotlinx.android.synthetic.main.dialog_add_scheme_new.*
+import java.util.Date
+import kotlin.collections.ArrayDeque
 
-val START_POWER = 0
-val START_LVL = 1
+const val START_POWER = 0
+const val START_LVL = 1
 
 class AddingPlayersActivity : AppCompatActivity() {
 
-    val schemeName : MutableLiveData<String> = MutableLiveData()
+    fun interface SchemeCallback{
+        fun create(name: String)
+    }
+
+    val viewmodel by viewModels<AddingPlayersVM>()
+    val playerList = mutableListOf<Player>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_players)
-        val viewmodel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(
-            AddingPlayersVM::class.java)
 
-        val playerList: MutableList<Player> = mutableListOf()
-
-        val recyclerView : RecyclerView = findViewById(R.id.recyclerView_new_players)
-        recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = AddedPlayersAdapter(this, playerList)
-        recyclerView.adapter = adapter
+        recyclerView_new_players.adapter = adapter
 
-        val radioButton: RadioButton = findViewById(R.id.radioButton_scheme)
-
-        val startGame : Button = findViewById(R.id.btn_startGame)
-        startGame.setOnClickListener {
-            if(playerList.size > 1){
-                // if radioButton.isChecked user want to add that players as scheme
-                if(radioButton.isChecked){
-                    schemeName.observe(this, Observer {
-                        // inserting scheme to db
-                        val scheme = Scheme(playerList,  it)
-                        viewmodel.insertScheme(scheme)
-                        // starting game
-                        val game = Game(Date().time , playerList)
-                        startGameIntent(game)
-                    })
-                    val dialog = SchemeNameDialog(schemeName)
-                    dialog.show(supportFragmentManager,"dialog")
-                }
-                else{
-                    // starting game
-                    val game = Game(Date().time , playerList)
-                    startGameIntent(game)
-                }
+        name_player.setOnKeyListener { v, keyCode, event ->
+            if(event.keyCode == KeyEvent.KEYCODE_ENTER){
+                if(event.action == KeyEvent.ACTION_DOWN) add_player.performClick()
+                return@setOnKeyListener true
             }
-            else{
-                Toast.makeText(this,
-                    R.string.player_count_error, Toast.LENGTH_SHORT).show()
+            false
+        }
+
+        btn_startGame.setOnClickListener {
+            if(playerList.size < 2) {
+                Snackbar.make(findViewById(android.R.id.content), R.string.player_count_error, Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            when(checkbox_scheme.isChecked){
+                true -> {
+                    SchemeNameDialog(this) {
+                        viewmodel.insertScheme(Scheme(playerList, it))
+                        startGameIntent()
+                    }.show()
+                }
+                false -> startGameIntent()
             }
         }
-        val playerNameEditText : EditText = findViewById(R.id.name_player_editText)
-        val addPlayer : Button = findViewById(R.id.add_player_button)
-        addPlayer.setOnClickListener {
-            val playerName = playerNameEditText.text.toString()
-            if(playerName.length > 0 && playerName.length < 20) {
-                val player: Player
-                player = Player(
-                    playerNameEditText.text.toString(),
-                    START_POWER,
-                    START_LVL
-                )
 
-                playerList.add(player)
-                adapter.notifyDataSetChanged()
-                playerNameEditText.setText("")
 
-                Toast.makeText(this,
-                    R.string.player_added, Toast.LENGTH_SHORT).show()
-
+        add_player.setOnClickListener {
+            val playerName = name_player.text.toString()
+            if(playerName.length in 1..20) {
+                playerList.add(0, Player(name_player.text.toString(), START_POWER, START_LVL))
+                (recyclerView_new_players.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0,0)
+                adapter.notifyItemInserted(0)
+                name_player.setText("")
             }else{
-                Toast.makeText(this,
-                    R.string.name_lenght_error, Toast.LENGTH_LONG).show()
+                Snackbar.make(findViewById(android.R.id.content), R.string.name_lenght_error, Snackbar.LENGTH_SHORT).show()
             }
-
         }
-
     }
 
     // function starting game activity
-    private fun startGameIntent(game : Game) {
+    private fun startGameIntent() {
+        val game = Game(Date().time , playerList)
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra(GAME_KEY, game)
         startActivity(intent)
     }
 
+    override fun onResume() {
+        super.onResume()
+        name_player.requestFocus()
+    }
+
     // function show dialog for get scheme name from user
-    class SchemeNameDialog(val typedName: MutableLiveData<String>) : DialogFragment(){
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            return activity?.let {
-                val builder = AlertDialog.Builder(it)
-
-                val inflater = it.layoutInflater
-                val view = inflater.inflate(R.layout.dialog_add_scheme, null)
-
-                val editText : EditText = view.findViewById(R.id.editText_scheme_dialog_name)
-
-                val add : TextView = view.findViewById(R.id.txtView_scheme_dialog_add)
-                add.setOnClickListener {
-                        val name = editText.text.toString()
-                        typedName.value = name
-                        dismiss()
+    class SchemeNameDialog(context: Context, val callback: SchemeCallback) : Dialog(context) {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setContentView(R.layout.dialog_add_scheme_new)
+            yes.setOnClickListener {
+                if(scheme_name.text.toString().length < 4) {
+                    scheme_name.background = ContextCompat.getDrawable(context, R.drawable.edit_text_error)
+                    return@setOnClickListener
                 }
-                val cancel : TextView = view.findViewById(R.id.txtView_scheme_dialog_cancel)
-                cancel.setOnClickListener { dismiss() }
-
-                builder.setView(view).create()
-            } ?: throw IllegalStateException("Activity cannot be null")
+                callback.create(scheme_name.text.toString())
+                dismiss()
+            }
+            cancel.setOnClickListener { dismiss() }
         }
     }
 }

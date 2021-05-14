@@ -1,67 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:background="@color/colorBackground"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:background="@color/colorBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-            android:text="@string/adding_players"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/count_player_textView"/>
-    <EditText
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_player_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="10dp"
-            android:ems="10"
-            android:id="@+id/name_player_editText" android:hint="@string/player_name"/>
-    <Button
-            android:text="@string/add"
-            android:layout_width="match_parent"
-            style="@style/Button"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_player_button"/>
+            android:orientation="horizontal">
 
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_new_players"
-                android:layout_width="match_parent"
+        <EditText
+                android:id="@+id/name_player"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_above="@+id/radioButton_scheme"
-                android:layout_margin="10dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <RadioButton
-                android:id="@+id/radioButton_scheme"
-                android:layout_above="@+id/btn_startGame"
-                android:layout_width="match_parent"
+                android:textCursorDrawable="@drawable/cursor_primary"
+                android:inputType="textPersonName|textCapWords"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/add_player"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/player_name"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginStart="10dp"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        <ImageView
+                android:id="@+id/add_player"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save as scheme">
-        </RadioButton>
+                android:layout_gravity="center"
+                android:background="?android:selectableItemBackgroundBorderless"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_add_brown"/>
 
-        <Button
-                android:id="@+id/btn_startGame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Button"
-                android:layout_alignParentBottom="true"
-                android:text="@string/start_game">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </Button>
-    </RelativeLayout>
+    <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/add_player_container"
+            android:background="@color/colorPrimary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_new_players"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/separator"
+            app:layout_constraintBottom_toTopOf="@+id/checkbox_scheme"
+            android:layout_margin="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <CheckBox
+            android:id="@+id/checkbox_scheme"
+            android:layout_above="@+id/btn_startGame"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/btn_startGame"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:text="Save as scheme">
+    </CheckBox>
+
+    <gerard.example.munchkinhelper.core.views.RoundedButton
+            android:id="@+id/btn_startGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="14sp"
+            android:text="@string/start_game"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
