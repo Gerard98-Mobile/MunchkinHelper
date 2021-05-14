@@ -4,13 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import gerard.example.munchkinhelper.Cfg
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
@@ -58,6 +54,7 @@ class GameFragment : Fragment(){
 
 
         game?.let {
+            selectLeaderFromStart(it.players)
             playerAdapter = GamePlayerAdapter(view.context, it.players)
         }
 
@@ -67,6 +64,7 @@ class GameFragment : Fragment(){
             power_counter?.attachValue(player.getAbsolutePowerInt())
             power_counter?.onChangeListener = CounterView.OnChangeListener{ newValue, _ ->
                 player.setPowerFromAbsoluteValue(newValue)
+                game?.let { selectLeader(it.players) }
                 viewmodel?.autosave(game)
                 playerAdapter?.notifyDataSetChanged()
             }
@@ -74,6 +72,7 @@ class GameFragment : Fragment(){
             level_counter?.onChangeListener = CounterView.OnChangeListener { newValue, lvlUp ->
                 player.lvl = newValue
                 power_counter?.attachValue(player.getAbsolutePowerInt())
+                game?.let { selectLeader(it.players) }
                 viewmodel?.autosave(game)
                 soundHelper?.playLvlChangeSound(lvlUp)
                 playerAdapter?.notifyDataSetChanged()
@@ -99,4 +98,28 @@ class GameFragment : Fragment(){
 
         }
     }
+
+    var leader: Player? = null
+
+    fun selectLeaderFromStart(players: List<Player>){
+        players.forEach {
+            if(it.isLeader) leader = it
+        }
+    }
+
+    fun selectLeader(players: List<Player>){
+        val newLeader = players.maxByOrNull { it.lvl }
+
+        players.forEach { a -> if(newLeader?.lvl == a.lvl && newLeader != a){
+            leader?.isLeader = false
+            leader = null
+            return
+        }
+        }
+
+        newLeader?.isLeader = true
+        leader?.isLeader = false
+        leader = newLeader
+    }
+
 }

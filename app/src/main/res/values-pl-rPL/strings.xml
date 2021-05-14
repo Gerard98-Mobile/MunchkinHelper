@@ -62,4 +62,5 @@
     <string name="delete_game">Usuń grę</string>
     <string name="delete_scheme">Usuń schemat</string>
     <string name="edit">Edytuj</string>
+    <string name="load_last_game">Przywróć ostatnią grę</string>
 </resources>

@@ -77,4 +77,5 @@
     <string name="more">More</string>
     <string name="delete_scheme">Delete Scheme</string>
     <string name="edit">Edit</string>
+    <string name="load_last_game">Load Last Game</string>
 </resources>

@@ -1,7 +1,10 @@
 package gerard.example.munchkinhelper.core
 
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import gerard.example.munchkinhelper.Cfg
+import gerard.example.munchkinhelper.model.Game
 
 abstract class SharedValueImpl<T>{
 
@@ -12,7 +15,7 @@ abstract class SharedValueImpl<T>{
     abstract fun getValue() : T?
     abstract fun setValue(value : T)
 
-    fun with(defaultValue: T, key: String) {
+    fun with(defaultValue: T?, key: String) {
         this.key = key
         this.defaultValue = defaultValue
     }
@@ -60,6 +63,23 @@ abstract class SharedValueImpl<T>{
             with(Cfg.sharedPreferences?.edit()){
                 if(this == null) return
                 putString(key, value)
+                commit()
+            }
+        }
+    }
+
+    class SharedGame : SharedValueImpl<Game>(){
+        override fun getValue(): Game? {
+            val gameJson = Cfg.sharedPreferences?.getString(key, (defaultValue ?: "").toString())
+            val type = object: TypeToken<Game>(){}.type
+            return Gson().fromJson(gameJson, type)
+        }
+
+        override fun setValue(value: Game) {
+            val gameJson = Gson().toJson(value)
+            with(Cfg.sharedPreferences?.edit()){
+                if(this == null) return
+                putString(key, gameJson)
                 commit()
             }
         }

@@ -1,7 +1,6 @@
 package gerard.example.munchkinhelper.ui.fragments.fight
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.core.views.EditTextWithTitle
 import gerard.example.munchkinhelper.core.views.FightCounter
-import kotlinx.android.synthetic.main.fight_fragment2.*
+import kotlinx.android.synthetic.main.fight_fragment.*
 
 class FightFragment : Fragment() {
 
@@ -21,7 +20,7 @@ class FightFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fight_fragment2, container, false)
+        return inflater.inflate(R.layout.fight_fragment, container, false)
     }
 
     private val model: SharedViewModel by activityViewModels()

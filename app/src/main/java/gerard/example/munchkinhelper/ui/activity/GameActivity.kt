@@ -4,6 +4,7 @@ package gerard.example.munchkinhelper.ui.activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,13 +23,15 @@ val GAME_KEY = "game_key"
 
 class GameActivity : AppCompatActivity() {
 
+    var game : Game? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         Cfg.init(this)
         setToolbar()
 
-        val game = intent.getSerializableExtra(GAME_KEY) as Game?
+        game = intent.getSerializableExtra(GAME_KEY) as Game?
         changeFragment(HomeFragment.newInstance(game))
     }
 
@@ -69,7 +72,7 @@ class GameActivity : AppCompatActivity() {
         val title = dialog.findViewById(R.id.txtView_dialog_title) as TextView
         title.setText(this.getString(R.string.back_pressed_title))
         val body = dialog.findViewById(R.id.txtView_dialog_body) as TextView
-        body.setText(this.getString(R.string.back_pressed_body))
+        body.text = this.getString(R.string.back_pressed_body)
 
         val yesBtn = dialog.findViewById(R.id.txtView_dialog_yes) as TextView
         val noBtn = dialog.findViewById(R.id.txtView_dialog_no) as TextView
@@ -88,6 +91,12 @@ class GameActivity : AppCompatActivity() {
         toolbar_back.visibility = View.VISIBLE
         toolbar_settings.visibility = View.GONE
         toolbar_autosave.visibility = View.GONE
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        game?.let { Cfg.lastGame.set(it) }
     }
 
 }

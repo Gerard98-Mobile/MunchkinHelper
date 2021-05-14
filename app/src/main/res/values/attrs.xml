@@ -9,7 +9,10 @@
     </declare-styleable>
 
     <declare-styleable name="FightCounter">
-
+        <attr name="counter_orientation" format="enum" >
+            <enum name="vertical" value="0"/>
+            <enum name="horizontal" value="1"/>
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="RoundedButton">

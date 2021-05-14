@@ -2,6 +2,7 @@ package gerard.example.munchkinhelper.core.views
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.widget.EditText
 import android.widget.FrameLayout
 import gerard.example.munchkinhelper.R
@@ -19,7 +20,16 @@ class FightCounter @JvmOverloads constructor(
     var valueChangeListener : ValueChangeListener? = null
 
     init{
-        inflate(context, R.layout.view_fight_counter, this)
+        val a = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.FightCounter,
+            defStyleAttr,
+            0
+        )
+        val orientation = a.getInt(R.styleable.FightCounter_counter_orientation, 0)
+        inflate(context,
+            if(orientation == 0) R.layout.view_fight_counter else R.layout.view_fight_counter_horizontal,
+            this)
 
         add1.setOnClickListener { changeValue(1) }
         add2.setOnClickListener { changeValue(2) }
@@ -32,6 +42,8 @@ class FightCounter @JvmOverloads constructor(
         minus3.setOnClickListener { changeValue(-3) }
         minus5.setOnClickListener { changeValue(-5) }
         minus10.setOnClickListener { changeValue(-10) }
+
+        a.recycle()
     }
 
     fun changeValue(changer: Int){

@@ -3,7 +3,7 @@ package gerard.example.munchkinhelper.core
 import android.content.SharedPreferences
 import java.lang.UnsupportedOperationException
 
-class SharedValue<T>(val key: String, defaultValue: T, val clazz: Class<T>){
+class SharedValue<T>(val key: String, defaultValue: T?, val clazz: Class<T>){
 
     private var value : T? = null
 
@@ -29,6 +29,7 @@ class SharedValue<T>(val key: String, defaultValue: T, val clazz: Class<T>){
             "java.lang.Boolean","boolean" -> return SharedValueImpl.Bool() as SharedValueImpl<T>
             "java.lang.String","string" -> return SharedValueImpl.Text() as SharedValueImpl<T>
             "java.lang.Integer","integer" -> return SharedValueImpl.Integer() as SharedValueImpl<T>
+            "gerard.example.munchkinhelper.model.Game","game" -> return SharedValueImpl.SharedGame() as SharedValueImpl<T>
             else -> throw UnsupportedOperationException("This type is unsupported")
         }
     }

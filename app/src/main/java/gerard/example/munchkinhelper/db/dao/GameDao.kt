@@ -7,7 +7,7 @@ import gerard.example.munchkinhelper.model.Game
 interface GameDao {
 
     @Insert
-    suspend fun insert(game: Game)
+    suspend fun insert(game: Game) : Long
 
     @Update
     suspend fun update(game: Game)

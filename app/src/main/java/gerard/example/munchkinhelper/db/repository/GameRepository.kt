@@ -10,8 +10,8 @@ class GameRepository(private val gameDao: GameDao) {
         return gameDao.findAll()
     }
 
-    suspend fun insert(game: Game){
-        gameDao.insert(game)
+    suspend fun insert(game: Game) : Long{
+        return gameDao.insert(game)
     }
 
     suspend fun update(game: Game){

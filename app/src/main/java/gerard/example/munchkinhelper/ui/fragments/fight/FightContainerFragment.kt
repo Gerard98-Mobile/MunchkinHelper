@@ -46,6 +46,7 @@ class FightContainerFragment : Fragment() {
         })
 
         reset.setOnClickListener {
+            changeFragment(0)
             model.reset()
         }
 

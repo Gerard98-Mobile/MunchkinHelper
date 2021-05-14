@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="5"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+            android:layout_width="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="@string/add_one"
+            android:id="@+id/add1"/>
+
+    <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="@string/add_two"
+            android:id="@+id/add2"/>
+
+    <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="@string/add_three"
+            android:id="@+id/add3"/>
+
+    <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/add_five"
+            android:id="@+id/add5"/>
+
+    <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/add_ten"
+            android:id="@+id/add10"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_columnWeight="1"
+            android:text="@string/minus_one"
+            android:id="@+id/minus1"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="@string/minus_two"
+            android:id="@+id/minus2"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_columnWeight="1"
+            android:text="@string/minus_three"
+            android:id="@+id/minus3"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_height="wrap_content"
+            android:text="@string/minus_five"
+            android:id="@+id/minus5"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_height="wrap_content"
+            android:text="@string/minus_ten"
+            android:id="@+id/minus10"/>
+
+</GridLayout>
