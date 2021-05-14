@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import gerard.example.munchkinhelper.R
+import kotlinx.android.synthetic.main.dice_fragment.view.*
 import kotlin.random.Random
 
 class DiceFragment : Fragment(){
@@ -18,12 +19,10 @@ class DiceFragment : Fragment(){
         surface.setZOrderOnTop(true)
         surface.holder.setFormat(PixelFormat.TRANSLUCENT)
 
-
-        val roll : Button = v.findViewById(R.id.roll_button)
-        roll.setOnClickListener {
+        v.roll_button.setOnClickListener {
             val canvas : Canvas = surface.holder.lockCanvas()
             canvas.drawColor(ContextCompat.getColor(v.context, R.color.colorBackground))
-            val d = resources.getDrawable(getRandomDiceId(), null)
+            val d = ContextCompat.getDrawable(it.context, getRandomDiceId()) ?: return@setOnClickListener
 
             val top = Random.nextInt(canvas.height - 150)
             val left = Random.nextInt(canvas.width - 150)
