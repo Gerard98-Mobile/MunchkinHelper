@@ -20,16 +20,13 @@ import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
 import com.google.android.material.snackbar.Snackbar
 import gerard.example.munchkinhelper.model.Scheme
-import gerard.example.munchkinhelper.now
-import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
 import gerard.example.munchkinhelper.util.NavigationHelper
+import gerard.example.munchkinhelper.util.now
 import kotlinx.android.synthetic.main.activity_adding_players.*
 import kotlinx.android.synthetic.main.dialog_add_scheme_new.*
-import java.util.Date
-import kotlin.collections.ArrayDeque
 
 const val START_POWER = 0
 const val START_LVL = 1

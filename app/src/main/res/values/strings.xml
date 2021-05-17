@@ -78,4 +78,9 @@
     <string name="delete_scheme">Delete Scheme</string>
     <string name="edit">Edit</string>
     <string name="load_last_game">Load Last Game</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="death_count">Death count: %d</string>
+    <string name="death_count_setting">Show death count</string>
+    <string name="reset_game_title">Reset Game</string>
+    <string name="reset_game_body">Are you sure about reseting that game?</string>
 </resources>

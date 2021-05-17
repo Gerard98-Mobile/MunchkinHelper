@@ -1,11 +1,14 @@
 package gerard.example.munchkinhelper.model
 
+import gerard.example.munchkinhelper.ui.activity.create.START_LVL
+import gerard.example.munchkinhelper.ui.activity.create.START_POWER
 import java.io.Serializable
 
 class Player(
     val name: String,
     var power: Int,
     var lvl: Int,
+    var deaths: Int = 0,
     var isLeader: Boolean = false) : Serializable{
 
     /*
@@ -28,7 +31,14 @@ class Player(
     }
 
     fun death() {
-        lvl = 1
-        power = 0
+        deaths++
+        lvl = START_LVL
+        power = START_POWER
+    }
+
+    fun reset(){
+        lvl = START_LVL
+        power = START_POWER
+        deaths = 0
     }
 }

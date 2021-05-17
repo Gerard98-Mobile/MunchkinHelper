@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import gerard.example.munchkinhelper.Cfg
 import gerard.example.munchkinhelper.MainActivity
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.R
@@ -51,6 +52,8 @@ class GamePlayerAdapter(val context: Context, val players: List<Player>) : Recyc
             itemView.txtView_power_item.text = player.getAbsolutePower()
             itemView.txtView_level_item.text = player.lvl.toString()
             itemView.imgView_leader.visibility = if(player.isLeader) View.VISIBLE else View.INVISIBLE
+            itemView.death_count.isVisible = player.deaths > 0 && Cfg.showDeathCount.value.get() == true
+            itemView.death_count.text = context.getString(R.string.death_count, player.deaths)
 
             itemView.linearLayout_player_container.setOnClickListener {
                 if(selectedView != it){

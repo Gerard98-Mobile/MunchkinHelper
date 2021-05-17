@@ -8,3 +8,5 @@ object DateUtil {
     fun dateDDMMYYYYdash() = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
 }
+
+fun now() = System.currentTimeMillis()

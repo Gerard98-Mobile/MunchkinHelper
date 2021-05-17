@@ -1,8 +1,6 @@
 package gerard.example.munchkinhelper.ui.activity.load
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.model.Game
-import gerard.example.munchkinhelper.now
-import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.NavigationHelper
+import gerard.example.munchkinhelper.util.now
 import kotlinx.android.synthetic.main.fragment_scheme.*
 
 class SchemeFragment : Fragment(){

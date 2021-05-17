@@ -17,6 +17,9 @@ class Game(
     val players: List<Player>
 
 ) : Serializable{
+    fun reset() {
+        players.forEach { it.reset() }
+    }
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

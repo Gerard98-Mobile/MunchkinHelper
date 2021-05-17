@@ -63,4 +63,9 @@
     <string name="delete_scheme">Usuń schemat</string>
     <string name="edit">Edytuj</string>
     <string name="load_last_game">Przywróć ostatnią grę</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="death_count">Liczba śmierci: %d</string>
+    <string name="death_count_setting">Pokazuj licznik śmierci</string>
+    <string name="reset_game_title">Resetowanie Gry</string>
+    <string name="reset_game_body">Czy jesteś pewny że chcesz zresetować grę?</string>
 </resources>

@@ -25,10 +25,14 @@ object Cfg{
     private val _autoSaveValue = SharedValue("auto_save",true,Boolean::class.java)
     private val _sound = SharedValue("sound",true,Boolean::class.java)
     private val _dice3d = SharedValue("sound",true,Boolean::class.java)
+    private val _showDeathCount = SharedValue("show_death_count",true,Boolean::class.java)
+//    private val _darkMode = SharedValue("dark_mode",false,Boolean::class.java)
 
     val autoSave = Setting(R.string.auto_save, _autoSaveValue, R.drawable.ic_save)
     val sound = Setting(R.string.sound, _sound, R.drawable.ic_audio)
     val dice3d = Setting(R.string.dice3d, _dice3d, R.drawable.ic_dice_four)
+    val showDeathCount = Setting(R.string.death_count_setting, _showDeathCount, R.drawable.ic_skull)
+//    val darkMode = Setting(R.string.dark_mode, _darkMode, R.drawable.ic_dark_mode)
 
-    val settings = listOf(autoSave, sound, dice3d)
+    val settings = listOf(autoSave, sound, dice3d, showDeathCount)
 }

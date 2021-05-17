@@ -2,17 +2,12 @@ package gerard.example.munchkinhelper.ui.activity.load
 
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
-import gerard.example.munchkinhelper.ui.activity.GAME_KEY
-import gerard.example.munchkinhelper.ui.activity.GameActivity
-import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Scheme
-import gerard.example.munchkinhelper.now
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
 import kotlinx.android.synthetic.main.item_card_scheme_new.view.*

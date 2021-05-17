@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.ui.activity.create.START_LVL
 import kotlinx.android.synthetic.main.view_counter.view.*
 
 class CounterView @JvmOverloads constructor(
@@ -27,7 +28,7 @@ class CounterView @JvmOverloads constructor(
         imgButton_reduce.setOnClickListener {
             value?.let {
                 val newValue = it-1
-                if(newValue < 0) return@let
+                if(newValue < START_LVL) return@let
                 value = newValue
                 txtView_value.text = newValue.toString()
                 onChangeListener?.onChange(newValue, false)
@@ -47,7 +48,7 @@ class CounterView @JvmOverloads constructor(
 
     fun attachValue(value: Int){
         this.value = value
-        txtView_value.setText(value.toString())
+        txtView_value.text = value.toString()
     }
 
 }

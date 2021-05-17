@@ -3,6 +3,8 @@ package gerard.example.munchkinhelper.ui.activity
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -12,12 +14,14 @@ import androidx.fragment.app.Fragment
 import gerard.example.munchkinhelper.Cfg
 import gerard.example.munchkinhelper.MainActivity
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.core.dialogs.YesNoDialog
 import gerard.example.munchkinhelper.ui.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.ui.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.dialog_custom.*
 
 val GAME_KEY = "game_key"
 
@@ -45,7 +49,7 @@ class GameActivity : AppCompatActivity() {
         }
         toolbar_settings.visibility = View.VISIBLE
         toolbar_back.visibility = View.GONE
-        toolbar_settings.setOnClickListener { changeFragment(SettingsFragment()) }
+        toolbar_settings.setOnClickListener { changeFragment(SettingsFragment.newInstance(game)) }
         toolbar_back.setOnClickListener { onBackPressed() }
     }
 
@@ -65,22 +69,15 @@ class GameActivity : AppCompatActivity() {
             return
         }
 
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_custom)
-
-        val title = dialog.findViewById(R.id.txtView_dialog_title) as TextView
-        title.setText(this.getString(R.string.back_pressed_title))
-        val body = dialog.findViewById(R.id.txtView_dialog_body) as TextView
-        body.text = this.getString(R.string.back_pressed_body)
-
-        val yesBtn = dialog.findViewById(R.id.txtView_dialog_yes) as TextView
-        val noBtn = dialog.findViewById(R.id.txtView_dialog_no) as TextView
-        yesBtn.setOnClickListener {
-            NavigationHelper.finish(this)
-        }
-        noBtn.setOnClickListener { dialog.dismiss() }
-        dialog.show()
+        YesNoDialog(
+            this,
+            R.string.back_pressed_title,
+            R.string.back_pressed_body
+        ){ value, _ ->
+            when(value){
+                true -> NavigationHelper.finish(this@GameActivity)
+            }
+        }.show()
     }
 
     fun setToolbarTitle(text: String){
