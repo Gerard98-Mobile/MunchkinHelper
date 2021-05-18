@@ -9,7 +9,10 @@ import android.text.Html
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import androidx.core.text.HtmlCompat
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.colorStateList
 import gerard.example.munchkinhelper.model.Player
 import kotlinx.android.synthetic.main.dialog_death.*
 
@@ -36,6 +39,22 @@ class DeathDialog(
             deathCallback.death()
             dismiss()
         }
+
+        with(CfgTheme.current.backgroundColor.colorInt(context)){
+            root.setCardBackgroundColor(this)
+        }
+
+        with(CfgTheme.current.primaryColor.colorInt(context)){
+            root.strokeColor = this
+            dead_text.setTextColor(this)
+            btn_no.setTextColor(this)
+            btn_yes.setTextColor(this)
+        }
+
+        with(CfgTheme.current.primaryColor.colorStateList(context)){
+            image.imageTintList = this
+        }
+
     }
 
     fun getDeadText() : String{

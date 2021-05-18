@@ -15,7 +15,9 @@ import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
 import kotlinx.android.synthetic.main.power_edit_text.view.*
 
 
@@ -67,6 +69,10 @@ class EditTextWithTitle @JvmOverloads constructor(
 
     fun setCount(value: Int) {
         editText.setText(value.toString())
+    }
+
+    fun applyTheme() {
+        txtView_title.setTextColor(CfgTheme.current.primaryColor.colorInt(context))
     }
 
     enum class STATE{

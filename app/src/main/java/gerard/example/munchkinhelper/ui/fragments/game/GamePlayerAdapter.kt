@@ -12,10 +12,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import gerard.example.munchkinhelper.Cfg
-import gerard.example.munchkinhelper.MainActivity
+import com.google.android.material.card.MaterialCardView
+import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.model.Player
-import gerard.example.munchkinhelper.R
 import kotlinx.android.synthetic.main.game_fragment.*
 import kotlinx.android.synthetic.main.item_player.view.*
 
@@ -55,10 +54,22 @@ class GamePlayerAdapter(val context: Context, val players: List<Player>) : Recyc
             itemView.death_count.isVisible = player.deaths > 0 && Cfg.showDeathCount.value.get() == true
             itemView.death_count.text = context.getString(R.string.death_count, player.deaths)
 
+            with(CfgTheme.current.primaryColor.colorInt(context)){
+                itemView.txtView_playerName_item.setTextColor(this)
+                itemView.txtView_power_item.setTextColor(this)
+                itemView.txtView_level_item.setTextColor(this)
+            }
+
+            if(selectedView != itemView){
+                itemView.linearLayout_player_container.setCardBackgroundColor(CfgTheme.current.backgroundColor.colorInt(context))
+                itemView.linearLayout_player_container.strokeColor = CfgTheme.current.backgroundColor.colorInt(context)
+            }
+
+
             itemView.linearLayout_player_container.setOnClickListener {
                 if(selectedView != it){
-                    itemView.linearLayout_player_container.setBackgroundResource(R.drawable.circle_border)
-                    selectedView?.setBackgroundResource(0)
+                    itemView.linearLayout_player_container.strokeColor = CfgTheme.current.primaryColor.colorInt(context)
+                    (selectedView as? MaterialCardView)?.strokeColor = CfgTheme.current.backgroundColor.colorInt(context)
                     selectedView = itemView.linearLayout_player_container
                     selectedPlayer.value = player
                 }

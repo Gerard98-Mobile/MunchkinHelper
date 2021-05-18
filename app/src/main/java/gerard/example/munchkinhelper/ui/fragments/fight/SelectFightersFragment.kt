@@ -7,19 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorStateList
+import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import kotlinx.android.synthetic.main.fragment_select_fighters.*
 import java.io.Serializable
 
-class SelectFightersFragment : Fragment() {
+class SelectFightersFragment : BaseFragment() {
 
     class FighterModel(val player: Player, var selected: Boolean)
 
     private val model: SharedViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +48,15 @@ class SelectFightersFragment : Fragment() {
         model.reset.observe(viewLifecycleOwner, {
             reset()
         })
+    }
+
+    override fun applyThemeColors() {
+        context?.let {
+            swipe_to_right.backgroundTintList = CfgTheme.current.primaryColor.colorStateList(it)
+            fighters_recycler_view.adapter?.notifyDataSetChanged()
+            swipe_to_right.imageTintList = CfgTheme.current.backgroundColor.colorStateList(it)
+        }
+
     }
 
     fun reset() {

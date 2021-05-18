@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
@@ -35,6 +35,16 @@ class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val
         holder.itemView.root.setOnClickListener {
             callback.execute(games[position], Action.OPEN)
         }
+
+        with(CfgTheme.current.primaryColor.colorInt(context)){
+            holder.itemView.players.setTextColor(this)
+            holder.itemView.game_date.setTextColor(this)
+            holder.itemView.root.strokeColor = this
+        }
+
+        holder.itemView.more.imageTintList = CfgTheme.current.primaryColor.colorStateList(context)
+        holder.itemView.root.setCardBackgroundColor(CfgTheme.current.backgroundColor.colorStateList(context))
+
 
         holder.itemView.more_icon_click_area.setOnClickListener{
             MoreOptionsPopUp(listOf(

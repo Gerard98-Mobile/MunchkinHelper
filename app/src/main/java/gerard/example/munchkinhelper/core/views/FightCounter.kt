@@ -3,9 +3,12 @@ package gerard.example.munchkinhelper.core.views
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
 import kotlinx.android.synthetic.main.power_edit_text.view.*
 import kotlinx.android.synthetic.main.view_fight_counter.view.*
 
@@ -48,6 +51,13 @@ class FightCounter @JvmOverloads constructor(
 
     fun changeValue(changer: Int){
         valueChangeListener?.valueChanged(changer)
+    }
+
+    fun applyTheme() {
+        val color = CfgTheme.current.primaryColor.colorInt(context)
+        for(i in 0..grid.childCount){
+            (grid.getChildAt(i) as? Button)?.setTextColor(color)
+        }
     }
 
 }

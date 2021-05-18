@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.colorStateList
+import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.model.Game
 import kotlinx.android.synthetic.main.home_fragment.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +57,14 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun applyThemeColors() {
+        context?.let {
+            navigation.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(it))
+            navigation.itemIconTintList = CfgTheme.current.stateChecked.colorStateList(it)
+            navigation.itemTextColor = CfgTheme.current.stateChecked.colorStateList(it)
+        }
     }
 
 

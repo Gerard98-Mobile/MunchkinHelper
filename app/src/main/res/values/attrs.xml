@@ -18,6 +18,8 @@
     <declare-styleable name="RoundedButton">
         <attr name="android:text" format="string"/>
         <attr name="android:textSize" format="dimension"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="textColor" format="color"/>
     </declare-styleable>
 
 </resources>

@@ -2,23 +2,20 @@ package gerard.example.munchkinhelper.ui.activity.create
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.widget.*
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
 import com.google.android.material.snackbar.Snackbar
+import gerard.example.munchkinhelper.*
+import gerard.example.munchkinhelper.core.BaseActivity
 import gerard.example.munchkinhelper.model.Scheme
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.Action
@@ -26,12 +23,14 @@ import gerard.example.munchkinhelper.util.Callback
 import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.now
 import kotlinx.android.synthetic.main.activity_adding_players.*
-import kotlinx.android.synthetic.main.dialog_add_scheme_new.*
+import kotlinx.android.synthetic.main.activity_adding_players.root
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_add_scheme.*
 
 const val START_POWER = 0
 const val START_LVL = 1
 
-class AddingPlayersActivity : AppCompatActivity() {
+class AddingPlayersActivity : BaseActivity() {
 
     val viewmodel by viewModels<AddingPlayersVM>()
     val playerList = mutableListOf<Player>()
@@ -39,6 +38,7 @@ class AddingPlayersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_players)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapter = AddedPlayersAdapter(this, playerList)
@@ -83,6 +83,17 @@ class AddingPlayersActivity : AppCompatActivity() {
         }
     }
 
+    override fun applyThemeColors() {
+        root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
+        checkbox_scheme.setTextColor(CfgTheme.current.primaryColor.colorInt(this))
+        checkbox_scheme.buttonTintList = CfgTheme.current.primaryColor.colorStateList(this)
+        separator.setBackgroundColor(CfgTheme.current.primaryColor.colorInt(this))
+        add_player.imageTintList = CfgTheme.current.primaryColor.colorStateList(this)
+        name_player.setTextColor(CfgTheme.current.primaryColor.colorInt(this))
+        name_player.setHintTextColor(CfgTheme.current.textLight.colorInt(this))
+        btn_startGame.applyTheme()
+    }
+
     private fun startGameIntent() {
         NavigationHelper.startActivity(this, GameActivity::class.java, Game(now(), playerList))
     }
@@ -109,7 +120,9 @@ class AddingPlayersActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setContentView(R.layout.dialog_add_scheme_new)
+            setContentView(
+                if(Cfg.darkMode.value.get() == false) R.layout.dialog_add_scheme else R.layout.dialog_add_scheme_dark
+            )
             yes.setOnClickListener {
                 if(scheme_name.text.toString().length < 4) {
                     scheme_name.background = ContextCompat.getDrawable(context, R.drawable.edit_text_error)

@@ -5,7 +5,7 @@
         android:theme="@style/Theme.MaterialComponents.DayNight"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/colorBackground">
+        app:cardBackgroundColor="@color/backgroundDark">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -20,8 +20,8 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="15dp"
-                android:textColor="@color/colorWhite"
-                android:background="@color/colorPrimary"
+                android:textColor="@color/backgroundDark"
+                android:background="@color/primaryDarkColor"
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:gravity="center"
@@ -39,7 +39,8 @@
                 android:layout_margin="10dp"
                 android:background="@android:color/transparent"
                 android:hint="@string/editText_scheme_hint"
-                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/textDarkLight"
+                android:textColor="@color/colorWhite"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -55,6 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/TextButton.Decline"
+                    android:textColor="@color/colorWhite"
                     app:layout_constraintEnd_toStartOf="@+id/yes"
                     app:layout_constraintTop_toBottomOf="@+id/scheme_name">
             </TextView>
@@ -64,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/TextButton.Confirm"
+                    android:textColor="@color/colorWhite"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/scheme_name">
             </TextView>

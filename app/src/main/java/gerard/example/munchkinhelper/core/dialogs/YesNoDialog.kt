@@ -6,7 +6,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.annotation.StringRes
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
 import kotlinx.android.synthetic.main.dialog_custom.*
@@ -32,6 +34,20 @@ class YesNoDialog(
             callback.execute(false, Action.NONE)
             dismiss()
         }
+        with(CfgTheme.current.primaryColor.colorInt(context)){
+            title_txt.setBackgroundColor(this)
+            cancel.setTextColor(this)
+            yes.setTextColor(this)
+            body_txt.setTextColor(this)
+        }
+        with(CfgTheme.current.backgroundColor.colorInt(context)){
+            root.setCardBackgroundColor(this)
+        }
+
+        title_txt.setTextColor(CfgTheme.current.textColorSecondary.colorInt(context))
+
     }
+
+
 }
 

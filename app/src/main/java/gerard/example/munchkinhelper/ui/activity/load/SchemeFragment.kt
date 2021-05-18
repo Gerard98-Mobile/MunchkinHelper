@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.Action
@@ -15,7 +16,7 @@ import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.now
 import kotlinx.android.synthetic.main.fragment_scheme.*
 
-class SchemeFragment : Fragment(){
+class SchemeFragment : BaseFragment(){
 
     val viewmodel by viewModels<SchemeVM>()
 
@@ -51,5 +52,9 @@ class SchemeFragment : Fragment(){
                 (activity as? LoadGameActivity)?.changePositionOfBtn(dy.toFloat())
             }
         })
+    }
+
+    override fun applyThemeColors() {
+        schemes_recycler_view.adapter?.notifyDataSetChanged()
     }
 }

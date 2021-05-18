@@ -1,10 +1,16 @@
 package gerard.example.munchkinhelper
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.core.graphics.toColor
+import androidx.core.view.isVisible
+import gerard.example.munchkinhelper.core.BaseActivity
 import gerard.example.munchkinhelper.core.views.RoundedButton
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
@@ -16,7 +22,7 @@ import gerard.example.munchkinhelper.util.NavigationHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,4 +54,13 @@ class MainActivity : AppCompatActivity() {
             NavigationHelper.startActivity(this, AddingPlayersActivity::class.java)
         }
     }
+
+    override fun applyThemeColors() {
+        root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
+        logo.isVisible = CfgTheme.current is DefaultTheme
+        start_game.applyTheme()
+        btn_loadGame.applyTheme()
+        load_last_game.applyTheme()
+    }
+
 }

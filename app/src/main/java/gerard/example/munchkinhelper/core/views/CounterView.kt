@@ -3,7 +3,10 @@ package gerard.example.munchkinhelper.core.views
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.colorStateList
 import gerard.example.munchkinhelper.ui.activity.create.START_LVL
 import kotlinx.android.synthetic.main.view_counter.view.*
 
@@ -49,6 +52,23 @@ class CounterView @JvmOverloads constructor(
     fun attachValue(value: Int){
         this.value = value
         txtView_value.text = value.toString()
+    }
+
+    fun applyTheme() {
+        with(CfgTheme.current.primaryColor.colorInt(context)){
+            txtView_title.setTextColor(this)
+            imgButton_reduce.strokeColor = this
+            imgButton_add.strokeColor = this
+            txtView_value.setTextColor(this)
+        }
+        with(CfgTheme.current.primaryColor.colorStateList(context)){
+            plus.imageTintList = this
+            minus.imageTintList = this
+        }
+        with(CfgTheme.current.backgroundColor.colorInt(context)){
+            imgButton_reduce.setCardBackgroundColor(this)
+            imgButton_add.setCardBackgroundColor(this)
+        }
     }
 
 }

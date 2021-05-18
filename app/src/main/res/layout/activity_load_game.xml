@@ -1,90 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:background="@color/colorBackground">
+        android:background="@color/colorBackground"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-            android:id="@+id/linearLayout_load_nav"
+    <com.google.android.material.tabs.TabLayout
+            android:id="@+id/load_game_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-
-        <TextView
-                android:id="@+id/txtView_history"
-                android:layout_width="0dp"
+        <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:layout_margin="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@drawable/bottom_border_primary_bold"
-                android:textSize="18sp"
-                android:layout_weight="50"
-                android:gravity="center"
-                android:text="@string/history">
-        </TextView>
+                android:text="@string/history"/>
 
-        <View
-                android:layout_width="1dp"
-                android:background="@color/colorPrimary"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
-                android:layout_height="match_parent">
-
-        </View>
-
-        <TextView
-                android:id="@+id/txtView_scheme"
-                android:layout_width="0dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@drawable/bottom_border_primary"
+        <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:layout_margin="10dp"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:textColor="@color/colorGrey"
-                android:text="@string/schemes">
+                android:text="@string/schemes"/>
 
-        </TextView>
+    </com.google.android.material.tabs.TabLayout>
 
-    </LinearLayout>
-
-    <RelativeLayout
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/load_game_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/load_game_tab_layout"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_load_activity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:layout_alignParentTop="true"
-                android:layout_above="@id/btn_startNewGame"
-                tools:listitem="@layout/item_card_scheme">
+    <gerard.example.munchkinhelper.core.views.RoundedButton
+            android:id="@+id/btn_startNewGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/start_game">
+    </gerard.example.munchkinhelper.core.views.RoundedButton>
 
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <Button
-                android:id="@+id/btn_startNewGame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                style="@style/Button"
-                android:text="@string/start_game">
-
-        </Button>
-
-    </RelativeLayout>
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import gerard.example.munchkinhelper.Cfg
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.R
 import kotlinx.android.synthetic.main.item_added_player.view.*
@@ -13,7 +14,7 @@ class AddedPlayersAdapter(val context: Context, val players: MutableList<Player>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerHolder {
         return PlayerHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_added_player, parent, false)
+            LayoutInflater.from(context).inflate(if (Cfg.darkMode.value.get() == false) R.layout.item_added_player else R.layout.item_added_player_dark, parent, false)
         )
     }
 
