@@ -3,12 +3,14 @@ package gerard.example.munchkinhelper.ui.fragments.settings
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import gerard.example.munchkinhelper.Cfg
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.ui.activity.GameActivity
+import gerard.example.munchkinhelper.util.NavigationHelper
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 class SettingsFragment : Fragment(){

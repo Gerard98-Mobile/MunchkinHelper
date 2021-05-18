@@ -114,8 +114,9 @@ class GameFragment : Fragment(){
             leader?.isLeader = false
             leader = null
             return
-        }
-        }
+        }}
+
+        if(newLeader == leader) return
 
         newLeader?.isLeader = true
         leader?.isLeader = false

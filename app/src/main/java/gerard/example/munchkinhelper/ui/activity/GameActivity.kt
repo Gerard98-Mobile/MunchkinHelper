@@ -18,6 +18,7 @@ import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.dialog_custom.*
 
 val GAME_KEY = "game_key"
 
@@ -50,11 +51,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame, fragment)
-            .addToBackStack(null)
-            .commit()
+        NavigationHelper.changeFragment(supportFragmentManager, fragment)
     }
 
     override fun onBackPressed() {
@@ -69,22 +66,21 @@ class GameActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_custom)
 
-        val title = dialog.findViewById(R.id.txtView_dialog_title) as TextView
-        title.setText(this.getString(R.string.back_pressed_title))
-        val body = dialog.findViewById(R.id.txtView_dialog_body) as TextView
-        body.text = this.getString(R.string.back_pressed_body)
+        dialog.txtView_dialog_title.text = this.getString(R.string.back_pressed_title)
+        dialog.txtView_dialog_body.text = this.getString(R.string.back_pressed_body)
 
-        val yesBtn = dialog.findViewById(R.id.txtView_dialog_yes) as TextView
-        val noBtn = dialog.findViewById(R.id.txtView_dialog_no) as TextView
-        yesBtn.setOnClickListener {
-            NavigationHelper.finish(this)
+        dialog.txtView_dialog_yes.setOnClickListener {
+            NavigationHelper.startActivity(
+                activity = this,
+                clazz = MainActivity::class.java,
+                animDestination = NavigationHelper.AnimDestination.RIGHT)
         }
-        noBtn.setOnClickListener { dialog.dismiss() }
+        dialog.txtView_dialog_no.setOnClickListener { dialog.dismiss() }
         dialog.show()
     }
 
     fun setToolbarTitle(text: String){
-        toolbar_text.setText(text)
+        toolbar_text.text = text
     }
 
     fun hideToolbarButtons() {

@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         if(restoredGame != null) {
             load_last_game.visibility = View.VISIBLE
             load_last_game.setOnClickListener {
-                NavigationHelper.startActivity(this, LoadGameActivity::class.java, restoredGame)
+                NavigationHelper.startActivity(this, GameActivity::class.java, restoredGame)
             }
         }
 
