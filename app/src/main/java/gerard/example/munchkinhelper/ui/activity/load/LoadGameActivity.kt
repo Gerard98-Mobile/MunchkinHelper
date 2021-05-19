@@ -46,6 +46,10 @@ class LoadGameActivity : BaseActivity() {
         })
     }
 
+    override fun onBackPressed() {
+        NavigationHelper.finish(this)
+    }
+
     override fun applyThemeColors() {
         binding.run {
             CfgTheme.current.primaryColor.colorInt(this@LoadGameActivity).let {

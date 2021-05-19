@@ -18,6 +18,7 @@ import gerard.example.munchkinhelper.util.NavigationHelper
 class MainActivity : BaseActivity(true) {
 
     private lateinit var binding: ActivityMainBinding
+    var restoredGame: Game? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +34,13 @@ class MainActivity : BaseActivity(true) {
         }
 
         Cfg.init(this)
-        val restoredGame = Cfg.lastGame.get()
+        restoredGame = Cfg.lastGame.get()
         if(restoredGame != null) {
             binding.loadLastGame.visibility = View.VISIBLE
             binding.loadLastGame.setOnClickListener {
-                NavigationHelper.startActivity(this, GameActivity::class.java, restoredGame)
+                restoredGame?.let {
+                    NavigationHelper.startActivity(this, GameActivity::class.java, it)
+                }
             }
         }
 
@@ -50,6 +53,11 @@ class MainActivity : BaseActivity(true) {
         startGame.setOnClickListener {
             NavigationHelper.startActivity(this, AddingPlayersActivity::class.java)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        restoredGame = Cfg.lastGame.get()
     }
 
     override fun applyThemeColors() {

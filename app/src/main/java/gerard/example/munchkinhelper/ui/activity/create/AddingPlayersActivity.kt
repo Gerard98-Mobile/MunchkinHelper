@@ -87,6 +87,10 @@ class AddingPlayersActivity : BaseActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        NavigationHelper.finish(this)
+    }
+
     override fun applyThemeColors() {
         CfgTheme.current.primaryColor.colorInt(this).let{ color ->
             binding.run {
