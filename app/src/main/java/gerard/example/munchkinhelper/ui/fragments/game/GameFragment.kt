@@ -4,24 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.model.Player
-import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.colorStateList
 import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.core.views.CounterView
+import gerard.example.munchkinhelper.databinding.GameFragmentBinding
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.dialogs.DeathDialog
 import gerard.example.munchkinhelper.util.Sound
 import gerard.example.munchkinhelper.util.SoundHelper
-import kotlinx.android.synthetic.main.game_fragment.*
 
-class GameFragment : BaseFragment(){
+class GameFragment : BaseFragment<GameFragmentBinding>(){
 
     var selectedPlayer: Player? = null
     var viewmodel: GameFragmentVM? = null
@@ -29,19 +27,8 @@ class GameFragment : BaseFragment(){
 
     var soundHelper: SoundHelper? = null
 
-    companion object{
-        fun newInstance(game: Game?) : GameFragment {
-            return GameFragment().apply {
-                arguments = Bundle().apply{
-                    putSerializable(GAME_KEY, game)
-                }
-            }
-        }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.game_fragment, container, false)
-    }
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> GameFragmentBinding
+            = GameFragmentBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,30 +50,32 @@ class GameFragment : BaseFragment(){
         }
 
         val observer = Observer<Player>{ player ->
-            selectedPlayer = player
-            txtView_playerName.text = player.name
-            power_counter?.attachValue(player.getAbsolutePowerInt())
-            power_counter?.onChangeListener = CounterView.OnChangeListener{ newValue, _ ->
-                player.setPowerFromAbsoluteValue(newValue)
-                game?.let { selectLeader(it.players) }
-                viewmodel?.autosave(game)
-                playerAdapter?.notifyDataSetChanged()
-            }
-            level_counter?.attachValue(player.lvl)
-            level_counter?.onChangeListener = CounterView.OnChangeListener { newValue, lvlUp ->
-                player.lvl = newValue
-                power_counter?.attachValue(player.getAbsolutePowerInt())
-                game?.let { selectLeader(it.players) }
-                viewmodel?.autosave(game)
-                soundHelper?.playLvlChangeSound(lvlUp)
-                playerAdapter?.notifyDataSetChanged()
+            binding.run {
+                selectedPlayer = player
+                txtViewPlayerName.text = player.name
+                powerCounter.attachValue(player.getAbsolutePowerInt())
+                powerCounter.onChangeListener = CounterView.OnChangeListener{ newValue, _ ->
+                    player.setPowerFromAbsoluteValue(newValue)
+                    game?.let { selectLeader(it.players) }
+                    viewmodel?.autosave(game)
+                    playerAdapter?.notifyDataSetChanged()
+                }
+                levelCounter.attachValue(player.lvl)
+                levelCounter.onChangeListener = CounterView.OnChangeListener { newValue, lvlUp ->
+                    player.lvl = newValue
+                    powerCounter.attachValue(player.getAbsolutePowerInt())
+                    game?.let { selectLeader(it.players) }
+                    viewmodel?.autosave(game)
+                    soundHelper?.playLvlChangeSound(lvlUp)
+                    playerAdapter?.notifyDataSetChanged()
+                }
             }
         }
 
         playerAdapter?.selectedPlayer?.observe(viewLifecycleOwner, observer)
-        recycler_view.adapter = playerAdapter
+        binding.recyclerView.adapter = playerAdapter
 
-        skull_icon.setOnClickListener { v1 ->
+        binding.skullIcon.setOnClickListener { v1 ->
             selectedPlayer?.let {
                 DeathDialog(
                     v1.context,
@@ -103,17 +92,17 @@ class GameFragment : BaseFragment(){
         }
     }
 
-    override fun applyThemeColors() {
+    override fun applyThemeColors() : Unit = binding.run {
         context?.let {
-            skull_icon.imageTintList = CfgTheme.current.primaryColor.colorStateList(it)
+            skullIcon.imageTintList = CfgTheme.current.primaryColor.colorStateList(it)
             with(CfgTheme.current.primaryColor.colorInt(it)){
                 power.setTextColor(this)
                 level.setTextColor(this)
                 separator.setBackgroundColor(this)
-                txtView_playerName.setTextColor(this)
+                txtViewPlayerName.setTextColor(this)
             }
-            power_counter.applyTheme()
-            level_counter.applyTheme()
+            powerCounter.applyTheme()
+            levelCounter.applyTheme()
         }
     }
 
@@ -139,6 +128,16 @@ class GameFragment : BaseFragment(){
         newLeader?.isLeader = true
         leader?.isLeader = false
         leader = newLeader
+    }
+
+    companion object{
+        fun newInstance(game: Game?) : GameFragment {
+            return GameFragment().apply {
+                arguments = Bundle().apply{
+                    putSerializable(GAME_KEY, game)
+                }
+            }
+        }
     }
 
 }

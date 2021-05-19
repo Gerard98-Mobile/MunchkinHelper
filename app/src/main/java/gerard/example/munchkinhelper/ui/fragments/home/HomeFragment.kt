@@ -4,62 +4,56 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.colorStateList
 import gerard.example.munchkinhelper.core.BaseFragment
+import gerard.example.munchkinhelper.databinding.HomeFragmentBinding
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.model.Game
-import kotlinx.android.synthetic.main.home_fragment.*
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment<HomeFragmentBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
-    }
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> HomeFragmentBinding
+            = HomeFragmentBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val game = arguments?.getSerializable(GAME_KEY) as Game
 
-        home_view_pager.adapter = ViewPagerAdapter(game, this)
-        home_view_pager.isUserInputEnabled = false
+        binding.homeViewPager.adapter = ViewPagerAdapter(game, this)
+        binding.homeViewPager.isUserInputEnabled = false
 
 
-        navigation.setOnNavigationItemSelectedListener {
+        binding. navigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.menu_game -> home_view_pager.setCurrentItem(0,true)
-                R.id.menu_dice -> home_view_pager.setCurrentItem(1,true)
-                R.id.menu_fight -> home_view_pager.setCurrentItem(2,true)
+                R.id.menu_game -> binding.homeViewPager.setCurrentItem(0,true)
+                R.id.menu_dice -> binding.homeViewPager.setCurrentItem(1,true)
+                R.id.menu_fight -> binding.homeViewPager.setCurrentItem(2,true)
             }
             true
         }
 
-        home_view_pager.registerOnPageChangeCallback(object : OnPageChangeCallback(){
+        binding.homeViewPager.registerOnPageChangeCallback(object : OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
                 when(position){
-                    0 -> navigation.selectedItemId = R.id.menu_game
+                    0 -> binding.navigation.selectedItemId = R.id.menu_game
                     1 -> {
-                        home_view_pager.isUserInputEnabled = false
-                        navigation.selectedItemId = R.id.menu_dice
+                        binding.homeViewPager.isUserInputEnabled = false
+                        binding.navigation.selectedItemId = R.id.menu_dice
                     }
-                    2 -> navigation.selectedItemId = R.id.menu_fight
+                    2 -> binding.navigation.selectedItemId = R.id.menu_fight
                 }
             }
         })
     }
 
-    override fun applyThemeColors() {
+    override fun applyThemeColors() : Unit = binding.run{
         context?.let {
             navigation.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(it))
             navigation.itemIconTintList = CfgTheme.current.stateChecked.colorStateList(it)

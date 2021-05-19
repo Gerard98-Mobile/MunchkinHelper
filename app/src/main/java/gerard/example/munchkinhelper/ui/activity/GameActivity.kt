@@ -12,41 +12,45 @@ import androidx.fragment.app.Fragment
 import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.core.BaseActivity
 import gerard.example.munchkinhelper.core.dialogs.YesNoDialog
+import gerard.example.munchkinhelper.databinding.ActivityGameBinding
 import gerard.example.munchkinhelper.ui.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.ui.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.util.NavigationHelper
-import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.dialog_custom.*
 import kotlin.math.hypot
 
 val GAME_KEY = "game_key"
 
 class GameActivity : BaseActivity(true) {
 
+    private lateinit var binding: ActivityGameBinding
+
     var game : Game? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game)
+        binding = ActivityGameBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         setToolbar()
 
         game = intent.getSerializableExtra(GAME_KEY) as Game?
         changeFragment(HomeFragment.newInstance(game))
     }
 
-    fun setToolbar() {
+    fun setToolbar() = binding.run {
+
         setToolbarTitle(getString(R.string.app_name))
         if(Cfg.autoSave.value.get() == true){
-            toolbar_autosave.visibility = View.GONE
+            toolbarAutosave.visibility = View.GONE
         }
         else{
-            toolbar_autosave.visibility = View.VISIBLE
+            toolbarAutosave.visibility = View.VISIBLE
         }
-        toolbar_settings.visibility = View.VISIBLE
-        toolbar_back.visibility = View.GONE
-        toolbar_settings.setOnClickListener { changeFragment(SettingsFragment.newInstance(game)) }
-        toolbar_back.setOnClickListener { onBackPressed() }
+        toolbarSettings.visibility = View.VISIBLE
+        toolbarBack.visibility = View.GONE
+        toolbarSettings.setOnClickListener { changeFragment(SettingsFragment.newInstance(game)) }
+        toolbarBack.setOnClickListener { onBackPressed() }
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -72,20 +76,20 @@ class GameActivity : BaseActivity(true) {
         }.show()
     }
 
-    override fun applyThemeColors() {
-        window.statusBarColor = CfgTheme.current.appBarBackground.colorInt(this)
-        container.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
-        navigation.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
-        toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this))
-        toolbar_text.setTextColor(CfgTheme.current.primaryColor.colorInt(this))
-        with(CfgTheme.current.primaryColor.colorStateList(this)){
-            toolbar_autosave.imageTintList = this
-            toolbar_settings.imageTintList = this
-            toolbar_back.imageTintList = this
+    override fun applyThemeColors() = binding.run {
+        window.statusBarColor = CfgTheme.current.appBarBackground.colorInt(this@GameActivity)
+        container.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this@GameActivity))
+        navigation.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this@GameActivity))
+        toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this@GameActivity))
+        toolbarText.setTextColor(CfgTheme.current.primaryColor.colorInt(this@GameActivity))
+        CfgTheme.current.primaryColor.colorStateList(this@GameActivity).let {
+            toolbarAutosave.imageTintList = it
+            toolbarSettings.imageTintList = it
+            toolbarBack.imageTintList = it
         }
     }
 
-    fun changeTheme(a: () -> Unit){
+    fun changeTheme(a: () -> Unit) = binding.run{
 
         val w = container.measuredWidth
         val h = container.measuredHeight
@@ -115,58 +119,14 @@ class GameActivity : BaseActivity(true) {
         anim.start()
     }
 
-    fun changeTheme2(a: () -> Unit){
-
-
-        // get the right and bottom side
-        // lengths of the reveal layout
-        val x: Int = container.right
-        val y: Int = container.bottom
-
-        // here the starting radius of the reveal
-        // layout is 0 when it is not visible
-        val startRadius = 0
-
-        // make the end radius should match
-        // the while parent view
-        val endRadius = hypot(
-            container.width.toDouble(),
-            container.height.toDouble()
-        ).toInt()
-
-        applyThemeColors()
-        a()
-
-        // create the instance of the ViewAnimationUtils to
-        // initiate the circular reveal animation
-        val anim = ViewAnimationUtils.createCircularReveal(
-            container,
-            x,
-            y,
-            startRadius.toFloat(),
-            endRadius.toFloat()
-        )
-
-        // make the invisible reveal layout to visible
-        // so that upon revealing it can be visible to user
-        container.visibility = View.VISIBLE
-        // now start the reveal animation
-        anim.start()
-
-        // set the boolean value to true as the reveal
-        // layout is visible to the user
-        //isRevealed = true
-    }
-
-
     fun setToolbarTitle(text: String){
-        toolbar_text.text = text
+        binding.toolbarText.text = text
     }
 
-    fun hideToolbarButtons() {
-        toolbar_back.visibility = View.VISIBLE
-        toolbar_settings.visibility = View.GONE
-        toolbar_autosave.visibility = View.GONE
+    fun hideToolbarButtons() = binding.run {
+        toolbarBack.visibility = View.VISIBLE
+        toolbarSettings.visibility = View.GONE
+        toolbarAutosave.visibility = View.GONE
     }
 
 

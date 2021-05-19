@@ -12,21 +12,12 @@ import gerard.example.munchkinhelper.databinding.FragmentGamesHistoryBinding
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.NavigationHelper
 
-class HistoryGamesFragment : BaseFragment(){
+class HistoryGamesFragment : BaseFragment<FragmentGamesHistoryBinding>(){
 
-    private var _binding: FragmentGamesHistoryBinding? = null
-    private val binding get() = _binding!!
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentGamesHistoryBinding
+            = FragmentGamesHistoryBinding::inflate
 
     private val viewmodel by viewModels<HistoryGamesVM>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentGamesHistoryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,8 +56,4 @@ class HistoryGamesFragment : BaseFragment(){
         binding.historyRecycler.adapter?.notifyDataSetChanged()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

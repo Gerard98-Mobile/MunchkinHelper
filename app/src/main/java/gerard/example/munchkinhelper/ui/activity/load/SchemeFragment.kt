@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.databinding.FragmentSchemeBinding
 import gerard.example.munchkinhelper.model.Game
@@ -15,21 +14,12 @@ import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.now
 
-class SchemeFragment : BaseFragment(){
+class SchemeFragment : BaseFragment<FragmentSchemeBinding>(){
 
-    private var _binding: FragmentSchemeBinding? = null
-    private val binding get() = _binding!!
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSchemeBinding
+            = FragmentSchemeBinding::inflate
 
     val viewmodel by viewModels<SchemeVM>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSchemeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,10 +49,5 @@ class SchemeFragment : BaseFragment(){
 
     override fun applyThemeColors() {
         binding.schemesRecyclerView.adapter?.notifyDataSetChanged()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

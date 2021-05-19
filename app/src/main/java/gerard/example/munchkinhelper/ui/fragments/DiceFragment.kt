@@ -3,31 +3,28 @@ package gerard.example.munchkinhelper.ui.fragments
 import android.graphics.*
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
-import androidx.fragment.app.Fragment
 import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.core.BaseFragment
-import kotlinx.android.synthetic.main.dice_fragment.*
-import kotlinx.android.synthetic.main.dice_fragment.view.*
+import gerard.example.munchkinhelper.databinding.DiceFragmentBinding
 import kotlin.random.Random
 
-class DiceFragment : BaseFragment(){
+class DiceFragment : BaseFragment<DiceFragmentBinding>(){
 
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> DiceFragmentBinding
+            = DiceFragmentBinding::inflate
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v : View = inflater.inflate(R.layout.dice_fragment, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val surface : SurfaceView = v.findViewById(R.id.surface)
-        surface.setZOrderOnTop(true)
-        surface.holder.setFormat(PixelFormat.TRANSLUCENT)
+        binding.surface.setZOrderOnTop(true)
+        binding.surface.holder.setFormat(PixelFormat.TRANSLUCENT)
 
-        v.roll_button.setOnClickListener {
-            val canvas : Canvas = surface.holder.lockCanvas()
-            canvas.drawColor(ContextCompat.getColor(v.context, CfgTheme.current.backgroundColor))
+        binding.rollButton.setOnClickListener {
+            val canvas : Canvas = binding.surface.holder.lockCanvas()
+            canvas.drawColor(ContextCompat.getColor(it.context, CfgTheme.current.backgroundColor))
             val d = ContextCompat.getDrawable(it.context, getRandomDiceId()) ?: return@setOnClickListener
 
             d.setTint(CfgTheme.current.primaryColor.colorInt(it.context))
@@ -38,10 +35,8 @@ class DiceFragment : BaseFragment(){
             d.setBounds(left  ,top,left+150,top+150)
             d.draw(canvas)
 
-            surface.holder.unlockCanvasAndPost(canvas)
+            binding.surface.holder.unlockCanvasAndPost(canvas)
         }
-
-        return v
     }
 
     private fun getRandomDiceId() : Int{
@@ -58,9 +53,9 @@ class DiceFragment : BaseFragment(){
     }
 
     override fun applyThemeColors() {
-        roll_button.applyTheme()
+        binding.rollButton.applyTheme()
         context?.let {
-            frame.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(it))
+            binding.frame.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(it))
         }
     }
 

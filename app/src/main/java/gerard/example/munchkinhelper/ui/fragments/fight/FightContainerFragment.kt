@@ -1,31 +1,24 @@
 package gerard.example.munchkinhelper.ui.fragments.fight
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import gerard.example.munchkinhelper.CfgTheme
-import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.core.BaseFragment
+import gerard.example.munchkinhelper.databinding.FragmentFightContainerBinding
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.util.AnimationUtil
-import kotlinx.android.synthetic.main.fragment_fight_container.*
 
-class FightContainerFragment : BaseFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_fight_container, container, false)
-    }
+class FightContainerFragment : BaseFragment<FragmentFightContainerBinding>() {
+
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFightContainerBinding
+            = FragmentFightContainerBinding::inflate
 
     private val model: SharedViewModel by activityViewModels()
 
@@ -39,21 +32,21 @@ class FightContainerFragment : BaseFragment() {
         model.fighters = fighters
         val adapter = FightViewPagerAdapter(this)
 
-        fight_view_pager.adapter = adapter
+        binding.fightViewPager.adapter = adapter
 
-        fight_view_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+        binding.fightViewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                AnimationUtil.animateAlpha(back, position.toFloat(), 300)
+                AnimationUtil.animateAlpha(binding.back, position.toFloat(), 300)
             }
         })
 
-        reset.setOnClickListener {
+        binding.reset.setOnClickListener {
             changeFragment(0)
             model.reset()
         }
 
-        back.setOnClickListener {
+        binding.back.setOnClickListener {
             changeFragment(0)
         }
 
@@ -62,16 +55,17 @@ class FightContainerFragment : BaseFragment() {
     override fun applyThemeColors() {
         context?.let {
             with(CfgTheme.current.primaryColor.colorInt(it)){
-                back.setTextColor(this)
-                reset.setTextColor(this)
+                binding.back.setTextColor(this)
+                binding.reset.setTextColor(this)
             }
         }
 
     }
 
     fun changeFragment(i: Int) {
-        fight_view_pager.setCurrentItem(i, true)
+        binding.fightViewPager.setCurrentItem(i, true)
     }
+
 
     companion object{
         fun newInstance(game: Game) : FightContainerFragment {

@@ -1,22 +1,16 @@
 package gerard.example.munchkinhelper.ui.fragments.game
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import gerard.example.munchkinhelper.*
+import gerard.example.munchkinhelper.databinding.ItemPlayerBinding
 import gerard.example.munchkinhelper.model.Player
-import kotlinx.android.synthetic.main.game_fragment.*
-import kotlinx.android.synthetic.main.item_player.view.*
 
 class GamePlayerAdapter(val context: Context, val players: List<Player>) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
@@ -26,9 +20,8 @@ class GamePlayerAdapter(val context: Context, val players: List<Player>) : Recyc
     var selectedView: View? = null;
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PlayerHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_player, parent, false)
-        )
+        val itemBinding = ItemPlayerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlayerHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
@@ -41,36 +34,36 @@ class GamePlayerAdapter(val context: Context, val players: List<Player>) : Recyc
     }
 
 
-    private inner class PlayerHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    private inner class PlayerHolder(val binding: ItemPlayerBinding) : RecyclerView.ViewHolder(binding.root){
 
         var player: Player? = null
 
-        fun bind(player: Player){
-            this.player = player
-            itemView.txtView_playerName_item.text = player.name
-            itemView.txtView_power_item.text = player.getAbsolutePower()
-            itemView.txtView_level_item.text = player.lvl.toString()
-            itemView.imgView_leader.visibility = if(player.isLeader) View.VISIBLE else View.INVISIBLE
-            itemView.death_count.isVisible = player.deaths > 0 && Cfg.showDeathCount.value.get() == true
-            itemView.death_count.text = context.getString(R.string.death_count, player.deaths)
+        fun bind(player: Player) = binding.run{
+            this@PlayerHolder.player = player
+            txtViewPlayerNameItem.text = player.name
+            txtViewPowerItem.text = player.getAbsolutePower()
+            txtViewLevelItem.text = player.lvl.toString()
+            imgViewLeader.visibility = if(player.isLeader) View.VISIBLE else View.INVISIBLE
+            deathCount.isVisible = player.deaths > 0 && Cfg.showDeathCount.value.get() == true
+            deathCount.text = context.getString(R.string.death_count, player.deaths)
 
             with(CfgTheme.current.primaryColor.colorInt(context)){
-                itemView.txtView_playerName_item.setTextColor(this)
-                itemView.txtView_power_item.setTextColor(this)
-                itemView.txtView_level_item.setTextColor(this)
+                txtViewPlayerNameItem.setTextColor(this)
+                txtViewPowerItem.setTextColor(this)
+                txtViewLevelItem.setTextColor(this)
             }
 
             if(selectedView != itemView){
-                itemView.linearLayout_player_container.setCardBackgroundColor(CfgTheme.current.backgroundColor.colorInt(context))
-                itemView.linearLayout_player_container.strokeColor = CfgTheme.current.backgroundColor.colorInt(context)
+                linearLayoutPlayerContainer.setCardBackgroundColor(CfgTheme.current.backgroundColor.colorInt(context))
+                linearLayoutPlayerContainer.strokeColor = CfgTheme.current.backgroundColor.colorInt(context)
             }
 
 
-            itemView.linearLayout_player_container.setOnClickListener {
+            linearLayoutPlayerContainer.setOnClickListener {
                 if(selectedView != it){
-                    itemView.linearLayout_player_container.strokeColor = CfgTheme.current.primaryColor.colorInt(context)
+                    linearLayoutPlayerContainer.strokeColor = CfgTheme.current.primaryColor.colorInt(context)
                     (selectedView as? MaterialCardView)?.strokeColor = CfgTheme.current.backgroundColor.colorInt(context)
-                    selectedView = itemView.linearLayout_player_container
+                    selectedView = linearLayoutPlayerContainer
                     selectedPlayer.value = player
                 }
 
