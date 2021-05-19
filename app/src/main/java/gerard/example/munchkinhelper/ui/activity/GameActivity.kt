@@ -54,11 +54,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame, fragment)
-            .addToBackStack(null)
-            .commit()
+        NavigationHelper.changeFragment(supportFragmentManager, fragment)
     }
 
     override fun onBackPressed() {
@@ -81,7 +77,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun setToolbarTitle(text: String){
-        toolbar_text.setText(text)
+        toolbar_text.text = text
     }
 
     fun hideToolbarButtons() {
