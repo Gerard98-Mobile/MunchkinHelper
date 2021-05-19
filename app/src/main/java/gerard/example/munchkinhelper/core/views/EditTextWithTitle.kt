@@ -3,30 +3,25 @@ package gerard.example.munchkinhelper.core.views
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.TransitionDrawable
-import android.os.Build
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.annotation.ColorRes
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.colorInt
-import kotlinx.android.synthetic.main.power_edit_text.view.*
+import gerard.example.munchkinhelper.databinding.PowerEditTextBinding
 
 
 class EditTextWithTitle @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
+    private val binding: PowerEditTextBinding =
+        PowerEditTextBinding.inflate(LayoutInflater.from(context), this, true)
+
     init{
-        inflate(context, R.layout.power_edit_text, this)
 
         val a = context.obtainStyledAttributes(
             attrs,
@@ -35,7 +30,7 @@ class EditTextWithTitle @JvmOverloads constructor(
             0
         )
         val title = a.getString(R.styleable.EditTextWithTitle_editTextTitle)
-        txtView_title.setText(title)
+        binding.txtViewTitle.setText(title)
 
         a.recycle()
     }
@@ -56,7 +51,7 @@ class EditTextWithTitle @JvmOverloads constructor(
         val animator = ValueAnimator.ofObject(ArgbEvaluator(), oldColor, newColor)
         animator.duration = 500
         animator.addUpdateListener {
-            editText_background_card.setCardBackgroundColor(it.animatedValue as Int)
+            binding.editTextBackgroundCard.setCardBackgroundColor(it.animatedValue as Int)
         }
         animator.start()
 
@@ -64,15 +59,15 @@ class EditTextWithTitle @JvmOverloads constructor(
     }
 
     fun getCount(): Int {
-        return editText.text.toString().toIntOrNull() ?: 0
+        return binding.editText.text.toString().toIntOrNull() ?: 0
     }
 
     fun setCount(value: Int) {
-        editText.setText(value.toString())
+        binding.editText.setText(value.toString())
     }
 
     fun applyTheme() {
-        txtView_title.setTextColor(CfgTheme.current.primaryColor.colorInt(context))
+        binding.txtViewTitle.setTextColor(CfgTheme.current.primaryColor.colorInt(context))
     }
 
     enum class STATE{
