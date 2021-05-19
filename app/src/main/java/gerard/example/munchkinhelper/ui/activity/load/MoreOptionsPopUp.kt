@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import android.widget.PopupWindow
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.databinding.ItemMenuOptionBinding
 import gerard.example.munchkinhelper.databinding.PopupGameOptionsBinding
 
@@ -39,15 +39,21 @@ class MoreOptionsPopUp(val options: List<Option>, val callback: OptionCallback){
     private fun createView(context: Context) : View{
         val popupBinder = PopupGameOptionsBinding.inflate(LayoutInflater.from(context))
 
+        popupBinder.root.strokeColor = CfgTheme.current.primaryColor.colorInt(context)
+        popupBinder.root.setCardBackgroundColor(CfgTheme.current.backgroundColor.colorInt(context))
+
         options.forEach { option ->
             val itemBinder = ItemMenuOptionBinding.inflate(LayoutInflater.from(context))
-//            val item = LayoutInflater.from(context).inflate(pickLayout(R.layout.item_menu_option,R.layout.item_menu_option_dark), popupBinder.optionsContainer, false)
             itemBinder.icon.setImageResource(option.icon)
             itemBinder.text.text = context.getString(option.title)
             itemBinder.root.setOnClickListener {
                 callback.clicked(option)
                 popupWindow?.dismiss()
             }
+
+            itemBinder.icon.imageTintList = CfgTheme.current.primaryColor.colorStateList(context)
+            itemBinder.text.setTextColor(CfgTheme.current.primaryColor.colorInt(context))
+
             popupBinder.optionsContainer.addView(itemBinder.root)
         }
         return popupBinder.root

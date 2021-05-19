@@ -11,6 +11,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name="gerard.example.munchkinhelper.MainActivity"
+                android:configChanges="orientation"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -20,8 +22,10 @@
         <activity android:name=".ui.activity.GameActivity"
                 android:theme="@style/AppTheme.NoActionBar.NoStatusBar"
                 android:configChanges="screenSize"/>
+
         <activity android:name=".ui.activity.create.AddingPlayersActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".ui.activity.load.LoadGameActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
     </application>
