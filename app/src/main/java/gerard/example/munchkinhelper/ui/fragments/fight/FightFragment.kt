@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.core.views.EditTextWithTitle
 import gerard.example.munchkinhelper.core.views.FightCounter
 import kotlinx.android.synthetic.main.fight_fragment.*
 
-class FightFragment : Fragment() {
+class FightFragment : BaseFragment() {
 
     companion object{
         fun newInstance() : FightFragment {
@@ -51,6 +54,17 @@ class FightFragment : Fragment() {
             monsters_count?.setCount(it)
             setColorsForEditTexts()
         })
+    }
+
+    override fun applyThemeColors() {
+        players_counter.applyTheme()
+        monsters_counter.applyTheme()
+        context?.let {
+            vs_txtView.setTextColor(CfgTheme.current.primaryColor.colorInt(it))
+        }
+        players_count.applyTheme()
+        monsters_count.applyTheme()
+
     }
 
     private fun setColorsForEditTexts() {

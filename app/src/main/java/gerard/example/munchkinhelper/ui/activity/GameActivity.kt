@@ -1,38 +1,34 @@
 package gerard.example.munchkinhelper.ui.activity
 
 
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import android.view.animation.AccelerateInterpolator
+import androidx.core.animation.doOnEnd
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import gerard.example.munchkinhelper.Cfg
-import gerard.example.munchkinhelper.MainActivity
-import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.*
+import gerard.example.munchkinhelper.core.BaseActivity
 import gerard.example.munchkinhelper.core.dialogs.YesNoDialog
 import gerard.example.munchkinhelper.ui.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.ui.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.util.NavigationHelper
-import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.dialog_custom.*
+import kotlin.math.hypot
 
 val GAME_KEY = "game_key"
 
-class GameActivity : AppCompatActivity() {
+class GameActivity : BaseActivity(true) {
 
     var game : Game? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        Cfg.init(this)
         setToolbar()
 
         game = intent.getSerializableExtra(GAME_KEY) as Game?
@@ -75,6 +71,93 @@ class GameActivity : AppCompatActivity() {
             }
         }.show()
     }
+
+    override fun applyThemeColors() {
+        window.statusBarColor = CfgTheme.current.appBarBackground.colorInt(this)
+        container.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
+        navigation.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
+        toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this))
+        toolbar_text.setTextColor(CfgTheme.current.primaryColor.colorInt(this))
+        with(CfgTheme.current.primaryColor.colorStateList(this)){
+            toolbar_autosave.imageTintList = this
+            toolbar_settings.imageTintList = this
+            toolbar_back.imageTintList = this
+        }
+    }
+
+    fun changeTheme(a: () -> Unit){
+
+        val w = container.measuredWidth
+        val h = container.measuredHeight
+
+        val bitmap = Bitmap.createBitmap(w, h.toInt(), Bitmap.Config.ARGB_8888)
+
+        val canvas = Canvas(bitmap)
+        container.draw(canvas)
+
+        imageView.setImageBitmap(bitmap)
+        imageView.isVisible = true
+
+        applyThemeColors()
+        a()
+
+        val finalRadius = hypot(w.toDouble(), h * 1.1)
+
+        val anim = ViewAnimationUtils.createCircularReveal(container, w / 2, h / 2, 0f, finalRadius.toFloat())
+        anim.interpolator = AccelerateInterpolator()
+
+        anim.duration = 600L
+        anim.doOnEnd {
+            setStatusBarColors()
+            imageView.setImageDrawable(null)
+            imageView.isVisible = false
+        }
+        anim.start()
+    }
+
+    fun changeTheme2(a: () -> Unit){
+
+
+        // get the right and bottom side
+        // lengths of the reveal layout
+        val x: Int = container.right
+        val y: Int = container.bottom
+
+        // here the starting radius of the reveal
+        // layout is 0 when it is not visible
+        val startRadius = 0
+
+        // make the end radius should match
+        // the while parent view
+        val endRadius = hypot(
+            container.width.toDouble(),
+            container.height.toDouble()
+        ).toInt()
+
+        applyThemeColors()
+        a()
+
+        // create the instance of the ViewAnimationUtils to
+        // initiate the circular reveal animation
+        val anim = ViewAnimationUtils.createCircularReveal(
+            container,
+            x,
+            y,
+            startRadius.toFloat(),
+            endRadius.toFloat()
+        )
+
+        // make the invisible reveal layout to visible
+        // so that upon revealing it can be visible to user
+        container.visibility = View.VISIBLE
+        // now start the reveal animation
+        anim.start()
+
+        // set the boolean value to true as the reveal
+        // layout is visible to the user
+        //isRevealed = true
+    }
+
 
     fun setToolbarTitle(text: String){
         toolbar_text.text = text

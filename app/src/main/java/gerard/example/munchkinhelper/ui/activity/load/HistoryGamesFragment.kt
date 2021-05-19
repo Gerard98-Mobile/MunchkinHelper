@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.NavigationHelper
 import kotlinx.android.synthetic.main.fragment_games_history.*
 
-class HistoryGamesFragment : Fragment(){
+class HistoryGamesFragment : BaseFragment(){
 
     private val viewmodel by viewModels<HistoryGamesVM>()
 
@@ -57,5 +58,9 @@ class HistoryGamesFragment : Fragment(){
                 (activity as? LoadGameActivity)?.changePositionOfBtn(dy.toFloat())
             }
         })
+    }
+
+    override fun applyThemeColors() {
+        history_recycler.adapter?.notifyDataSetChanged()
     }
 }

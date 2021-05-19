@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.colorStateList
 import kotlinx.android.synthetic.main.item_figter.view.*
 
 class SelectFightersAdapter(
@@ -27,6 +30,9 @@ class SelectFightersAdapter(
 
         holder.itemView.fighter_checkBox.isChecked = model.selected
         holder.itemView.fighter_checkBox.setText(model.player.name)
+
+        holder.itemView.fighter_checkBox.setTextColor(CfgTheme.current.primaryColor.colorInt(context))
+        holder.itemView.fighter_checkBox.buttonTintList = CfgTheme.current.primaryColor.colorStateList(context)
 
         holder.itemView.fighter_checkBox.setOnClickListener {
             model.selected = holder.itemView.fighter_checkBox.isChecked

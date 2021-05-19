@@ -12,6 +12,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.model.Game
+import gerard.example.munchkinhelper.pickLayout
 import kotlinx.android.synthetic.main.item_menu_option.view.*
 import kotlinx.android.synthetic.main.popup_game_options.view.*
 
@@ -40,9 +41,9 @@ class MoreOptionsPopUp(val options: List<Option>, val callback: OptionCallback){
     }
 
     private fun createView(context: Context) : View{
-        val popupView = LayoutInflater.from(context).inflate(R.layout.popup_game_options, null)
+        val popupView = LayoutInflater.from(context).inflate(pickLayout(R.layout.popup_game_options, R.layout.popup_game_options_dark), null)
         options.forEach { option ->
-            val item = LayoutInflater.from(context).inflate(R.layout.item_menu_option, popupView.options_container, false)
+            val item = LayoutInflater.from(context).inflate(pickLayout(R.layout.item_menu_option,R.layout.item_menu_option_dark), popupView.options_container, false)
             item.icon.setImageResource(option.icon)
             item.text.text = context.getString(option.title)
             item.setOnClickListener {

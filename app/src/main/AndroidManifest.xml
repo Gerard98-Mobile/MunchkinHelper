@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="gerard.example.munchkinhelper">
+        package="gerard.example.munchkinhelper">
 
     <uses-feature android:glEsVersion="0x00030000" android:required="true" />
 
@@ -12,17 +12,20 @@
 
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name="gerard.example.munchkinhelper.MainActivity">
+        <activity android:name="gerard.example.munchkinhelper.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.GameActivity"
-                android:theme="@style/AppTheme.NoActionBar"
+                android:theme="@style/AppTheme.NoActionBar.NoStatusBar"
                 android:configChanges="screenSize"/>
-        <activity android:name=".ui.activity.create.AddingPlayersActivity"/>
-        <activity android:name=".ui.activity.load.LoadGameActivity"/>
+        <activity android:name=".ui.activity.create.AddingPlayersActivity"
+                android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.activity.load.LoadGameActivity"
+                android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

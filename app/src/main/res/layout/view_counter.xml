@@ -22,14 +22,15 @@
             android:layout_height="50dp"
             android:theme="@style/Theme.MaterialComponents.DayNight"
             app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/colorBackground"
             app:strokeColor="@color/colorPrimary"
             app:strokeWidth="3dp"
+            app:cardBackgroundColor="@color/colorBackground"
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toBottomOf="@+id/txtView_title"
             app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
+                        android:id="@+id/minus"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="12dp"
@@ -59,8 +60,8 @@
             android:layout_height="50dp"
             android:theme="@style/Theme.MaterialComponents.DayNight"
             app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/colorBackground"
             app:strokeColor="@color/colorPrimary"
+            app:cardBackgroundColor="@color/colorBackground"
             app:strokeWidth="3dp"
             android:layout_marginStart="8dp"
             app:layout_constraintTop_toTopOf="@+id/imgButton_reduce"
@@ -68,6 +69,7 @@
             app:layout_constraintStart_toEndOf="@+id/txtView_value">
 
         <ImageView
+                android:id="@+id/plus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="12dp"

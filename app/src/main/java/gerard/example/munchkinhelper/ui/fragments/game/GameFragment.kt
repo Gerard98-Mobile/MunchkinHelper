@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.colorStateList
+import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.core.views.CounterView
 import gerard.example.munchkinhelper.model.Game
@@ -17,7 +21,7 @@ import gerard.example.munchkinhelper.util.Sound
 import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.game_fragment.*
 
-class GameFragment : Fragment(){
+class GameFragment : BaseFragment(){
 
     var selectedPlayer: Player? = null
     var viewmodel: GameFragmentVM? = null
@@ -96,6 +100,20 @@ class GameFragment : Fragment(){
                 }.show()
             }
 
+        }
+    }
+
+    override fun applyThemeColors() {
+        context?.let {
+            skull_icon.imageTintList = CfgTheme.current.primaryColor.colorStateList(it)
+            with(CfgTheme.current.primaryColor.colorInt(it)){
+                power.setTextColor(this)
+                level.setTextColor(this)
+                separator.setBackgroundColor(this)
+                txtView_playerName.setTextColor(this)
+            }
+            power_counter.applyTheme()
+            level_counter.applyTheme()
         }
     }
 

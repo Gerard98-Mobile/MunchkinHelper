@@ -17,6 +17,7 @@ class Game(
     val players: List<Player>
 
 ) : Serializable{
+
     fun reset() {
         players.forEach { it.reset() }
     }

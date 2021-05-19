@@ -13,4 +13,13 @@
     <color name="looserColor">#E96D72</color>
     <color name="drawColor">@color/colorGrey</color>
     <color name="backlight">#ffffad</color>
+
+    <color name="backgroundDark">#121212</color>
+    <color name="appBarDark">#272727</color>
+    <color name="primaryDarkColorPurple">#BB86FC</color>
+    <color name="primaryDarkColor">@color/colorWhite</color>
+    <color name="textDarkLight">#808080</color>
+
+    <color name="darkGrey">#756f62</color>
+
 </resources>

@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
+import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.util.AnimationUtil
 import kotlinx.android.synthetic.main.fragment_fight_container.*
 
-class FightContainerFragment : Fragment() {
+class FightContainerFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +55,16 @@ class FightContainerFragment : Fragment() {
 
         back.setOnClickListener {
             changeFragment(0)
+        }
+
+    }
+
+    override fun applyThemeColors() {
+        context?.let {
+            with(CfgTheme.current.primaryColor.colorInt(it)){
+                back.setTextColor(this)
+                reset.setTextColor(this)
+            }
         }
 
     }
