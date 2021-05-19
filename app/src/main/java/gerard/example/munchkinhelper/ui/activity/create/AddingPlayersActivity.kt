@@ -112,6 +112,8 @@ class AddingPlayersActivity : BaseActivity() {
 
         binding.namePlayer.setHintTextColor(CfgTheme.current.textLight.colorInt(this))
         binding.btnStartGame.applyTheme()
+
+        binding.recyclerViewNewPlayers.adapter?.notifyDataSetChanged()
     }
 
     private fun startGameIntent() {
