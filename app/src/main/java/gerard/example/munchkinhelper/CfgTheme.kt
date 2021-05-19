@@ -16,13 +16,6 @@ object CfgTheme {
         current = selectAppTheme()
     }
 
-    fun actual(): String {
-        return when(current){
-            is DefaultTheme -> "Default"
-            is DarkTheme -> "Dark"
-        }
-    }
-
 }
 
 fun pickLayout(default: Int, dark: Int) : Int{
@@ -38,7 +31,10 @@ sealed class Theme(
     @DrawableRes val stateChecked: Int
 )
 
-class DefaultTheme : Theme(
+interface ThemeLight
+interface ThemeDark
+
+class DefaultTheme : ThemeLight, Theme(
     backgroundColor = R.color.colorBackground,
     textColorSecondary = R.color.colorWhite,
     appBarBackground = R.color.colorBackground,
@@ -47,7 +43,7 @@ class DefaultTheme : Theme(
     stateChecked = R.drawable.state_checked
 )
 
-class DarkTheme : Theme(
+class DarkTheme : ThemeDark, Theme(
     backgroundColor = R.color.backgroundDark,
     textColorSecondary = R.color.backgroundDark,
     appBarBackground = R.color.backgroundDark,

@@ -47,11 +47,10 @@ abstract class BaseActivity(
         return actualTheme != CfgTheme.current
     }
 
-    // TODO("We need to change this because if we later would like to have more themes this will not work")
     fun setStatusBarColors(){
         window.statusBarColor = CfgTheme.current.appBarBackground.colorInt(this)
 
-        if(CfgTheme.current is DefaultTheme) setStatusBarTextColorDark() else setStatusBarTextColorLight()
+        if(CfgTheme.current is ThemeLight) setStatusBarTextColorDark() else setStatusBarTextColorLight()
     }
 
     private fun setStatusBarTextColorLight() {
