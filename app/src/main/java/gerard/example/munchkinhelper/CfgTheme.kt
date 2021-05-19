@@ -18,10 +18,6 @@ object CfgTheme {
 
 }
 
-fun pickLayout(default: Int, dark: Int) : Int{
-    return if(Cfg.darkMode.value.get() == false) default else dark
-}
-
 sealed class Theme(
     @ColorRes val backgroundColor: Int,
     @ColorRes val textColorSecondary: Int,
