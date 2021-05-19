@@ -2,20 +2,19 @@ package gerard.example.munchkinhelper.ui.activity.create
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import gerard.example.munchkinhelper.Cfg
+import gerard.example.munchkinhelper.CfgTheme
+import gerard.example.munchkinhelper.colorInt
+import gerard.example.munchkinhelper.colorStateList
 import gerard.example.munchkinhelper.model.Player
-import gerard.example.munchkinhelper.R
-import kotlinx.android.synthetic.main.item_added_player.view.*
+import gerard.example.munchkinhelper.databinding.ItemAddedPlayerBinding
 
 class AddedPlayersAdapter(val context: Context, val players: MutableList<Player>) : RecyclerView.Adapter<AddedPlayersAdapter.PlayerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerHolder {
-        return PlayerHolder(
-            LayoutInflater.from(context).inflate(if (Cfg.darkMode.value.get() == false) R.layout.item_added_player else R.layout.item_added_player_dark, parent, false)
-        )
+        val itemBinding = ItemAddedPlayerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlayerHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
@@ -24,13 +23,15 @@ class AddedPlayersAdapter(val context: Context, val players: MutableList<Player>
 
     override fun onBindViewHolder(holder: PlayerHolder, position: Int) {
         holder.bind(players[position])
+        holder.itemBinding.remove.imageTintList = CfgTheme.current.primaryColor.colorStateList(context)
+        holder.itemBinding.name.setTextColor(CfgTheme.current.primaryColor.colorInt(context))
     }
 
-    inner class PlayerHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class PlayerHolder(val itemBinding: ItemAddedPlayerBinding) : RecyclerView.ViewHolder(itemBinding.root){
         fun bind(player: Player){
-            itemView.name.text = player.name
+            itemBinding.name.text = player.name
 
-            itemView.remove.setOnClickListener {
+            itemBinding.remove.setOnClickListener {
                 players.remove(player)
                 notifyItemRemoved(layoutPosition)
             }

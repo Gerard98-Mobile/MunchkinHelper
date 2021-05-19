@@ -1,20 +1,16 @@
 package gerard.example.munchkinhelper.ui.activity.load
 
 import android.content.Context
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.PopupWindow
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import gerard.example.munchkinhelper.R
-import gerard.example.munchkinhelper.model.Game
-import gerard.example.munchkinhelper.pickLayout
-import kotlinx.android.synthetic.main.item_menu_option.view.*
-import kotlinx.android.synthetic.main.popup_game_options.view.*
+import gerard.example.munchkinhelper.databinding.ItemMenuOptionBinding
+import gerard.example.munchkinhelper.databinding.PopupGameOptionsBinding
 
 fun interface OptionCallback{
     fun clicked(option: Option)
@@ -41,18 +37,20 @@ class MoreOptionsPopUp(val options: List<Option>, val callback: OptionCallback){
     }
 
     private fun createView(context: Context) : View{
-        val popupView = LayoutInflater.from(context).inflate(pickLayout(R.layout.popup_game_options, R.layout.popup_game_options_dark), null)
+        val popupBinder = PopupGameOptionsBinding.inflate(LayoutInflater.from(context))
+
         options.forEach { option ->
-            val item = LayoutInflater.from(context).inflate(pickLayout(R.layout.item_menu_option,R.layout.item_menu_option_dark), popupView.options_container, false)
-            item.icon.setImageResource(option.icon)
-            item.text.text = context.getString(option.title)
-            item.setOnClickListener {
+            val itemBinder = ItemMenuOptionBinding.inflate(LayoutInflater.from(context))
+//            val item = LayoutInflater.from(context).inflate(pickLayout(R.layout.item_menu_option,R.layout.item_menu_option_dark), popupBinder.optionsContainer, false)
+            itemBinder.icon.setImageResource(option.icon)
+            itemBinder.text.text = context.getString(option.title)
+            itemBinder.root.setOnClickListener {
                 callback.clicked(option)
                 popupWindow?.dismiss()
             }
-            popupView.options_container.addView(item)
+            popupBinder.optionsContainer.addView(itemBinder.root)
         }
-        return popupView
+        return popupBinder.root
     }
 
 }

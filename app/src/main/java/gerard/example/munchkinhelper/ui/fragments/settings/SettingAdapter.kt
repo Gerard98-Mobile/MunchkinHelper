@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import gerard.example.munchkinhelper.R
+import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.core.recycler.ViewHolder
-import gerard.example.munchkinhelper.pickLayout
+import gerard.example.munchkinhelper.databinding.ItemBooleanSettingBinding
+import gerard.example.munchkinhelper.databinding.ItemPlayerBinding
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
-import kotlinx.android.synthetic.main.item_boolean_setting.view.*
+
 
 class SettingAdapter(
     val context: Context,
@@ -21,17 +22,13 @@ class SettingAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
             0 -> return SettingBooleanVH(
-                LayoutInflater.from(context).inflate(
-                    pickLayout(R.layout.item_boolean_setting, R.layout.item_boolean_setting_dark), parent, false
-                ),
+                ItemBooleanSettingBinding.inflate(LayoutInflater.from(parent.context), parent, false),
                 callback
             )
             // 1 TODO
             // 2 TODO
             else -> return SettingBooleanVH(
-                LayoutInflater.from(context).inflate(
-                    pickLayout(R.layout.item_boolean_setting, R.layout.item_boolean_setting_dark), parent, false
-                ),
+                ItemBooleanSettingBinding.inflate(LayoutInflater.from(parent.context), parent, false),
                 callback
             )
         }
@@ -40,8 +37,17 @@ class SettingAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is SettingBooleanVH -> holder.bind(data[position] as Setting<Boolean>)
+            is SettingBooleanVH -> bindBooleanSetting(holder, data[position] as Setting<Boolean>)
         }
+    }
+
+    private fun bindBooleanSetting(holder: SettingBooleanVH, value: Setting<Boolean>){
+        holder.bind(value)
+        holder.binder.settingImg.imageTintList = CfgTheme.current.primaryColor.colorStateList(context)
+        holder.binder.switchButton.setTextColor(CfgTheme.current.primaryColor.colorInt(context))
+        holder.binder.switchButton.thumbTintList = CfgTheme.current.switchState.colorStateList(context)
+        holder.binder.switchButton.trackTintList = CfgTheme.current.switchTrack.colorStateList(context)
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -58,18 +64,18 @@ class SettingAdapter(
     }
 
     class SettingBooleanVH(
-        itemView: View,
+        val binder: ItemBooleanSettingBinding,
         val callback: Callback<Setting<*>>
-    ) : ViewHolder<Setting<Boolean>>(itemView){
+    ) : ViewHolder<Setting<Boolean>>(binder.root){
 
         override fun bind(value: Setting<Boolean>) {
-            itemView.switch_button.setText(value.displayName)
+            binder.switchButton.setText(value.displayName)
             value.displayIcon?.let {
-                itemView.setting_img.setImageResource(value.displayIcon)
-                itemView.setting_img.visibility = View.VISIBLE
+                binder.settingImg.setImageResource(value.displayIcon)
+                binder.settingImg.visibility = View.VISIBLE
             }
-            itemView.switch_button.isChecked = value.value.get() ?: false
-            itemView.switch_button.setOnCheckedChangeListener { compoundButton, b ->
+            binder.switchButton.isChecked = value.value.get() ?: false
+            binder.switchButton.setOnCheckedChangeListener { compoundButton, b ->
                 value.value.set(b)
                 callback.execute(value, Action.NONE)
             }

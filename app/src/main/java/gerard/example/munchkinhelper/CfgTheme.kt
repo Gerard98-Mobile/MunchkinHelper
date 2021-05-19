@@ -28,6 +28,8 @@ sealed class Theme(
     @ColorRes val textLight: Int,
     @ColorRes val appBarBackground: Int,
     @ColorRes val primaryColor: Int,
+    @ColorRes val switchState: Int,
+    @ColorRes val switchTrack: Int,
     @DrawableRes val stateChecked: Int
 )
 
@@ -40,6 +42,8 @@ class DefaultTheme : ThemeLight, Theme(
     appBarBackground = R.color.colorBackground,
     textLight = R.color.textDarkLight,
     primaryColor = R.color.colorPrimary,
+    switchState = R.color.switch_state,
+    switchTrack = R.color.colorGrey,
     stateChecked = R.drawable.state_checked
 )
 
@@ -49,5 +53,7 @@ class DarkTheme : ThemeDark, Theme(
     appBarBackground = R.color.backgroundDark,
     textLight = R.color.textDarkLight,
     primaryColor = R.color.colorWhite,
+    switchState = R.color.switch_state_dark,
+    switchTrack = R.color.colorGrey,
     stateChecked = R.drawable.state_checked_dark
 )
