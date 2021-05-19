@@ -55,6 +55,7 @@ class MainActivity : BaseActivity(true) {
     override fun applyThemeColors() {
         binding.root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
         binding.logo.isVisible = CfgTheme.current is DefaultTheme
+        binding.logoTxt.isVisible = CfgTheme.current is DarkTheme
         binding.startGame.applyTheme()
         binding.btnLoadGame.applyTheme()
         binding.loadLastGame.applyTheme()

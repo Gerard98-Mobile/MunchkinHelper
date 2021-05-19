@@ -52,7 +52,6 @@ class SoundHelper(
     }
 
     fun playLvlChangeSound(lvlUp: Boolean){
-        //playSound(if(lvlUp) R.raw.level_up else R.raw.level_down)
         playSound(if(lvlUp) Sound.LVL_UP else Sound.LVL_DOWN)
     }
 

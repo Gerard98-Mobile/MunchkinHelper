@@ -30,15 +30,43 @@
                 app:layout_constraintGuide_percent="0.2"/>
 
 
-        <ImageView
-                android:id="@+id/logo"
+        <LinearLayout
+                android:id="@+id/logo_container"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:src="@drawable/logo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent">
+
+
+            <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/logo_txt"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="42sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/app_name"
+                    android:src="@drawable/logo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
 
 
         <gerard.example.munchkinhelper.core.views.RoundedButton
@@ -49,7 +77,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@+id/logo"
+                app:layout_constraintTop_toBottomOf="@+id/logo_container"
                 app:layout_constraintStart_toStartOf="@+id/guideline_vertical_02"
                 app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_08"/>
 

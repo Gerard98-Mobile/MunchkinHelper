@@ -34,5 +34,5 @@ object Cfg{
     val showDeathCount = Setting(R.string.death_count_setting, _showDeathCount, R.drawable.ic_skull)
     val darkMode = Setting(R.string.dark_mode, _darkMode, R.drawable.ic_dark_mode)
 
-    val settings = listOf(autoSave, sound, dice3d, showDeathCount, darkMode)
+    val settings = listOf(autoSave, sound, showDeathCount, darkMode)
 }
