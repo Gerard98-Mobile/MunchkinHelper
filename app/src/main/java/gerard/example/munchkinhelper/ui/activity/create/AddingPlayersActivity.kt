@@ -152,13 +152,17 @@ class AddingPlayersActivity : BaseActivity() {
         private fun applyTheme(){
             binding.run {
                 CfgTheme.current.primaryColor.colorInt(context).let {
-                    root.setCardBackgroundColor(it)
                     title.setBackgroundColor(it)
+                    schemeName.setTextColor(it)
                     cancel.setTextColor(it)
                     yes.setTextColor(it)
-                    schemeName.setTextColor(it)
                 }
 
+                CfgTheme.current.backgroundColor.colorInt(context).let {
+                    root.setCardBackgroundColor(it)
+                }
+
+                schemeName.setHintTextColor(CfgTheme.current.textLight.colorInt(context))
                 title.setTextColor(CfgTheme.current.textColorSecondary.colorInt(context))
             }
         }
