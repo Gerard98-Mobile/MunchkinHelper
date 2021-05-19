@@ -15,52 +15,54 @@ import gerard.example.munchkinhelper.model.Player
 import com.google.android.material.snackbar.Snackbar
 import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.core.BaseActivity
+import gerard.example.munchkinhelper.databinding.ActivityAddingPlayersBinding
+import gerard.example.munchkinhelper.databinding.DialogAddSchemeBinding
 import gerard.example.munchkinhelper.model.Scheme
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
 import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.now
-import kotlinx.android.synthetic.main.activity_adding_players.*
-import kotlinx.android.synthetic.main.activity_adding_players.root
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.dialog_add_scheme.*
 
 const val START_POWER = 0
 const val START_LVL = 1
 
 class AddingPlayersActivity : BaseActivity() {
 
+    private lateinit var binding : ActivityAddingPlayersBinding
+
     val viewmodel by viewModels<AddingPlayersVM>()
     val playerList = mutableListOf<Player>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_adding_players)
+        binding = ActivityAddingPlayersBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        toolbar.setNavigationOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             NavigationHelper.finish(this)
         }
 
 
         val adapter = AddedPlayersAdapter(this, playerList)
-        recyclerView_new_players.adapter = adapter
+        binding.recyclerViewNewPlayers.adapter = adapter
 
-        name_player.setOnKeyListener { v, keyCode, event ->
+        binding.namePlayer.setOnKeyListener { v, keyCode, event ->
             if(event.keyCode == KeyEvent.KEYCODE_ENTER){
-                if(event.action == KeyEvent.ACTION_DOWN) add_player.performClick()
+                if(event.action == KeyEvent.ACTION_DOWN) binding.addPlayer.performClick()
                 return@setOnKeyListener true
             }
             false
         }
 
-        btn_startGame.setOnClickListener {
+        binding.btnStartGame.setOnClickListener {
             if(playerList.size < 2) {
                 Snackbar.make(findViewById(android.R.id.content), R.string.player_count_error, Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            when(checkbox_scheme.isChecked){
+            when(binding.checkboxScheme.isChecked){
                 true -> {
                     SchemeNameDialog(this) { name, _ ->
                         viewmodel.insertScheme(Scheme(playerList, name))
@@ -72,13 +74,13 @@ class AddingPlayersActivity : BaseActivity() {
         }
 
 
-        add_player.setOnClickListener {
-            val playerName = name_player.text.toString()
+        binding.addPlayer.setOnClickListener {
+            val playerName = binding.namePlayer.text.toString()
             if(playerName.length in 1..20) {
-                playerList.add(0, Player(name_player.text.toString(), START_POWER, START_LVL))
-                (recyclerView_new_players.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0,0)
+                playerList.add(0, Player(binding.namePlayer.text.toString(), START_POWER, START_LVL))
+                (binding.recyclerViewNewPlayers.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0,0)
                 adapter.notifyItemInserted(0)
-                name_player.setText("")
+                binding.namePlayer.setText("")
             }else{
                 Snackbar.make(findViewById(android.R.id.content), R.string.name_lenght_error, Snackbar.LENGTH_SHORT).show()
             }
@@ -86,24 +88,26 @@ class AddingPlayersActivity : BaseActivity() {
     }
 
     override fun applyThemeColors() {
-        with(CfgTheme.current.primaryColor.colorInt(this)){
-            toolbar.navigationIcon?.setTint(this)
-            toolbar.setTitleTextColor(this)
-            checkbox_scheme.setTextColor(this)
-            separator.setBackgroundColor(this)
-            name_player.setTextColor(this)
+        CfgTheme.current.primaryColor.colorInt(this).let{ color ->
+            binding.run {
+                toolbar.navigationIcon?.setTint(color)
+                toolbar.setTitleTextColor(color)
+                checkboxScheme.setTextColor(color)
+                separator.setBackgroundColor(color)
+                namePlayer.setTextColor(color)
+            }
         }
 
         with(CfgTheme.current.primaryColor.colorStateList(this)){
-            checkbox_scheme.buttonTintList = this
-            add_player.imageTintList = this
+            binding.checkboxScheme.buttonTintList = this
+            binding.addPlayer.imageTintList = this
         }
 
-        toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this))
-        root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
+        binding.toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this))
+        binding.root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
 
-        name_player.setHintTextColor(CfgTheme.current.textLight.colorInt(this))
-        btn_startGame.applyTheme()
+        binding.namePlayer.setHintTextColor(CfgTheme.current.textLight.colorInt(this))
+        binding.btnStartGame.applyTheme()
     }
 
     private fun startGameIntent() {
@@ -112,31 +116,51 @@ class AddingPlayersActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        name_player.requestFocus()
+        binding.namePlayer.requestFocus()
     }
 
     override fun onPause() {
         super.onPause()
-        name_player.clearFocus()
+        binding.namePlayer.clearFocus()
     }
 
     // function show dialog for get scheme name from user
     class SchemeNameDialog(context: Context, val callback: Callback<String>) : Dialog(context) {
+
+        private lateinit var binding : DialogAddSchemeBinding
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+            binding = DialogAddSchemeBinding.inflate(layoutInflater)
+            val view = binding.root
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setContentView(
-                if(Cfg.darkMode.value.get() == false) R.layout.dialog_add_scheme else R.layout.dialog_add_scheme_dark
-            )
-            yes.setOnClickListener {
-                if(scheme_name.text.toString().length < 4) {
-                    scheme_name.background = ContextCompat.getDrawable(context, R.drawable.edit_text_error)
+            setContentView(view)
+
+            binding.yes.setOnClickListener {
+                if(binding.schemeName.text.toString().length < 4) {
+                    binding.schemeName.background = ContextCompat.getDrawable(context, R.drawable.edit_text_error)
                     return@setOnClickListener
                 }
-                callback.execute(scheme_name.text.toString(), Action.NONE)
+                callback.execute(binding.schemeName.text.toString(), Action.NONE)
                 dismiss()
             }
-            cancel.setOnClickListener { dismiss() }
+            binding.cancel.setOnClickListener { dismiss() }
+
+            applyTheme()
+        }
+
+        private fun applyTheme(){
+            binding.run {
+                CfgTheme.current.primaryColor.colorInt(context).let {
+                    root.setCardBackgroundColor(it)
+                    title.setBackgroundColor(it)
+                    cancel.setTextColor(it)
+                    yes.setTextColor(it)
+                    schemeName.setTextColor(it)
+                }
+
+                title.setTextColor(CfgTheme.current.textColorSecondary.colorInt(context))
+            }
         }
     }
 }

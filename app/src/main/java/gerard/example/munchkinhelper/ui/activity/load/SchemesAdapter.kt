@@ -3,43 +3,39 @@ package gerard.example.munchkinhelper.ui.activity.load
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.*
+import gerard.example.munchkinhelper.databinding.ItemCardSchemeBinding
 import gerard.example.munchkinhelper.model.Scheme
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
-import kotlinx.android.synthetic.main.item_card_scheme.view.*
-import kotlinx.android.synthetic.main.item_card_scheme.view.more
-import kotlinx.android.synthetic.main.item_card_scheme.view.more_icon_click_area
-import kotlinx.android.synthetic.main.item_card_scheme.view.players
 
 class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val callback: Callback<Scheme>) : RecyclerView.Adapter<SchemesAdapter.SchemeHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SchemeHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_card_scheme, parent, false)
-        return SchemeHolder(view)
+        val itemBinding = ItemCardSchemeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SchemeHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: SchemeHolder, position: Int) {
         holder.bind(schemes[position])
 
-        holder.itemView.scheme_root.setOnClickListener{
+        holder.binding.schemeRoot.setOnClickListener{
             callback.execute(schemes[position], Action.OPEN)
         }
 
 
         with(CfgTheme.current.primaryColor.colorInt(context)){
-            holder.itemView.players.setTextColor(this)
-            holder.itemView.scheme_name.setTextColor(this)
-            holder.itemView.scheme_root.strokeColor = this
+            holder.binding.players.setTextColor(this)
+            holder.binding.schemeName.setTextColor(this)
+            holder.binding.schemeRoot.strokeColor = this
         }
 
-        holder.itemView.more.imageTintList = CfgTheme.current.primaryColor.colorStateList(context)
-        holder.itemView.scheme_root.setCardBackgroundColor(CfgTheme.current.backgroundColor.colorStateList(context))
+        holder.binding.more.imageTintList = CfgTheme.current.primaryColor.colorStateList(context)
+        holder.binding.schemeRoot.setCardBackgroundColor(CfgTheme.current.backgroundColor.colorStateList(context))
 
-        holder.itemView.more_icon_click_area.setOnClickListener {
+        holder.binding.moreIconClickArea.setOnClickListener {
             MoreOptionsPopUp(listOf(Option.DELETE_SCHEME)) { option ->
                 when(option){
                     Option.DELETE_SCHEME -> {
@@ -58,10 +54,10 @@ class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val
         return schemes.size
     }
 
-    class SchemeHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    class SchemeHolder(val binding : ItemCardSchemeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(scheme : Scheme){
-            itemView.players.text = scheme.players.joinToString(", ") { it.name }
-            itemView.scheme_name.text = scheme.schemeName
+            binding.players.text = scheme.players.joinToString(", ") { it.name }
+            binding.schemeName.text = scheme.schemeName
         }
     }
 }

@@ -1,75 +1,79 @@
 package gerard.example.munchkinhelper.ui.activity.load
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.core.BaseActivity
-import gerard.example.munchkinhelper.pickLayout
+import gerard.example.munchkinhelper.databinding.ActivityLoadGameBinding
 import gerard.example.munchkinhelper.ui.activity.create.AddingPlayersActivity
 import gerard.example.munchkinhelper.util.NavigationHelper
-import kotlinx.android.synthetic.main.activity_adding_players.*
-import kotlinx.android.synthetic.main.activity_load_game.*
-import kotlinx.android.synthetic.main.activity_load_game.root
-import kotlinx.android.synthetic.main.activity_load_game.toolbar
 
 class LoadGameActivity : BaseActivity() {
 
+    private lateinit var binding : ActivityLoadGameBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_load_game)
+        binding = ActivityLoadGameBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        toolbar.setNavigationOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             NavigationHelper.finish(this)
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        load_game_viewpager.adapter = LoadGameVPAdapter(this)
+        binding.loadGameViewpager.adapter = LoadGameVPAdapter(this)
 
-        TabLayoutMediator(load_game_tab_layout, load_game_viewpager) { tab, position ->
+        TabLayoutMediator(binding.loadGameTabLayout, binding.loadGameViewpager) { tab, position ->
             tab.text = if(position == 0) getString(R.string.history) else getString(R.string.schemes)
         }.attach()
 
-        btn_startNewGame.setOnClickListener {
+        binding.btnStartNewGame.setOnClickListener {
             NavigationHelper.startActivity(this, AddingPlayersActivity::class.java)
         }
 
-        load_game_viewpager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+        binding.loadGameViewpager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                btn_startNewGame.animate().translationY(0f)
+                binding.btnStartNewGame.animate().translationY(0f)
             }
         })
     }
 
     override fun applyThemeColors() {
-        toolbar.navigationIcon?.setTint(CfgTheme.current.primaryColor.colorInt(this))
-        toolbar.setTitleTextColor(CfgTheme.current.primaryColor.colorInt(this))
-        toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this))
+        binding.run {
+            CfgTheme.current.primaryColor.colorInt(this@LoadGameActivity).let {
+                toolbar.navigationIcon?.setTint(it)
+                toolbar.setTitleTextColor(it)
+            }
 
-        with(CfgTheme.current.primaryColor.colorInt(this)){
-            load_game_tab_layout.setSelectedTabIndicatorColor(this)
-            load_game_tab_layout.setTabTextColors(R.color.darkGrey.colorInt(this@LoadGameActivity), this)
+            toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this@LoadGameActivity))
+
+            CfgTheme.current.primaryColor.colorInt(this@LoadGameActivity).let{
+                loadGameTabLayout.setSelectedTabIndicatorColor(it)
+                loadGameTabLayout.setTabTextColors(R.color.darkGrey.colorInt(this@LoadGameActivity), it)
+            }
+            root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this@LoadGameActivity))
+            btnStartNewGame.applyTheme()
         }
-        root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
-        btn_startNewGame.applyTheme()
+
     }
 
     var startPostion : Float? = null
     fun changePositionOfBtn(newPosition: Float){
-        if(startPostion == null) startPostion = btn_startNewGame.y
+        if(startPostion == null) startPostion = binding.btnStartNewGame.y
 
         startPostion?.let {
-            if(btn_startNewGame.y + newPosition < it) return
+            if(binding.btnStartNewGame.y + newPosition < it) return
         }
 
-        btn_startNewGame.y = btn_startNewGame.y + newPosition
+        binding.btnStartNewGame.y = binding.btnStartNewGame.y + newPosition
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

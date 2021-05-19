@@ -1,17 +1,12 @@
 package gerard.example.munchkinhelper
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
-import androidx.core.graphics.toColor
 import androidx.core.view.isVisible
 import gerard.example.munchkinhelper.core.BaseActivity
 import gerard.example.munchkinhelper.core.views.RoundedButton
+import gerard.example.munchkinhelper.databinding.ActivityMainBinding
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
@@ -19,14 +14,16 @@ import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.ui.activity.create.AddingPlayersActivity
 import gerard.example.munchkinhelper.ui.activity.load.LoadGameActivity
 import gerard.example.munchkinhelper.util.NavigationHelper
-import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : BaseActivity(true) {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         if(BuildConfig.DEBUG && Cfg.autoOpen){
             val intent = Intent(this, GameActivity::class.java)
@@ -38,8 +35,8 @@ class MainActivity : BaseActivity(true) {
         Cfg.init(this)
         val restoredGame = Cfg.lastGame.get()
         if(restoredGame != null) {
-            load_last_game.visibility = View.VISIBLE
-            load_last_game.setOnClickListener {
+            binding.loadLastGame.visibility = View.VISIBLE
+            binding.loadLastGame.setOnClickListener {
                 NavigationHelper.startActivity(this, GameActivity::class.java, restoredGame)
             }
         }
@@ -56,11 +53,11 @@ class MainActivity : BaseActivity(true) {
     }
 
     override fun applyThemeColors() {
-        root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
-        logo.isVisible = CfgTheme.current is DefaultTheme
-        start_game.applyTheme()
-        btn_loadGame.applyTheme()
-        load_last_game.applyTheme()
+        binding.root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
+        binding.logo.isVisible = CfgTheme.current is DefaultTheme
+        binding.startGame.applyTheme()
+        binding.btnLoadGame.applyTheme()
+        binding.loadLastGame.applyTheme()
     }
 
 }

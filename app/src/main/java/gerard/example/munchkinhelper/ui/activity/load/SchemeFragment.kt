@@ -4,19 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.core.BaseFragment
+import gerard.example.munchkinhelper.databinding.FragmentSchemeBinding
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.ui.activity.GameActivity
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.NavigationHelper
 import gerard.example.munchkinhelper.util.now
-import kotlinx.android.synthetic.main.fragment_scheme.*
 
 class SchemeFragment : BaseFragment(){
+
+    private var _binding: FragmentSchemeBinding? = null
+    private val binding get() = _binding!!
 
     val viewmodel by viewModels<SchemeVM>()
 
@@ -25,7 +27,8 @@ class SchemeFragment : BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_scheme, container, false)
+        _binding = FragmentSchemeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,10 +46,10 @@ class SchemeFragment : BaseFragment(){
                     }
                 }
             }
-            schemes_recycler_view.adapter = adapter
+            binding.schemesRecyclerView.adapter = adapter
         })
 
-        schemes_recycler_view.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+        binding.schemesRecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 (activity as? LoadGameActivity)?.changePositionOfBtn(dy.toFloat())
@@ -55,6 +58,11 @@ class SchemeFragment : BaseFragment(){
     }
 
     override fun applyThemeColors() {
-        schemes_recycler_view.adapter?.notifyDataSetChanged()
+        binding.schemesRecyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
