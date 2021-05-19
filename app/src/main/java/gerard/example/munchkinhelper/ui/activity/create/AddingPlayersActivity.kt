@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.MenuItem
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -39,7 +38,10 @@ class AddingPlayersActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adding_players)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            NavigationHelper.finish(this)
+        }
+
 
         val adapter = AddedPlayersAdapter(this, playerList)
         recyclerView_new_players.adapter = adapter
@@ -84,12 +86,22 @@ class AddingPlayersActivity : BaseActivity() {
     }
 
     override fun applyThemeColors() {
+        with(CfgTheme.current.primaryColor.colorInt(this)){
+            toolbar.navigationIcon?.setTint(this)
+            toolbar.setTitleTextColor(this)
+            checkbox_scheme.setTextColor(this)
+            separator.setBackgroundColor(this)
+            name_player.setTextColor(this)
+        }
+
+        with(CfgTheme.current.primaryColor.colorStateList(this)){
+            checkbox_scheme.buttonTintList = this
+            add_player.imageTintList = this
+        }
+
+        toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this))
         root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
-        checkbox_scheme.setTextColor(CfgTheme.current.primaryColor.colorInt(this))
-        checkbox_scheme.buttonTintList = CfgTheme.current.primaryColor.colorStateList(this)
-        separator.setBackgroundColor(CfgTheme.current.primaryColor.colorInt(this))
-        add_player.imageTintList = CfgTheme.current.primaryColor.colorStateList(this)
-        name_player.setTextColor(CfgTheme.current.primaryColor.colorInt(this))
+
         name_player.setHintTextColor(CfgTheme.current.textLight.colorInt(this))
         btn_startGame.applyTheme()
     }
@@ -106,13 +118,6 @@ class AddingPlayersActivity : BaseActivity() {
     override fun onPause() {
         super.onPause()
         name_player.clearFocus()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> NavigationHelper.finish(this)
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     // function show dialog for get scheme name from user

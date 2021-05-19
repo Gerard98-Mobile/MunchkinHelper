@@ -13,13 +13,21 @@ import gerard.example.munchkinhelper.core.BaseActivity
 import gerard.example.munchkinhelper.pickLayout
 import gerard.example.munchkinhelper.ui.activity.create.AddingPlayersActivity
 import gerard.example.munchkinhelper.util.NavigationHelper
+import kotlinx.android.synthetic.main.activity_adding_players.*
 import kotlinx.android.synthetic.main.activity_load_game.*
+import kotlinx.android.synthetic.main.activity_load_game.root
+import kotlinx.android.synthetic.main.activity_load_game.toolbar
 
 class LoadGameActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_load_game)
+
+        toolbar.setNavigationOnClickListener {
+            NavigationHelper.finish(this)
+        }
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         load_game_viewpager.adapter = LoadGameVPAdapter(this)
@@ -41,6 +49,10 @@ class LoadGameActivity : BaseActivity() {
     }
 
     override fun applyThemeColors() {
+        toolbar.navigationIcon?.setTint(CfgTheme.current.primaryColor.colorInt(this))
+        toolbar.setTitleTextColor(CfgTheme.current.primaryColor.colorInt(this))
+        toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this))
+
         with(CfgTheme.current.primaryColor.colorInt(this)){
             load_game_tab_layout.setSelectedTabIndicatorColor(this)
             load_game_tab_layout.setTabTextColors(R.color.darkGrey.colorInt(this@LoadGameActivity), this)

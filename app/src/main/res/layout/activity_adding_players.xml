@@ -12,9 +12,11 @@
             android:id="@+id/toolbar"
             android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
-            style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_constraintTop_toTopOf="parent"
+            style="@style/ThemeOverlay.AppCompat.Dark"
+            app:navigationIcon="@drawable/ic_back"
             app:title="@string/app_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@color/colorPrimary"
             android:background="@color/colorBackground"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

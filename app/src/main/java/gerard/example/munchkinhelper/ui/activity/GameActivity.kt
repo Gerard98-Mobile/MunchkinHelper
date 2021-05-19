@@ -1,39 +1,28 @@
 package gerard.example.munchkinhelper.ui.activity
 
 
-import android.animation.ValueAnimator
-import android.app.Dialog
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.animation.AccelerateInterpolator
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.core.BaseActivity
-import gerard.example.munchkinhelper.core.SharedValueImpl
 import gerard.example.munchkinhelper.core.dialogs.YesNoDialog
 import gerard.example.munchkinhelper.ui.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.ui.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.util.NavigationHelper
-import gerard.example.munchkinhelper.util.SoundHelper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.dialog_custom.*
 import kotlin.math.hypot
 
 val GAME_KEY = "game_key"
 
-class GameActivity : BaseActivity() {
+class GameActivity : BaseActivity(true) {
 
     var game : Game? = null
 
@@ -123,7 +112,7 @@ class GameActivity : BaseActivity() {
 
         anim.duration = 600L
         anim.doOnEnd {
-            setStatusBarTextColor()
+            setStatusBarColors()
             imageView.setImageDrawable(null)
             imageView.isVisible = false
         }

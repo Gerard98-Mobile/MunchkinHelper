@@ -1,9 +1,11 @@
 package gerard.example.munchkinhelper.model
 
+import androidx.room.Entity
 import gerard.example.munchkinhelper.ui.activity.create.START_LVL
 import gerard.example.munchkinhelper.ui.activity.create.START_POWER
 import java.io.Serializable
 
+@Entity
 class Player(
     val name: String,
     var power: Int,

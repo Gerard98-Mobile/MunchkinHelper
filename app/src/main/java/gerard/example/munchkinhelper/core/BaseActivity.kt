@@ -2,15 +2,19 @@ package gerard.example.munchkinhelper.core
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import gerard.example.munchkinhelper.*
 
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity(
+    val statusBarFloating : Boolean = false
+) : AppCompatActivity() {
+
+    var actualTheme: Theme? = null
 
     abstract fun applyThemeColors()
 
@@ -18,24 +22,35 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Cfg.init(this)
 
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
+        if(statusBarFloating){
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
+        }
 
     }
 
     override fun onResume() {
         super.onResume()
-        supportActionBar?.setBackgroundDrawable(CfgTheme.current.appBarBackground.colorDrawable(this))
-        supportActionBar?.elevation = 0f
-        window.statusBarColor = CfgTheme.current.appBarBackground.colorInt(this)
-        setStatusBarTextColor()
+        Log.e("Event","OnResume BaseActivity")
 
-        applyThemeColors()
+        if(isThemeChanged()){
+            Log.e("Event","Theme changed")
+            actualTheme = CfgTheme.current
+            setStatusBarColors()
+            applyThemeColors()
+        }
     }
 
-    fun setStatusBarTextColor(){
+    private fun isThemeChanged() : Boolean {
+        return actualTheme != CfgTheme.current
+    }
+
+    // TODO("We need to change this because if we later would like to have more themes this will not work")
+    fun setStatusBarColors(){
+        window.statusBarColor = CfgTheme.current.appBarBackground.colorInt(this)
+
         if(CfgTheme.current is DefaultTheme) setStatusBarTextColorDark() else setStatusBarTextColorLight()
     }
 

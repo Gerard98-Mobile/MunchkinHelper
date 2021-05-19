@@ -7,13 +7,24 @@
         android:background="@color/colorBackground"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            style="@style/ThemeOverlay.AppCompat.Dark"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/app_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@color/colorPrimary"
+            android:background="@color/colorBackground"/>
+
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/load_game_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabSelectedTextColor="@color/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

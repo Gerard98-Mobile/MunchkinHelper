@@ -42,7 +42,7 @@ class DefaultTheme : Theme(
     backgroundColor = R.color.colorBackground,
     textColorSecondary = R.color.colorWhite,
     appBarBackground = R.color.colorBackground,
-    textLight = R.color.colorGrey,
+    textLight = R.color.textDarkLight,
     primaryColor = R.color.colorPrimary,
     stateChecked = R.drawable.state_checked
 )
