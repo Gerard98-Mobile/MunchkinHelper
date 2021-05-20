@@ -41,6 +41,7 @@ class Player(
     fun reset(){
         lvl = START_LVL
         power = START_POWER
+        isLeader = false
         deaths = 0
     }
 }
