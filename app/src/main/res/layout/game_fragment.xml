@@ -80,13 +80,14 @@
             android:id="@+id/linearLayout_changer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="3dp"
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
         <View
                 android:id="@+id/separator"
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
         <TextView
