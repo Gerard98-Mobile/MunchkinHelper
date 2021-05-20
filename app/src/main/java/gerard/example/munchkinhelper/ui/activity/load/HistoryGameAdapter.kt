@@ -7,30 +7,29 @@ import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.colorStateList
+import gerard.example.munchkinhelper.core.recycler.CustomViewHolder
+import gerard.example.munchkinhelper.core.recycler.SingleRecyclerAdapter
 import gerard.example.munchkinhelper.databinding.ItemCardHistoryBinding
 import gerard.example.munchkinhelper.model.Game
+import gerard.example.munchkinhelper.util.Action
+import gerard.example.munchkinhelper.util.Callback
 import gerard.example.munchkinhelper.util.DateUtil
 import java.util.Date
 
-class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val callback: Callback) : RecyclerView.Adapter<HistoryGameAdapter.HistoryGameHolder>()  {
+class HistoryGameAdapter(context: Context, val games: MutableList<Game>, val callback: Callback<Game>) : SingleRecyclerAdapter<Game, ItemCardHistoryBinding>(context)  {
 
-    enum class Action{ DELETE, OPEN }
-
-    fun interface Callback{
-        fun execute(game: Game, action: Action)
+    init{
+        register(games, ::bind, ItemCardHistoryBinding::inflate)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryGameHolder {
-        val itemBinding = ItemCardHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HistoryGameHolder(itemBinding)
-    }
-
-    override fun onBindViewHolder(holder: HistoryGameHolder, position: Int) {
-        holder.bind(games[position])
+    fun bind(holder: CustomViewHolder<ItemCardHistoryBinding>, game: Game){
+        holder.binding.players.text = game.players.joinToString(", ") { "${it.name} ${it.lvl} lvl" }
+        val date = DateUtil.dateDDMMYYYYdash().format(Date(game.saveDate))
+        holder.binding.gameDate.text = date.toString()
 
         // listeners for open game
         holder.binding.root.setOnClickListener {
-            callback.execute(games[position], Action.OPEN)
+            callback.execute(game, Action.OPEN)
         }
 
         with(CfgTheme.current.primaryColor.colorInt(context)){
@@ -58,16 +57,4 @@ class HistoryGameAdapter(val context: Context, val games: MutableList<Game>, val
         }
     }
 
-    override fun getItemCount(): Int {
-        return games.size
-    }
-
-    class HistoryGameHolder(val binding : ItemCardHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(game : Game){
-            binding.players.text = game.players.joinToString(", ") { "${it.name} ${it.lvl} lvl" }
-            val date = DateUtil.dateDDMMYYYYdash().format(Date(game.saveDate))
-            binding.gameDate.text = date.toString()
-        }
-
-    }
 }

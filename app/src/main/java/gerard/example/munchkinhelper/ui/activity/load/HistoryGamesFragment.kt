@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.core.BaseFragment
 import gerard.example.munchkinhelper.databinding.FragmentGamesHistoryBinding
 import gerard.example.munchkinhelper.ui.activity.GameActivity
+import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.NavigationHelper
 
 class HistoryGamesFragment : BaseFragment<FragmentGamesHistoryBinding>(){
@@ -27,18 +28,15 @@ class HistoryGamesFragment : BaseFragment<FragmentGamesHistoryBinding>(){
             Log.e("TAG", "History games live data")
             val adapter = HistoryGameAdapter(view.context, it) { game, action ->
                 when(action){
-                    HistoryGameAdapter.Action.DELETE -> {
+                    Action.DELETE -> {
                         viewmodel.removeGame(game)
                     }
-                    HistoryGameAdapter.Action.OPEN -> {
+                    Action.OPEN -> {
                         activity?.let {
                             NavigationHelper.startActivity(it, GameActivity::class.java, game)
                         }
-
                     }
                 }
-
-
 
             }
             binding.historyRecycler.adapter = adapter

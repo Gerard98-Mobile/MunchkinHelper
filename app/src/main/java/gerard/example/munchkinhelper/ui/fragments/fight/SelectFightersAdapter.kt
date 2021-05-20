@@ -7,26 +7,25 @@ import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.CfgTheme
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.colorStateList
+import gerard.example.munchkinhelper.core.recycler.CustomViewHolder
+import gerard.example.munchkinhelper.core.recycler.SingleRecyclerAdapter
 import gerard.example.munchkinhelper.databinding.ItemFigterBinding
 
 class SelectFightersAdapter(
-    val context: Context,
-    val fighters: List<SelectFightersFragment.FighterModel>,
+    context: Context,
+    fighters: List<SelectFightersFragment.FighterModel>,
     val callback: FighterSelectedCallback
-) : RecyclerView.Adapter<SelectFightersAdapter.SelectFighterVH>() {
+) : SingleRecyclerAdapter<SelectFightersFragment.FighterModel, ItemFigterBinding>(context) {
 
     fun interface FighterSelectedCallback{
         fun selectionChange(newPlayersPower: Int)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectFighterVH {
-        val itemBinding = ItemFigterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SelectFighterVH(itemBinding)
+    init{
+        register(fighters, ::bind, ItemFigterBinding::inflate)
     }
 
-    override fun onBindViewHolder(holder: SelectFighterVH, position: Int) {
-        val model = fighters.get(position)
-
+    fun bind(holder: CustomViewHolder<ItemFigterBinding>, model: SelectFightersFragment.FighterModel){
         holder.binding.fighterCheckBox.isChecked = model.selected
         holder.binding.fighterCheckBox.setText(model.player.name)
 
@@ -39,10 +38,4 @@ class SelectFightersAdapter(
         }
     }
 
-
-    override fun getItemCount(): Int {
-        return fighters.size
-    }
-
-    class SelectFighterVH(val binding: ItemFigterBinding) : RecyclerView.ViewHolder(binding.root)
 }

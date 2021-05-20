@@ -43,7 +43,6 @@ class GameFragment : BaseFragment<GameFragmentBinding>(){
 
         var playerAdapter : GamePlayerAdapter? = null
 
-
         game?.let {
             selectLeaderFromStart(it.players)
             playerAdapter = GamePlayerAdapter(view.context, it.players)

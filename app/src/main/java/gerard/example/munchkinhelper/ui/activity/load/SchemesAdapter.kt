@@ -6,23 +6,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.*
+import gerard.example.munchkinhelper.core.recycler.CustomViewHolder
+import gerard.example.munchkinhelper.core.recycler.SingleRecyclerAdapter
 import gerard.example.munchkinhelper.databinding.ItemCardSchemeBinding
 import gerard.example.munchkinhelper.model.Scheme
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
 
-class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val callback: Callback<Scheme>) : RecyclerView.Adapter<SchemesAdapter.SchemeHolder>() {
+class SchemesAdapter(context: Context, val schemes: MutableList<Scheme>, val callback: Callback<Scheme>) : SingleRecyclerAdapter<Scheme, ItemCardSchemeBinding>(context) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SchemeHolder {
-        val itemBinding = ItemCardSchemeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SchemeHolder(itemBinding)
+    init{
+        register(schemes, ::bind, ItemCardSchemeBinding::inflate)
     }
 
-    override fun onBindViewHolder(holder: SchemeHolder, position: Int) {
-        holder.bind(schemes[position])
+    fun bind(holder: CustomViewHolder<ItemCardSchemeBinding>, scheme: Scheme){
+
+        holder.binding.players.text = scheme.players.joinToString(", ") { it.name }
+        holder.binding.schemeName.text = scheme.schemeName
 
         holder.binding.schemeRoot.setOnClickListener{
-            callback.execute(schemes[position], Action.OPEN)
+            callback.execute(scheme, Action.OPEN)
         }
 
 
@@ -50,14 +53,4 @@ class SchemesAdapter(val context: Context, val schemes: MutableList<Scheme>, val
         }
     }
 
-    override fun getItemCount(): Int {
-        return schemes.size
-    }
-
-    class SchemeHolder(val binding : ItemCardSchemeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(scheme : Scheme){
-            binding.players.text = scheme.players.joinToString(", ") { it.name }
-            binding.schemeName.text = scheme.schemeName
-        }
-    }
 }
