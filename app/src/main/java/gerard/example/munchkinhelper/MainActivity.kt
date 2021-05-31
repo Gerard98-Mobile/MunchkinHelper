@@ -26,11 +26,14 @@ class MainActivity : BaseActivity(true) {
         val view = binding.root
         setContentView(view)
 
-        if(BuildConfig.DEBUG && Cfg.autoOpen){
-            val intent = Intent(this, GameActivity::class.java)
-            val game = Game(0, listOf(Player("Gerard",2,4), Player("Braciak",5,3)))
-            intent.putExtra(GAME_KEY, game)
-            startActivity(intent)
+        if(BuildConfig.DEBUG){
+            binding.btnDebugOpen.isVisible = true
+            binding.btnDebugOpen.setOnClickListener {
+                val intent = Intent(this, GameActivity::class.java)
+                val game = Game(0, listOf(Player("Gerard",2,4), Player("Braciak",5,3)))
+                intent.putExtra(GAME_KEY, game)
+                startActivity(intent)
+            }
         }
 
         Cfg.init(this)
