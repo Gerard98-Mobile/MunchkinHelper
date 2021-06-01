@@ -47,13 +47,11 @@ class MainActivity : BaseActivity(true) {
             }
         }
 
-        val loadGame: RoundedButton = findViewById(R.id.btn_loadGame)
-        loadGame.setOnClickListener {
+        binding.btnLoadGame.setOnClickListener {
             NavigationHelper.startActivity(this, LoadGameActivity::class.java)
         }
 
-        val startGame: RoundedButton = findViewById(R.id.start_game)
-        startGame.setOnClickListener {
+        binding.startGame.setOnClickListener {
             NavigationHelper.startActivity(this, AddingPlayersActivity::class.java)
         }
     }
