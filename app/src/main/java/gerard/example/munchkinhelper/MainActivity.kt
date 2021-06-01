@@ -54,6 +54,10 @@ class MainActivity : BaseActivity(true) {
         binding.startGame.setOnClickListener {
             NavigationHelper.startActivity(this, AddingPlayersActivity::class.java)
         }
+
+        binding.btnTest.setOnClickListener {
+            NavigationHelper.startActivity(this, TestPage::class.java)
+        }
     }
 
     override fun onResume() {
@@ -65,9 +69,9 @@ class MainActivity : BaseActivity(true) {
         binding.root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this))
         binding.logo.isVisible = CfgTheme.current is DefaultTheme
         binding.logoTxt.isVisible = CfgTheme.current is DarkTheme
-        binding.startGame.applyTheme()
-        binding.btnLoadGame.applyTheme()
-        binding.loadLastGame.applyTheme()
+//        binding.startGame.applyTheme()
+//        binding.btnLoadGame.applyTheme()
+//        binding.loadLastGame.applyTheme()
     }
 
 }

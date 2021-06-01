@@ -44,7 +44,6 @@ class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRec
             linearLayoutPlayerContainer.strokeColor = CfgTheme.current.backgroundColor.colorInt(context)
         }
 
-
         linearLayoutPlayerContainer.setOnClickListener {
             if(selectedView != it){
                 linearLayoutPlayerContainer.strokeColor = CfgTheme.current.primaryColor.colorInt(context)
@@ -52,7 +51,6 @@ class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRec
                 selectedView = linearLayoutPlayerContainer
                 selectedPlayer.value = player
             }
-
         }
     }
 }

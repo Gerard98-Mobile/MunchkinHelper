@@ -28,7 +28,6 @@ class SettingsFragment : BaseFragment<SettingsFragmentBinding>(){
         context?.let {
             adapter = SettingAdapter(it, Cfg.settings){ value, _ ->
                 if(value.value == Cfg.darkMode.value){
-                    CfgTheme.themeChanged()
                     changeTheme()
                 }
             }
@@ -58,16 +57,16 @@ class SettingsFragment : BaseFragment<SettingsFragmentBinding>(){
     }
 
     override fun applyThemeColors() {
-        adapter = context?.let {
-            SettingAdapter(it, Cfg.settings){ value, _ ->
-                if(value.value == Cfg.darkMode.value){
-                    CfgTheme.themeChanged()
-                    changeTheme()
-                }
-            }
-        }
-        binding.resetGame.applyTheme()
-        binding.settingsRecycler.adapter = adapter
+//        adapter = context?.let {
+//            SettingAdapter(it, Cfg.settings){ value, _ ->
+//                if(value.value == Cfg.darkMode.value){
+//                    changeTheme()
+//                }
+//            }
+//        }
+        //binding.resetGame.applyTheme()
+      //  binding.settingsRecycler.adapter = adapter
+        binding.settingsRecycler.adapter?.notifyDataSetChanged()
     }
 
     override fun onAttach(context: Context) {

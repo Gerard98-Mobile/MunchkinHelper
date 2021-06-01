@@ -28,6 +28,8 @@
 
         <activity android:name=".ui.activity.load.LoadGameActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".TestPage"/>
     </application>
 
 </manifest>

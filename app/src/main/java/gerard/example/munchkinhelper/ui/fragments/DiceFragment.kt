@@ -53,7 +53,7 @@ class DiceFragment : BaseFragment<DiceFragmentBinding>(){
     }
 
     override fun applyThemeColors() {
-        binding.rollButton.applyTheme()
+        //binding.rollButton.applyTheme()
         context?.let {
             binding.frame.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(it))
         }

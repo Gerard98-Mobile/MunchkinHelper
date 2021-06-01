@@ -64,7 +64,7 @@ class LoadGameActivity : BaseActivity() {
                 loadGameTabLayout.setTabTextColors(R.color.darkGrey.colorInt(this@LoadGameActivity), it)
             }
             root.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this@LoadGameActivity))
-            btnStartNewGame.applyTheme()
+            //btnStartNewGame.applyTheme()
         }
 
     }

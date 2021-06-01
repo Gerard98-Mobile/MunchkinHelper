@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:visibility="gone" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <gerard.example.munchkinhelper.core.normal.ColoredConstraintLayout
             android:id="@+id/container"
             android:background="@color/colorBackground"
             android:paddingTop="24dp"
@@ -25,15 +25,14 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_width="match_parent"
                 style="@style/ThemeOverlay.AppCompat.Dark"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/colorBackground">
+                app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                <ImageView
+                <gerard.example.munchkinhelper.core.normal.PrimaryImageView
                         android:id="@+id/toolbar_back"
                         android:layout_width="30dp"
                         android:layout_height="match_parent"
@@ -42,7 +41,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:src="@drawable/ic_back"/>
 
-                <TextView
+                <gerard.example.munchkinhelper.core.normal.PrimaryTextView
                         android:id="@+id/toolbar_text"
                         app:layout_constraintStart_toEndOf="@+id/toolbar_back"
                         app:layout_constraintEnd_toStartOf="@+id/toolbar_autosave"
@@ -55,7 +54,7 @@
                         android:textStyle="bold"
                         android:text="@string/app_name"/>
 
-                <ImageView
+                <gerard.example.munchkinhelper.core.normal.PrimaryImageView
                         android:id="@+id/toolbar_autosave"
                         android:layout_width="30dp"
                         android:layout_height="match_parent"
@@ -64,7 +63,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/toolbar_settings"
                         android:src="@drawable/ic_save2"/>
 
-                <ImageView
+                <gerard.example.munchkinhelper.core.normal.PrimaryImageView
                         android:id="@+id/toolbar_settings"
                         android:layout_width="30dp"
                         android:layout_height="match_parent"
@@ -92,6 +91,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:menu = "@menu/bottom_nav"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </gerard.example.munchkinhelper.core.normal.ColoredConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

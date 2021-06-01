@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"/>
 
-        <TextView
+        <gerard.example.munchkinhelper.core.normal.PrimaryTextView
                 android:id="@+id/power"
                 android:layout_width="0dp"
                 android:layout_weight="2"

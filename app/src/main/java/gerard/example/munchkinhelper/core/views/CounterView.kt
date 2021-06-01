@@ -4,16 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import gerard.example.munchkinhelper.CfgTheme
-import gerard.example.munchkinhelper.R
-import gerard.example.munchkinhelper.colorInt
-import gerard.example.munchkinhelper.colorStateList
+import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.databinding.ViewCounterBinding
 import gerard.example.munchkinhelper.ui.activity.create.START_LVL
 
 class CounterView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr), CfgTheme.ThemeChangedListener {
 
     fun interface OnChangeListener{
         fun onChange(newValue: Int, goUp: Boolean)
@@ -48,6 +45,8 @@ class CounterView @JvmOverloads constructor(
             }
         }
 
+        if(!isInEditMode) onThemeChanged(CfgTheme.current)
+
         a.recycle()
     }
 
@@ -56,7 +55,7 @@ class CounterView @JvmOverloads constructor(
         binding.txtViewValue.text = value.toString()
     }
 
-    fun applyTheme() = binding.run {
+    override fun onThemeChanged(theme: Theme)  = binding.run {
         with(CfgTheme.current.primaryColor.colorInt(context)){
             txtViewValue.setTextColor(this)
             imgButtonReduce.strokeColor = this
@@ -71,6 +70,16 @@ class CounterView @JvmOverloads constructor(
             imgButtonReduce.setCardBackgroundColor(this)
             imgButtonAdd.setCardBackgroundColor(this)
         }
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if(!isInEditMode) CfgTheme.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        if(!isInEditMode) CfgTheme.removeListener(this)
     }
 
 }

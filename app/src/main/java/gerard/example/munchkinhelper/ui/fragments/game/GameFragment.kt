@@ -95,13 +95,10 @@ class GameFragment : BaseFragment<GameFragmentBinding>(){
         context?.let {
             skullIcon.imageTintList = CfgTheme.current.primaryColor.colorStateList(it)
             with(CfgTheme.current.primaryColor.colorInt(it)){
-                power.setTextColor(this)
-                level.setTextColor(this)
                 separator.setBackgroundColor(this)
-                txtViewPlayerName.setTextColor(this)
             }
-            powerCounter.applyTheme()
-            levelCounter.applyTheme()
+//            powerCounter.applyTheme()
+//            levelCounter.applyTheme()
         }
     }
 
