@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import gerard.example.munchkinhelper.core.BaseActivity
-import gerard.example.munchkinhelper.core.views.RoundedButton
+import gerard.example.munchkinhelper.core.dialogs.TestPopup
+import gerard.example.munchkinhelper.core.recycler.CustomViewHolder
+import gerard.example.munchkinhelper.core.viewpager.LoopedMultiRecyclerAdapter
+import gerard.example.munchkinhelper.core.viewpager.LoopedTabLayoutMediator
 import gerard.example.munchkinhelper.databinding.ActivityMainBinding
+import gerard.example.munchkinhelper.databinding.TestItemBinding
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Player
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
@@ -29,10 +33,11 @@ class MainActivity : BaseActivity(true) {
         if(BuildConfig.DEBUG){
             binding.btnDebugOpen.isVisible = true
             binding.btnDebugOpen.setOnClickListener {
-                val intent = Intent(this, GameActivity::class.java)
-                val game = Game(0, listOf(Player("Gerard",2,4), Player("Braciak",5,3)))
-                intent.putExtra(GAME_KEY, game)
-                startActivity(intent)
+                TestPopup().show(binding.startGame)
+//                val intent = Intent(this, GameActivity::class.java)
+//                val game = Game(0, listOf(Player("Gerard",2,4), Player("Braciak",5,3)))
+//                intent.putExtra(GAME_KEY, game)
+//                startActivity(intent)
             }
         }
 
@@ -54,7 +59,46 @@ class MainActivity : BaseActivity(true) {
         binding.startGame.setOnClickListener {
             NavigationHelper.startActivity(this, AddingPlayersActivity::class.java)
         }
+
+
     }
+
+//    class Test(
+//        val text: String
+//    )
+//
+//    data class Halo(
+//        val alo: Boolean
+//    )
+//
+//    val siema = listOf(
+//        Test("Siema"),
+//        Halo(true),
+//        Halo(false),
+//        Test("XD2"),
+//        Test("XD3")
+//    )
+//
+//    val adapter = object: LoopedMultiRecyclerAdapter<Any>(this, true){
+//        init{
+//            register({ it is Test}, ::bind, TestItemBinding::inflate)
+//            register({ it is Halo}, ::bindBoolean, TestItemBinding::inflate)
+//        }
+//
+//        fun bind(holder: CustomViewHolder<TestItemBinding>, test: Test){
+//            holder.binding.text.text = test.text
+//        }
+//
+//        fun bindBoolean(holder: CustomViewHolder<TestItemBinding>, test: Halo){
+//            holder.binding.text.text = test.toString() + " " + test.toString()
+//        }
+//    }
+//
+//    fun initVP(){
+//        adapter.data = siema
+//        binding.viewpagerTest.adapter = adapter
+//        LoopedTabLayoutMediator(adapter, binding.viewpagerTest, binding.tablayout).attach()
+//    }
 
     override fun onResume() {
         super.onResume()

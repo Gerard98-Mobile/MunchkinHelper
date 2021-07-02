@@ -22,4 +22,13 @@
         <attr name="textColor" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="Banner">
+        <attr name="android:entries"/>
+    </declare-styleable>
+
+    <declare-styleable name="PasswordEditText">
+
+    </declare-styleable>
+
+
 </resources>

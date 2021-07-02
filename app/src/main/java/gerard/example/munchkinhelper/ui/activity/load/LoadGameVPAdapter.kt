@@ -13,9 +13,9 @@ class LoadGameVPAdapter(parent: FragmentActivity) : FragmentStateAdapter(parent)
     }
 
     override fun createFragment(position: Int): Fragment {
-        when(position){
-            0 -> return HistoryGamesFragment()
-            else -> return SchemeFragment()
+        return when(position){
+            0 -> HistoryGamesFragment()
+            else -> SchemeFragment()
         }
     }
 }

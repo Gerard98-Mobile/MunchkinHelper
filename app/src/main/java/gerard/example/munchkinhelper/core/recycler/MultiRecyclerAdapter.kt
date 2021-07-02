@@ -53,6 +53,7 @@ open class MultiRecyclerAdapter<T>(val context: Context) : RecyclerView.Adapter<
         throw NotRegisteredException("Siema")
     }
 
+    @SuppressWarnings("unchecked")
     override fun onBindViewHolder(holder: CustomViewHolder<ViewBinding>, position: Int) {
         items.forEach {
             if(it.condition(data[position])){

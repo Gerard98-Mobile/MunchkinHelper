@@ -10,6 +10,7 @@ import gerard.example.munchkinhelper.R
 import gerard.example.munchkinhelper.colorInt
 import gerard.example.munchkinhelper.colorStateList
 import gerard.example.munchkinhelper.core.BaseFragment
+import gerard.example.munchkinhelper.core.dialogs.TestPopup
 import gerard.example.munchkinhelper.databinding.HomeFragmentBinding
 import gerard.example.munchkinhelper.ui.activity.GAME_KEY
 import gerard.example.munchkinhelper.model.Game
@@ -51,6 +52,8 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
                 }
             }
         })
+
+        TestPopup().show(binding.navigation.getChildAt(1))
     }
 
     override fun applyThemeColors() : Unit = binding.run{

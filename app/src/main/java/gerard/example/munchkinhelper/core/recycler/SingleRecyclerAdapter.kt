@@ -1,15 +1,17 @@
 package gerard.example.munchkinhelper.core.recycler
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import androidx.viewpager2.widget.ViewPager2
 import gerard.example.munchkinhelper.BuildConfig
 import java.lang.Exception
 
-open class SingleRecyclerAdapter<T, BINDING: ViewBinding>(val context: Context) : RecyclerView.Adapter<CustomViewHolder<BINDING>>(){
+abstract class SingleRecyclerAdapter<T, BINDING: ViewBinding>(val context: Context) : RecyclerView.Adapter<CustomViewHolder<BINDING>>(){
 
     var data: List<T>? = null
     lateinit var bind: (holder: CustomViewHolder<BINDING>, item: T) -> Unit

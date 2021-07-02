@@ -18,10 +18,10 @@ class ViewPagerAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        when(position){
-            1 -> return DiceFragment()
-            2 -> return FightContainerFragment.newInstance(game)
-            else -> return GameFragment.newInstance(game)
+        return when(position){
+            1 -> DiceFragment()
+            2 -> FightContainerFragment.newInstance(game)
+            else -> GameFragment.newInstance(game)
         }
     }
 }

@@ -68,4 +68,13 @@
         <item name="android:background">?android:selectableItemBackgroundBorderless</item>
     </style>
 
+    <style name="AppTheme.TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@drawable/tab_indicator_unselected</item>
+        <item name="tabIndicator">@drawable/tab_indicator_selected</item>
+        <item name="tabIndicatorColor">@android:color/holo_red_dark</item>
+        <item name="tabIndicatorGravity">center</item>
+        <item name="tabMaxWidth">12dp</item>
+        <item name="tabGravity">center</item>
+    </style>
+
 </resources>

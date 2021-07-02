@@ -84,4 +84,11 @@
     <string name="reset_game_title">Reset Game</string>
     <string name="reset_game_body">Are you sure about reseting that game?</string>
     <string name="debug_open" translatable="false">Debug open</string>
+
+    <string-array name="banner_texts">
+        <item>Halio</item>
+        <item>Mariolka</item>
+        <item>Mara</item>
+        <item>Bomba</item>
+    </string-array>
 </resources>

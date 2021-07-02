@@ -40,7 +40,6 @@ class RoundedButton @JvmOverloads constructor(
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        Log.e("RoundedButton","setOnClick")
         binding.root.setOnClickListener(l)
     }
 

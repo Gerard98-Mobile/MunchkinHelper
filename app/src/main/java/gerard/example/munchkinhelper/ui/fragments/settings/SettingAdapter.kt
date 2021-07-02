@@ -1,17 +1,11 @@
 package gerard.example.munchkinhelper.ui.fragments.settings
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.core.recycler.CustomViewHolder
 import gerard.example.munchkinhelper.core.recycler.MultiRecyclerAdapter
-import gerard.example.munchkinhelper.core.recycler.ViewHolder
-import gerard.example.munchkinhelper.core.views.BooleanSettingView
 import gerard.example.munchkinhelper.databinding.ItemBooleanSettingBinding
-import gerard.example.munchkinhelper.databinding.ItemPlayerBinding
 import gerard.example.munchkinhelper.util.Action
 import gerard.example.munchkinhelper.util.Callback
 
@@ -39,6 +33,7 @@ class SettingAdapter(
             callback.execute(value, Action.NONE)
         }
     }
+
 
 
 }
