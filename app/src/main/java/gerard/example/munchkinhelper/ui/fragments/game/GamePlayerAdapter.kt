@@ -1,6 +1,7 @@
 package gerard.example.munchkinhelper.ui.fragments.game
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import gerard.example.munchkinhelper.core.recycler.CustomViewHolder
 import gerard.example.munchkinhelper.core.recycler.SingleRecyclerAdapter
 import gerard.example.munchkinhelper.databinding.ItemPlayerBinding
 import gerard.example.munchkinhelper.model.Player
+import gerard.example.munchkinhelper.util.AnimationUtil
 
 class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRecyclerAdapter<Player, ItemPlayerBinding>(context)  {
 
@@ -33,8 +35,12 @@ class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRec
         deathCount.isVisible = player.deaths > 0 && Cfg.showDeathCount.value.get() == true
         deathCount.text = context.getString(R.string.death_count, player.deaths)
 
+        listOf(this.close, this.userDelete, this.userSettings).forEach {
+            it.isEnabled = false
+        }
+
         with(CfgTheme.current.primaryColor.colorInt(context)){
-            txtViewPlayerNameItem.setTextColor(this)
+            txtViewPlayerNameItem.setTextColor(this )
             txtViewPowerItem.setTextColor(this)
             txtViewLevelItem.setTextColor(this)
         }
@@ -52,7 +58,30 @@ class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRec
                 selectedView = linearLayoutPlayerContainer
                 selectedPlayer.value = player
             }
-
         }
+
+        linearLayoutPlayerContainer.setOnLongClickListener {
+            changeViewVisibility(holder)
+            true
+        }
+
+        close.setOnClickListener {
+            changeViewVisibility(holder)
+        }
+    }
+
+    val animationDuration = 700L
+    var settingsShowed = false
+
+    fun changeViewVisibility(holder: CustomViewHolder<ItemPlayerBinding>) = holder.binding.run{
+        listOf(this.close, this.userDelete, this.userSettings).forEach {
+            it.isEnabled = this.settingsView.alpha == 0F
+        }
+
+        AnimationUtil.animateShowHideView(
+            listOf((this.settingsView to !settingsShowed), (this.mainView to settingsShowed)),
+            animationDuration
+        )
+        settingsShowed = !settingsShowed
     }
 }

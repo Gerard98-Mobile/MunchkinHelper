@@ -9,7 +9,6 @@ import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.core.recycler.CustomViewHolder
 import gerard.example.munchkinhelper.core.recycler.MultiRecyclerAdapter
 import gerard.example.munchkinhelper.core.recycler.ViewHolder
-import gerard.example.munchkinhelper.core.views.BooleanSettingView
 import gerard.example.munchkinhelper.databinding.ItemBooleanSettingBinding
 import gerard.example.munchkinhelper.databinding.ItemPlayerBinding
 import gerard.example.munchkinhelper.util.Action

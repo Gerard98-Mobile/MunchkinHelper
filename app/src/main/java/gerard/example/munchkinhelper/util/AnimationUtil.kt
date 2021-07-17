@@ -8,6 +8,16 @@ import gerard.example.munchkinhelper.core.views.FightCounter
 
 object AnimationUtil {
 
+    fun animateShowHideView(views: List<Pair<View,Boolean>>, duration: Long){
+        views.forEach { view ->
+            view.first.clearAnimation()
+            view.first.animate()
+                .alpha(if(view.second) 1f else 0f)
+                .setDuration(duration)
+                .start()
+        }
+    }
+
     fun animateAlpha(view: View, value: Float, duration: Long){
         view.animate()
             .alpha(value)
