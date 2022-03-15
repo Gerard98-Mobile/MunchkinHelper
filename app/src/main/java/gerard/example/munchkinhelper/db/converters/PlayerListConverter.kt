@@ -7,7 +7,7 @@ import gerard.example.munchkinhelper.model.Player
 
 class PlayerListConverter {
 
-    val gson = Gson()
+    private val gson = Gson()
 
     @TypeConverter
     fun toPlayers(players : String) : List<Player>{

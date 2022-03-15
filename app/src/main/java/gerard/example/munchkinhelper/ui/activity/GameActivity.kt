@@ -13,10 +13,13 @@ import gerard.example.munchkinhelper.*
 import gerard.example.munchkinhelper.core.BaseActivity
 import gerard.example.munchkinhelper.core.dialogs.YesNoDialog
 import gerard.example.munchkinhelper.databinding.ActivityGameBinding
+import gerard.example.munchkinhelper.functional.Timer
 import gerard.example.munchkinhelper.ui.fragments.home.HomeFragment
 import gerard.example.munchkinhelper.ui.fragments.settings.SettingsFragment
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.util.NavigationHelper
+import gerard.example.munchkinhelper.util.msToHHMM
+import java.util.*
 import kotlin.math.hypot
 
 val GAME_KEY = "game_key"
@@ -26,15 +29,22 @@ class GameActivity : BaseActivity(true) {
     private lateinit var binding: ActivityGameBinding
 
     var game : Game? = null
+    private var timer : Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        setToolbar()
 
         game = intent.getSerializableExtra(GAME_KEY) as Game?
+
+        timer = Timer(10000) {
+            game?.increaseTime(10000)
+            binding.toolbarTimeText.text = getString(R.string.session_time, game?.gameTime?.msToHHMM() ?: "00:00")
+        }
+
+        setToolbar()
         changeFragment(HomeFragment.newInstance(game))
     }
 
@@ -51,6 +61,7 @@ class GameActivity : BaseActivity(true) {
         toolbarBack.visibility = View.GONE
         toolbarSettings.setOnClickListener { changeFragment(SettingsFragment.newInstance(game)) }
         toolbarBack.setOnClickListener { onBackPressed() }
+//        toolbarTimeText.text = getString(R.string.session_time, game?.gameTime?.getReadable() ?: "00:00")
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -82,6 +93,7 @@ class GameActivity : BaseActivity(true) {
         navigation.setBackgroundColor(CfgTheme.current.backgroundColor.colorInt(this@GameActivity))
         toolbar.setBackgroundColor(CfgTheme.current.appBarBackground.colorInt(this@GameActivity))
         toolbarText.setTextColor(CfgTheme.current.primaryColor.colorInt(this@GameActivity))
+        toolbarTimeText.setTextColor(CfgTheme.current.primaryColor.colorInt(this@GameActivity))
         CfgTheme.current.primaryColor.colorStateList(this@GameActivity).let {
             toolbarAutosave.imageTintList = it
             toolbarSettings.imageTintList = it
@@ -129,9 +141,14 @@ class GameActivity : BaseActivity(true) {
         toolbarAutosave.visibility = View.GONE
     }
 
+    override fun onResume() {
+        super.onResume()
+        timer?.startTimer()
+    }
 
     override fun onPause() {
         super.onPause()
+        timer?.cancelTimer()
         game?.let { Cfg.lastGame.set(it) }
     }
 

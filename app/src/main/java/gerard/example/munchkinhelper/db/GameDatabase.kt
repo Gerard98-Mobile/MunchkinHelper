@@ -11,7 +11,7 @@ import gerard.example.munchkinhelper.db.dao.SchemeDao
 import gerard.example.munchkinhelper.model.Game
 import gerard.example.munchkinhelper.model.Scheme
 
-@Database(entities = arrayOf(Game::class, Scheme::class), version = 1, exportSchema = false)
+@Database(entities = [Game::class, Scheme::class], version = 2, exportSchema = true)
 @TypeConverters(PlayerListConverter::class)
 public abstract class GameDatabase : RoomDatabase(){
 
@@ -32,7 +32,10 @@ public abstract class GameDatabase : RoomDatabase(){
                     context.applicationContext,
                     GameDatabase::class.java,
                     "game_database"
-                ).build()
+                ).addMigrations(
+                    MIGRATION_1_2
+                )
+                    .build()
                 INSTANCE = instance
                 return instance
             }

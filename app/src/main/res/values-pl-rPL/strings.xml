@@ -68,4 +68,5 @@
     <string name="death_count_setting">Pokazuj licznik śmierci</string>
     <string name="reset_game_title">Resetowanie Gry</string>
     <string name="reset_game_body">Czy jesteś pewny że chcesz zresetować grę?</string>
+    <string name="session_time">Czas sesji: %s</string>
 </resources>

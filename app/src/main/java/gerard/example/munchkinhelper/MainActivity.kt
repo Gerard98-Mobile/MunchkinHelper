@@ -30,7 +30,10 @@ class MainActivity : BaseActivity(true) {
             binding.btnDebugOpen.isVisible = true
             binding.btnDebugOpen.setOnClickListener {
                 val intent = Intent(this, GameActivity::class.java)
-                val game = Game(0, listOf(Player("Gerard",2,4), Player("Braciak",5,3)))
+                val game = Game(
+                    0,
+                    listOf(Player("Gerard",2,4), Player("Braciak",5,3)),
+                )
                 intent.putExtra(GAME_KEY, game)
                 startActivity(intent)
             }

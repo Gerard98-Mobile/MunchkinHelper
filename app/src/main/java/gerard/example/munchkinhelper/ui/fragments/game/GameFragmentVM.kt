@@ -29,7 +29,7 @@ class GameFragmentVM(application: Application) : AndroidViewModel(application) {
             if(gameExist == false){
                 gameExist = repository.checkIfExist(game)
             }
-            it.saveDate = Date().time
+            it.saveDate = System.currentTimeMillis()
             if(gameExist){
                 repository.update(it)
             }
@@ -46,7 +46,7 @@ class GameFragmentVM(application: Application) : AndroidViewModel(application) {
             if(!gameExist){
                 gameExist = repository.checkIfExist(game)
             }
-            it.saveDate = Date().time
+            it.saveDate = System.currentTimeMillis()
             if(gameExist){
                 repository.update(it)
             }
