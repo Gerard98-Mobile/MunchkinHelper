@@ -16,26 +16,22 @@ object AnimationUtil {
 
     fun animateShowHideView(views: List<Pair<View,Boolean>>, duration: Long, animationCallback: AnimationCallback? = null){
         views.forEach { view ->
+            view.first.isClickable = false
+            view.first.isFocusable = false
             view.first.animate()
                 .alpha(if(view.second) 1f else 0f)
                 .setListener(object: Animator.AnimatorListener{
-                    override fun onAnimationStart(animation: Animator?) {
-
-                    }
+                    override fun onAnimationStart(animation: Animator?) {}
 
                     override fun onAnimationEnd(animation: Animator?) {
+                        view.first.isClickable = view.second
+                        view.first.isFocusable = view.second
                         animationCallback?.animationEnded()
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {
+                    override fun onAnimationCancel(animation: Animator?) {}
 
-                    }
-
-                    override fun onAnimationRepeat(animation: Animator?) {
-
-                    }
-
-
+                    override fun onAnimationRepeat(animation: Animator?) {}
                 })
                 .setDuration(duration)
                 .start()

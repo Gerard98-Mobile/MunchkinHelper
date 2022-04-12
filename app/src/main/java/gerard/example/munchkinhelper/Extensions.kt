@@ -14,3 +14,15 @@ fun Boolean.exec(ontrue: () -> (Unit), onfalse: () -> (Unit)) { if(this) ontrue(
 inline fun <reified T> checkType(obj: Any) : Boolean {
     return obj is T
 }
+
+fun String.toTwoDigitString(): String{
+    return if(this.count() == 1) "0$this" else this
+}
+
+fun Pair<Int, Int>.toTwoDigitList(): List<String> = mutableListOf<String>().let { list ->
+    if(this.first < 0 || this.second < 0 || this.first < this.second) list
+    for (i in this.first..this.second) {
+        list.add(i.toString().toTwoDigitString())
+    }
+    list
+}

@@ -130,14 +130,14 @@
                 android:id="@+id/power_counter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:title="@string/power"/>
+                app:counterTitle="@string/power"/>
 
         <gerard.example.munchkinhelper.core.views.CounterView
                 android:id="@+id/level_counter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                app:title="@string/level"/>
+                app:counterTitle="@string/level"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

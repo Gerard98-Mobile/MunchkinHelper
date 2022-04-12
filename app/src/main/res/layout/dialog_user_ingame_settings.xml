@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dialog_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/dialog_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="15dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        style="@style/Theme.MaterialComponents.DayNight"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Siema"
-                android:gravity="center"/>
+    <gerard.example.munchkinhelper.core.views.MyEditText
+            android:id="@+id/player_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/player_name"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <gerard.example.munchkinhelper.core.views.digitSelector.DigitSelector
+            android:id="@+id/digit_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:selectorTitle="@string/death_count_title"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player_name"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginStart="7dp"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:cardBackgroundColor="@color/colorBackground"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="1dp"
+            app:cardCornerRadius="6dp">
+
+        <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textCursorDrawable="@drawable/cursor_primary"
+                android:textColor="@color/colorPrimary"
+                android:background="@android:color/transparent"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Error"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/container"
+            android:textColor="@color/error"
+            android:layout_marginStart="7dp"
+            android:textSize="15sp" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

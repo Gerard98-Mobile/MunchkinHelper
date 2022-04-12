@@ -27,7 +27,7 @@ class CounterView @JvmOverloads constructor(
 
     init{
         val a = context.obtainStyledAttributes(attrs, R.styleable.Counter, defStyleAttr, 0)
-        val title = a.getString(R.styleable.Counter_title)
+        val title = a.getString(R.styleable.Counter_counterTitle)
         binding.txtViewTitle.text = title
 
         binding.imgButtonReduce.setOnClickListener {

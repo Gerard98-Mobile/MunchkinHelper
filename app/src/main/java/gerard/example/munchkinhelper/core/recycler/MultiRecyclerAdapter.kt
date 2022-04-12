@@ -21,7 +21,7 @@ open class MultiRecyclerAdapter<T>(val context: Context) : RecyclerView.Adapter<
         abstract fun binding(a: CustomViewHolder<BINDING>, b: T)
     }
 
-    val items = mutableListOf<RegisteredItem<T, ViewBinding>>()
+    private val items = mutableListOf<RegisteredItem<T, ViewBinding>>()
 
     var data = listOf<Any>()
         set(value) {

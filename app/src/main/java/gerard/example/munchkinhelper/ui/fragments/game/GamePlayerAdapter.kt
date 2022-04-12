@@ -1,7 +1,14 @@
 package gerard.example.munchkinhelper.ui.fragments.game
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
+import android.view.ViewAnimationUtils
+import android.view.Window
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.card.MaterialCardView
@@ -33,6 +40,11 @@ class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRec
         deathCount.isVisible = player.deaths > 0 && Cfg.showDeathCount.value.get() == true
         deathCount.text = context.getString(R.string.death_count, player.deaths)
 
+        settingsView.setOnLongClickListener {
+            changeViewVisibility(holder)
+            true
+        }
+
         with(CfgTheme.current.primaryColor.colorInt(context)){
             txtViewPlayerNameItem.setTextColor(this )
             txtViewPowerItem.setTextColor(this)
@@ -60,31 +72,47 @@ class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRec
         }
 
         close.setOnClickListener {
-            settingClick(settingsView, linearLayoutPlayerContainer) {
-                changeViewVisibility(holder)
-            }
+            changeViewVisibility(holder)
         }
 
         userSettings.setOnClickListener{
-            settingClick(settingsView, linearLayoutPlayerContainer) {
 
-            }
         }
 
         userDelete.setOnClickListener{
-            settingClick(settingsView, linearLayoutPlayerContainer) {
-                UserDataDialog(context, userDelete).show()
-            }
+            val dialog = UserDataDialog(context).show()
+
         }
     }
 
-    private fun settingClick(settingsView: View, parent: View, xd: () -> Unit){
-        if(settingsView.alpha != 1f) {
-            parent.performClick()
-            return
+    fun revealShow(dialogView: View, animationView: View,b: Boolean, dialog: Dialog?) {
+        val view: View = dialogView.findViewById(R.id.dialog_parent) ?: return
+        val w: Int = view.width
+        val h: Int = view.height
+        val endRadius = Math.hypot(w.toDouble(), h.toDouble()).toInt()
+        val cx = (animationView.x + animationView.width / 2).toInt()
+        val cy: Int = animationView.y.toInt() + animationView.height + 56
+        if (b) {
+            val revealAnimator =
+                ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, endRadius.toFloat())
+            view.visibility = View.VISIBLE
+            revealAnimator.duration = 700
+            revealAnimator.start()
+        } else {
+            val anim =
+                ViewAnimationUtils.createCircularReveal(view, cx, cy, endRadius.toFloat(), 0f)
+            anim.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    dialog?.dismiss()
+                    view.visibility = View.INVISIBLE
+                }
+            })
+            anim.duration = 700
+            anim.start()
         }
-        xd.invoke()
     }
+
 
     val animationDuration = 700L
     var settingsShowed = false
@@ -93,9 +121,8 @@ class GamePlayerAdapter(context: Context, val players: List<Player>) : SingleRec
         AnimationUtil.animateShowHideView(
             listOf((this.settingsView to !settingsShowed), (this.mainView to settingsShowed)),
             animationDuration
-        ){
-            settingsShowed = !settingsShowed
-        }
+        )
+        settingsShowed = !settingsShowed
 
     }
 }

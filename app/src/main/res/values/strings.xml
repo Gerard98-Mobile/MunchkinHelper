@@ -5,7 +5,7 @@
     <string name="invalid_amount_players">"Amount of players must be beetween 1–9 "</string>
     <string name="level" translatable="false">level</string>
     <string name="one" translatable="false">1</string>
-    <string name="player_name">Name of player</string>
+    <string name="player_name">Player name</string>
     <string name="end">End of the game!</string>
     <string name="winner">Player with name: %1$s reached 10 lvl and he win!!</string>
     <string name="stay">Stay</string>
@@ -80,8 +80,11 @@
     <string name="load_last_game">Load Last Game</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="death_count">Death count: %d</string>
+    <string name="death_count_title">Deaths</string>
     <string name="death_count_setting">Show death count</string>
     <string name="reset_game_title">Reset Game</string>
     <string name="reset_game_body">Are you sure about reseting that game?</string>
     <string name="debug_open" translatable="false">Debug open</string>
+    <string name="user_data_dialog_title" translatable="false">Ciach</string>
+    <string name="delete_player">Delete player</string>
 </resources>

@@ -19,11 +19,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+<!--        <View-->
+<!--                android:id="@+id/view_block_clicks"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:translationZ="3dp"-->
+<!--                android:visibility="gone"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/settingsView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0"
+
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:alpha="1"
@@ -64,8 +78,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:alpha="0"
-                android:alpha="1"
+
                 android:paddingTop="13dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
